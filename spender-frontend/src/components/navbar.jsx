@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Switch, Link, } from "react-router-dom"
 import Charts from "./charts"
 import HomePage from "./home-page"
 import Settings from "./settings"
-import Money from "./money"
 
 function Navbar() {
     
@@ -21,7 +20,6 @@ function Navbar() {
                 </Navbar>
                 <Switch>
                     <Route exact path="/"><HomePage /></Route>
-                    <Route path="/money"><Money /></Route>
                     <Route path="/charts"><Charts /></Route>
                     <Route path="/settings"><Settings /></Route>
                 </Switch>
