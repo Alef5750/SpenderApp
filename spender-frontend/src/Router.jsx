@@ -8,14 +8,14 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/home">
-          <HomePage />
-        </Route>
         <Route path="/expenses">
           <Expenses />
         </Route>
         <Route path="/settings">
           <Settings />
+        </Route>
+        <Route path="/home">
+          <HomePage />
         </Route>
         <Route path="/">
           <SignIn />

@@ -1,9 +1,9 @@
-
-function HomePage() {
-    return (
-        <p>
-            home
-        </p>
-    )
+import React from "react";
+import Navigation from "../components/Navigation";
+export default function SignIn() {
+  return (
+    <div>
+      <Navigation />
+    </div>
+  );
 }
-export default HomePage
