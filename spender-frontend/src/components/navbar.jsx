@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 
+// Adding some comments to see if my git commits get pushed
+
 export default function Navbar() {
   return (
     <Router>
