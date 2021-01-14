@@ -1,9 +1,14 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Router from "./Router";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <h1>Spender App</h1>
+      <Router>
+        <Navbar />
+      </Router>
     </div>
   );
 }
