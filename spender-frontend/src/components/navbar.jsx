@@ -12,7 +12,7 @@ export default function Navbar() {
           <Link to="/">Home</Link>
         </Navbar>
         <Switch>
-          <Route exact path="/">
+          <Route path="/">
             <HomePage />
           </Route>
         </Switch>
