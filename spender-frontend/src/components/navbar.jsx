@@ -1,3 +1,4 @@
+import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -7,7 +8,7 @@ export default function Navbar() {
   return (
     <Nav sticky="top" bg="dark" expand="sm">
       <Link to="/home">Home</Link>
-      <Link to="/expenses">$</Link>
+      <Link to="/expenses">Expenses</Link>
     </Nav>
   );
 }
