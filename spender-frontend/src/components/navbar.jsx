@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 
-function Navbar() {
+export default function Navbar() {
   return (
     <Router>
       <div className="mt-5">
@@ -10,9 +10,6 @@ function Navbar() {
           className="bg-primary mx-5 rounded d-flex justify-content-around"
         >
           <Link to="/">Home</Link>
-          <Link to="/money">$</Link>
-          <Link to="/charts">Charts</Link>
-          <Link to="/settings">Settings</Link>
         </Navbar>
         <Switch>
           <Route exact path="/">
@@ -23,5 +20,3 @@ function Navbar() {
     </Router>
   );
 }
-
-export default Navbar;
