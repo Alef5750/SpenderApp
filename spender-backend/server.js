@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // routes
-const usersRouter = require('./routes/usersRouter')
-const expensesRouter = require('./routes/expensesRouter')
+// const usersRouter = require('./routes/usersRouter')
+// const expensesRouter = require('./routes/expensesRouter')
 
-app.use('/api/users', usersRouter);
-app.use('/api/expenses', expensesRouter);
+// app.use('/api/users', usersRouter);
+// app.use('/api/expenses', expensesRouter);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
