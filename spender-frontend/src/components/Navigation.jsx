@@ -5,7 +5,7 @@ import styles from "../styles/Navbar.module.css";
 
 export default function Navigation() {
   return (
-    <Navbar className={styles.navBar} sticky="top" expand="sm">
+    <Navbar className={styles.navBar} sticky="top" expand="sm" >
       <Navbar.Brand href="/home">
         <svg
           width="36"
@@ -38,7 +38,7 @@ export default function Navigation() {
           />
         </svg>
       </Navbar.Brand>
-      <Navbar.Brand href="/stats">
+      <Navbar.Brand href="/charts">
         <svg
           width="36"
           height="36"

@@ -3,11 +3,15 @@ import SignIn from "./pages/SignIn";
 import HomePage from "./pages/HomePage";
 import Expenses from "./pages/Expenses";
 import Settings from "./pages/Settings";
+import Charts from "./pages/categories-page";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/charts">
+          <Charts/>
+        </Route>
         <Route path="/expenses">
           <Expenses />
         </Route>

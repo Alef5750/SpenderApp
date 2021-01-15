@@ -1,11 +1,14 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Router from "./Router";
+import Navigation from "./components/Navigation";
+
+// I added the navigation to the App, that way, you can navigate throughout the app
 
 function App() {
   return (
     <div className="App">
-      {/* why i see the navbar only in the main page? shouldn't it be throughout the app in all the pages? how can you navigate? */}
+      <Navigation/>
       <Router />
     </div>
   );
