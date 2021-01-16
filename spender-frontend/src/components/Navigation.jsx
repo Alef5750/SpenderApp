@@ -1,11 +1,13 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
 import styles from "../styles/Navbar.module.css";
-// Adding some comments to see if my git commits get pushed
+// To-Do:
+// enable highlighted logo according to page user is on
+//(when at HomePage, house logo is blue, for e.g.)
 
 export default function Navigation() {
   return (
-    <Navbar className={styles.navBar} sticky="top" expand="sm" >
+    <Navbar className={styles.navBar} sticky="top" expand="sm">
       <Navbar.Brand href="/home">
         <svg
           width="36"
