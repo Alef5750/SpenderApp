@@ -13,6 +13,6 @@ router.put('/:id', updateUserById)
 
 router.get('/:id/expenses', getExpensesById);
 
-router.post('/:id/expenses', addNewExpenseById);
+router.put('/:id/expenses', addNewExpenseById);
 
 module.exports = router;

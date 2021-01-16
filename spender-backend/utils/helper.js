@@ -19,4 +19,4 @@ const insertExpense = (newExpense, userExpenses) => {
 
   return userExpenses;
 }
-module.exports = { isEmpty }
+module.exports = { isEmpty, insertExpense }

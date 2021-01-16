@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const { insertExpense } = require("../utils/helper")
+
 
 
 module.exports = class User {
@@ -69,12 +71,20 @@ module.exports = class User {
     }
   }
 
+  /*
+  HOW SHOULD QUERY LOOK LIKE?
+  http://localhost:5000/api/users/:id/expenses?year=2020&month=10-12
+  */
+
   async addNewExpenseById(id, newExpense) {
     try {
       const user = await this.UserModel.findById(id);
+
       const currentExpenses = user.expenses;
-      // TO DO - FUNCTION TO INSERT NEW EXPENSE IN PROPER YEAR/DATE
-      return user.expenses;
+      const newExpenses = insertExpense(newExpense, currentExpenses)
+
+      const updatedUser = await this.UserModel.findByIdAndUpdate(id, { expenses: newExpenses }, { returnOriginal: false });
+      return updatedUser.expenses;
     } catch (err) {
       console.log(err.stack);
     }
