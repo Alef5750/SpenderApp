@@ -1,11 +1,11 @@
 import React from "react";
 import Navigation from "../components/Navigation";
 
-export default function Settings() {
+export default function Charts() {
   return (
     <div>
-      <Navigation/>
-      <h1>Settings Page</h1>;
+      <Navigation />
+      <h1>Expenses Page</h1>;
     </div>
   );
 }
