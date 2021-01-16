@@ -7,7 +7,8 @@ module.exports = class User {
       displayName: { type: String, required: true },
       email: { type: String, trim: true, lowercase: true, required: true },
       monthlyIncome: { type: Number, default: 0 },
-      monthlyGoal: { type: Number, default: 0 }
+      monthlyGoal: { type: Number, default: 0 },
+      expenses: { type: Object, default: [] }
     })
 
     this.UserModel = mongoose.model('Users', userSchema)
