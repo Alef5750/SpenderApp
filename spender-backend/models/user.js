@@ -25,7 +25,6 @@ module.exports = class User {
   async addNewUser(newUserInfo) {
     try {
       const newUser = await this.UserModel.create(newUserInfo);
-      console.log(newUser);
       return newUser;
     } catch (err) {
       console.log(err.stack);
@@ -43,9 +42,7 @@ module.exports = class User {
 
   async updateById(id, newUserInfo) {
     try {
-      console.log(newUserInfo)
       const updatedUser = await this.UserModel.findByIdAndUpdate(id, newUserInfo, { returnOriginal: false });
-      console.log(updatedUser)
       return updatedUser;
     } catch (err) {
       console.log(err.stack);
