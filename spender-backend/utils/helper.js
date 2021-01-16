@@ -7,27 +7,35 @@ const isEmpty = (obj) => {
 }
 
 const insertExpense = (newExpense, userExpenses) => {
-  if (Object.keys(userExpenses).length === 0) {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentMonth = date.getMonth() + 1;
 
+  // if the year doesn't exist in the expenses report
+  if (!userExpenses[currentYear]) {
     userExpenses = {
-      [year]: {
-        [month]: [newExpense]
+      ...userExpenses,
+      [currentYear]: {
+        [currentMonth]: [newExpense]
       }
     }
     return userExpenses
   }
-  const years = Object.keys(userExpenses);
-  const lastYear = years[years.length - 1];
-  const months = Object.keys(userExpenses[lastYear])
-  const lastMonth = months[months.length - 1];
 
-  const currentMonthExpenses = userExpenses[lastYear][lastMonth]
+  // if the month doesn't exist in the expenses report
+  if (!userExpenses[currentYear][currentMonth]) {
+    userExpenses[currentYear] = {
+      ...userExpenses[currentYear],
+      [currentMonth]: [newExpense]
+    }
+    return userExpenses
+  }
+
+  // new expense to existing year and month
+  const currentMonthExpenses = userExpenses[currentYear][currentMonth]
   const newMonthExpenses = [...currentMonthExpenses, newExpense]
 
-  userExpenses[lastYear][lastMonth] = newMonthExpenses;
+  userExpenses[currentYear][currentMonth] = newMonthExpenses;
   return userExpenses;
 }
 module.exports = { isEmpty, insertExpense }
