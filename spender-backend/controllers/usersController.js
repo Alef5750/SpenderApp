@@ -36,7 +36,7 @@ const getExpensesById = async (req, res) => {
 const addNewExpenseById = async (req, res) => {
   const { id } = req.params;
   const newExpense = req.body;
-  const expenses = user.addNewExpenseById(id, newExpense)
+  const expenses = await user.addNewExpenseById(id, newExpense)
   res.send(expenses);
 }
 
