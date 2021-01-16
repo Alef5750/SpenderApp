@@ -3,11 +3,9 @@ Data Schemas
 
 user {
   _id: ObjectId,
-  firstName: String,
-  lastName: String,
+  displayName: String,
   monthlyIncome: Number,
   monthlyGoal: Number
-  expenses: [{expense}, {expense}, {expense}]
 }
 
 expenses {
@@ -26,17 +24,18 @@ expense {
 }
 */
 
-const { MongoClient } = require('mongodb')
+const mongoose = require('mongoose');
 require('dotenv').config({ path: './.env' });
-
 const uri = process.env.MONGO_URI;
+
 
 class Database {
   constructor() {
     this._connect();
   }
+
   _connect() {
-    MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
       .then(() => {
         console.log('Database connection successful')
       })
