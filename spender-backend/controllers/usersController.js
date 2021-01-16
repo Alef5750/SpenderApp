@@ -29,7 +29,7 @@ const updateUserById = async (req, res) => {
 const getExpensesById = async (req, res) => {
   const { id } = req.params;
   const queryParams = req.query;
-  const expenses = isEmpty(queryParams) ? await user.findAllExpenses() : await user.findExpensesByParams(queryParams)
+  const expenses = isEmpty(queryParams) ? await user.findAllExpenses(id) : await user.findExpensesByParams(id, queryParams)
   res.send(expenses);
 }
 

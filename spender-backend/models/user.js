@@ -50,4 +50,34 @@ module.exports = class User {
     }
   }
 
+  async findAllExpenses(id) {
+    try {
+      const user = await this.UserModel.findById(id);
+      return user.expenses;
+    } catch (err) {
+      console.log(err.stack);
+    }
+  }
+
+  async findExpensesByParams(id, query) {
+    try {
+      const user = await this.UserModel.findById(id);
+      // TO DO - FILTER BY QUERY
+      return user.expenses;
+    } catch (err) {
+      console.log(err.stack);
+    }
+  }
+
+  async addNewExpenseById(id, newExpense) {
+    try {
+      const user = await this.UserModel.findById(id);
+      const currentExpenses = user.expenses;
+      // TO DO - FUNCTION TO INSERT NEW EXPENSE IN PROPER YEAR/DATE
+      return user.expenses;
+    } catch (err) {
+      console.log(err.stack);
+    }
+  }
+
 }
