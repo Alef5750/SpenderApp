@@ -43,7 +43,8 @@ module.exports = class User {
 
   async updateById(id, newUserInfo) {
     try {
-      const updatedUser = await this.UserModel.findByIdAndUpdate(id, newUserInfo);
+      console.log(newUserInfo)
+      const updatedUser = await this.UserModel.findByIdAndUpdate(id, newUserInfo, { returnOriginal: false });
       console.log(updatedUser)
       return updatedUser;
     } catch (err) {
