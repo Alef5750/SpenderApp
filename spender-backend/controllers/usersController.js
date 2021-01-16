@@ -1,3 +1,4 @@
+const { isEmpty } = require("../utils/helper")
 const User = require('../models/user')
 const user = new User();
 
@@ -25,4 +26,18 @@ const updateUserById = async (req, res) => {
   res.send(updatedUser);
 }
 
-module.exports = { getUsers, addNewUser, getUserById, updateUserById }; 
+const getExpensesById = async (req, res) => {
+  const { id } = req.params;
+  const queryParams = req.query;
+  const expenses = isEmpty(queryParams) ? await user.findAllExpenses() : await user.findExpensesByParams(queryParams)
+  res.send(expenses);
+}
+
+const addNewExpenseById = async (req, res) => {
+  const { id } = req.params;
+  const newExpense = req.body;
+  const expenses = user.addNewExpenseById(id, newExpense)
+  res.send(expenses);
+}
+
+module.exports = { getUsers, addNewUser, getUserById, updateUserById, getExpensesById, addNewExpenseById }; 

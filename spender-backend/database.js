@@ -4,8 +4,10 @@ Data Schemas
 user {
   _id: ObjectId,
   displayName: String,
+  email: String,
   monthlyIncome: Number,
   monthlyGoal: Number
+  expenses: [{expense}, {expense}, {expense}]
 }
 
 expenses {
@@ -17,6 +19,7 @@ expenses {
 expense {
   _id: ObjectId
   date: Date,
+  time: Number,
   title: String,
   desc: String,
   category: String

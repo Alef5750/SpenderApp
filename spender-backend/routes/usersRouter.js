@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { getUsers, addNewUser, getUserById, updateUserById } = require('../controllers/usersController')
+const { getUsers, addNewUser, getUserById, updateUserById, getExpensesById, addNewExpenseById } = require('../controllers/usersController')
 
 router.get('/', getUsers);
 
@@ -13,6 +13,6 @@ router.put('/:id', updateUserById)
 
 router.get('/:id/expenses', getExpensesById);
 
-router.post('/:id/expenses', addNewExpensesById);
+router.post('/:id/expenses', addNewExpenseById);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoClient = require('./database')
+const initClient = require('./database')
 const mongoose = require('mongoose');
 const app = express();
 const port = 5000;
@@ -13,6 +13,7 @@ app.use(
   })
 );
 
+// body parser
 const bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,11 +23,9 @@ app.use(bodyParser.json());
 
 // routes
 const usersRouter = require('./routes/usersRouter')
-// const expensesRouter = require('./routes/expensesRouter')
-
 app.use('/api/users', usersRouter);
-// app.use('/api/expenses', expensesRouter);
 
+// listen to port
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
