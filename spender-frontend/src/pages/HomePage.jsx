@@ -12,18 +12,20 @@ export default function HomePage() {
     <div>
       <Navigation />
         <h1>Hey User</h1>
-        <div className="mx-4 d-block">
-          <Button className="my-4 py-4 col bg-danger border-white">
-            <img className="mb-2" src={$} alt={"$"}/>
-            <span className="h3 ml-4">New Expense</span>
+        <div className="mx-4 vh-100">
+          <Button className="my-4 py-4 col bg-danger border-white d-flex align-items-center justify-content-around">
+            <img src={$} alt={"$"}/>
+            <span className="h3 mb-0">New Expense</span>
           </Button>
-          <Button className="my-4 py-4 col bg-success border-white">
-            <img className="mb-2" src={chartsIcon} alt={"Charts"} />
-            <span className="h3 ml-4">View Reports</span>
+        
+          <Button className="my-4 py-4 col bg-success border-white d-flex align-items-center justify-content-around">
+            <img src={chartsIcon} alt={"Charts"} />
+            <span className="h3 mb-0">View Reports</span>
           </Button>
-          <Button className="my-4 py-4 pl-4 col bg-primary border-white text-justify">
-            <img className="mb-2 ml-4" src={settingsIcon} alt={"Settings"} />
-            <span className="h3 ml-4">Settings</span>
+        
+          <Button className="my-4 py-4 col bg-primary border-white d-flex align-items-center justify-content-start">
+            <img className="mx-4" src={settingsIcon} alt={"Settings"} />
+            <span className="h3 mb-0 ml-3">Settings</span>
           </Button>
         </div>
         <Footer/>
