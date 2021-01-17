@@ -1,45 +1,51 @@
 const { isEmpty } = require("../utils/helper")
 const User = require('../models/user');
-const { query } = require("express");
 const user = new User();
 
 const getUsers = async (req, res) => {
   const users = await user.findAll();
-  res.send(users);
+  if (users) res.status(200).send(users)
+  else res.status(400).send("Users not found")
+
 }
 
 const addNewUser = async (req, res) => {
   const newUserInfo = req.body;
   const newUser = await user.addNewUser(newUserInfo);
-  res.send(newUser);
+  if (newUser) res.status(200).send(newUser)
+  else res.status(400).send("User could not be added")
 }
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
   const foundUser = await user.findById(id);
-  res.send(foundUser);
+  if (foundUser) res.status(200).send(foundUser)
+  else res.status(400).send("User could not be found")
+
 }
 
 const updateUserById = async (req, res) => {
   const { id } = req.params;
   const newUserInfo = req.body;
   const updatedUser = await user.updateById(id, newUserInfo);
-  res.send(updatedUser);
+  if (updatedUser) res.status(200).send(updatedUser)
+  else res.status(400).send("User could not be updated")
 }
 
 const getExpensesById = async (req, res) => {
   const { id } = req.params;
   const queryParams = req.query;
-  // res.send(queryParams);
   const expenses = isEmpty(queryParams) ? await user.findAllExpenses(id) : await user.findExpensesByParams(id, queryParams)
-  res.send(expenses);
+  if (expenses) res.status(200).send(expenses)
+  else res.status(400).send("Could not get user expenses")
 }
 
 const addNewExpenseById = async (req, res) => {
   const { id } = req.params;
   const newExpense = req.body;
   const expenses = await user.addNewExpenseById(id, newExpense)
-  res.send(expenses);
+  if (expenses) res.status(200).send(expenses)
+  else res.status(400).send("Could not add to user expenses")
 }
 
 module.exports = { getUsers, addNewUser, getUserById, updateUserById, getExpensesById, addNewExpenseById }; 

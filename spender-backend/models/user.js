@@ -22,6 +22,7 @@ module.exports = class User {
       return usersList;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
@@ -31,6 +32,7 @@ module.exports = class User {
       return newUser;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
@@ -40,6 +42,7 @@ module.exports = class User {
       return user;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
@@ -49,6 +52,7 @@ module.exports = class User {
       return updatedUser;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
@@ -58,6 +62,7 @@ module.exports = class User {
       return user.expenses;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
@@ -70,6 +75,7 @@ module.exports = class User {
       return filteredExpenses;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
@@ -86,6 +92,7 @@ module.exports = class User {
       return updatedUser.expenses;
     } catch (err) {
       console.log(err.stack);
+      return false;
     }
   }
 
