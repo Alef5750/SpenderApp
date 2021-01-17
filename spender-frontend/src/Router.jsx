@@ -10,7 +10,7 @@ export default function Router() {
     <BrowserRouter>
       <Switch>
         <Route path="/charts">
-          <Charts/>
+          <Charts />
         </Route>
         <Route path="/expenses">
           <Expenses />
