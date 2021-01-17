@@ -10,12 +10,6 @@ user {
   expenses: [{expense}, {expense}, {expense}]
 }
 
-expenses {
-  _id: ObjectId,
-  userId: ObjectId,
-  expenses: [{expense}, {expense}, {expense}]
-}
-
 expense {
   _id: ObjectId
   date: Date,
