@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const { insertExpense, getExpensesByQuery } = require("../utils/helper")
 
-
-
 module.exports = class User {
   constructor() {
     const userSchema = new mongoose.Schema({
@@ -78,8 +76,6 @@ module.exports = class User {
       return false;
     }
   }
-
-
 
   async addNewExpenseById(id, newExpense) {
     try {
