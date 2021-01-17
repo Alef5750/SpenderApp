@@ -82,7 +82,6 @@ const getExpensesByQuery = (expenses, query) => {
 
       queryMonth++;
     }
-    console.log(expensesByDate)
     return expensesByDate;
   } else {
     // two dates requested
