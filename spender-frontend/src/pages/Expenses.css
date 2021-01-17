@@ -1,0 +1,17 @@
+.expenses-first-features-div{
+    width: 140px;
+    height: 140px; 
+    background-color: #3DA9FC; 
+    font-weight:600; 
+    border-radius: 18%
+}
+
+.button-bottom{
+    left: 0; 
+    right: 0; 
+    position: absolute; 
+    bottom: 0; 
+    background-color: #094067;
+    font-size:27px; 
+    font-weight: 600
+}
