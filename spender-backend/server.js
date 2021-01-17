@@ -1,4 +1,6 @@
 const express = require('express');
+const initClient = require('./database')
+const mongoose = require('mongoose');
 const app = express();
 const port = 5000;
 const cors = require('cors')
@@ -11,6 +13,7 @@ app.use(
   })
 );
 
+// body parser
 const bodyParser = require("body-parser");
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,12 +22,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // routes
-// const usersRouter = require('./routes/usersRouter')
-// const expensesRouter = require('./routes/expensesRouter')
+const usersRouter = require('./routes/usersRouter')
+app.use('/api/users', usersRouter);
 
-// app.use('/api/users', usersRouter);
-// app.use('/api/expenses', expensesRouter);
-
+// listen to port
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
@@ -32,7 +33,7 @@ app.listen(port, () => {
 // handle termination on ctrl+c to close mongo connection
 process.on('SIGINT', () => {
   console.info('SIGTERM signal received.');
-  mongoClient.close(false, () => {
+  mongoose.connection.close(false, () => {
     console.log('MongoDb connection closed.');
     process.exit(0);
   });
