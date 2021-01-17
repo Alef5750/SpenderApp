@@ -1,5 +1,6 @@
 const { isEmpty } = require("../utils/helper")
-const User = require('../models/user')
+const User = require('../models/user');
+const { query } = require("express");
 const user = new User();
 
 const getUsers = async (req, res) => {
@@ -29,6 +30,7 @@ const updateUserById = async (req, res) => {
 const getExpensesById = async (req, res) => {
   const { id } = req.params;
   const queryParams = req.query;
+  // res.send(queryParams);
   const expenses = isEmpty(queryParams) ? await user.findAllExpenses(id) : await user.findExpensesByParams(id, queryParams)
   res.send(expenses);
 }

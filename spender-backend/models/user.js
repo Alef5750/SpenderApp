@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { insertExpense } = require("../utils/helper")
+const { insertExpense, getExpensesByQuery } = require("../utils/helper")
 
 
 
@@ -64,17 +64,16 @@ module.exports = class User {
   async findExpensesByParams(id, query) {
     try {
       const user = await this.UserModel.findById(id);
-      // TO DO - FILTER BY QUERY
-      return user.expenses;
+
+      const userExpenses = user.expenses;
+      const filteredExpenses = getExpensesByQuery(userExpenses, query);
+      return filteredExpenses;
     } catch (err) {
       console.log(err.stack);
     }
   }
 
-  /*
-  HOW SHOULD QUERY LOOK LIKE?
-  http://localhost:5000/api/users/:id/expenses?year=2020&month=10-12
-  */
+
 
   async addNewExpenseById(id, newExpense) {
     try {
