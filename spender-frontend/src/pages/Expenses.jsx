@@ -1,33 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+//components
 import Navigation from "../components/Navigation";
-import { Button } from "react-bootstrap";
+//images
 import expenses_monthly from "../images/expenses_monthly.png";
 import expenses_food from "../images/expenses_food.png";
 import expenses_entertainement from "../images/expenses_entertainement.png";
 import expenses_other from "../images/expenses_other.png";
 import expenses_add_new from "../images/expenses_add_new.png";
+//styles
+import { Button } from "react-bootstrap";
 import styles from "../styles/Expenses.module.css";
 
 export default function Expenses() {
+  const [redirect, setDirect] = useState(null);
+
   const handleMonthly = () => {
-    console.log("monthly");
+    setDirect("/expenses/monthly");
   };
   const handleFood = () => {
-    console.log("food");
+    setDirect("/expenses/food");
   };
   const handleEntertainment = () => {
-    console.log("entertainment");
+    setDirect("/expenses/entertainment");
   };
   const handleOther = () => {
-    console.log("other");
+    setDirect("/expenses/other");
   };
   const handleAddNew = () => {
-    console.log("addnew");
+    setDirect("/expenses/addnew");
   };
   const handleEdit = () => {
     console.log("edit");
   };
 
+  if (redirect) {
+    return <Redirect to={redirect} />;
+  }
   return (
     <div>
       <Navigation />
