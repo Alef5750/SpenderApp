@@ -1,41 +1,48 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import { Navbar } from "react-bootstrap";
-import MonthCharts from "../components/monthCharts"
-import QuarterCharts from "./QuarterCharts";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Navbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 import styles from "../styles/ChartsNav.module.css";
-import YearCharts from "./yearCharts";
+import ChartsGoals from "./chartsGoals";
+import ChartsHeader from "./chartsHeader";
+import ChartsGraphs from "./chartsGraphs";
+import ChartsReports from "./chartsReports";
 import ChartsDescription from "./chartsDescription";
 
 export default function ChartsNav() {
-
+    
     return (
-        <Router>
-            <Navbar bg="secondary" sticky="top" expand="sm" className="py-2 mb-2 justify-content-between">
-                <NavLink to="/charts/month" className={styles.links}>
-                    Month
-                </NavLink>
-                <NavLink to="/charts/3months" className={styles.links}>
-                    3-Months
-                </NavLink>
-                <NavLink to="/charts/year" className={styles.links}>
-                    Year
-                </NavLink>
-            </Navbar>
-            <Switch>
-                <Route path="/charts/month">
-                    <MonthCharts />
-                </Route>
-                <Route path="/charts/3months">
-                    <QuarterCharts/>
-                </Route>
-                <Route path="/charts/year">
-                    <YearCharts/>
-                </Route>
-                <Route path="/">
-                    <ChartsDescription/>
-                </Route>
-            </Switch>
-        </Router>
+        <div>
+            <ChartsHeader/>
+            <Router>
+                <Navbar expand="sm" className="fixed-bottom py-2 justify-content-between bg-warning">
+                    <NavLink to="/charts/goals" className="text-decoration-none">
+                        <span className={styles.link}>Goals</span>
+                    </NavLink>
+                    <NavLink to="/charts/graphs" className="text-decoration-none">
+                        <span className={styles.link}>Graphs</span>
+                    </NavLink>
+                    <NavLink to="/charts/reports" className="text-decoration-none">
+                        <span className={styles.link}>Reports</span>
+                    </NavLink>
+                </Navbar>
+                <Switch>
+                    <Route path="/charts/goals">
+                        <ChartsGoals />
+                    </Route>
+                    <Route path="/charts/graphs">
+                        <ChartsGraphs />
+                    </Route>
+                    <Route path="/charts/reports">
+                        <ChartsReports />
+                    </Route>
+                    <Route path="/">
+                        <ChartsDescription/>
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
     );
 }

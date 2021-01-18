@@ -1,7 +1,15 @@
-.links{
+.link{
     font-size: 30px;
     font-style: normal;
     font-weight: bold;
     text-decoration: none !important;
-    color: white;
+    /* color: white !important; */
+}
+
+.activeLink{
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none !important;
+    /* color: blue !important; */
 }
