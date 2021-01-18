@@ -1,9 +1,10 @@
 import React from "react";
+//components
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
+//styles
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navigation from "../components/Navigation";
-
-//styles
 import styles from "../styles/Settings.module.css";
 
 export default function Settings() {
@@ -24,6 +25,7 @@ export default function Settings() {
           Save
         </Button>
       </Form>
+      <Footer />
     </div>
   );
 }
