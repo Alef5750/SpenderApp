@@ -9,7 +9,6 @@ import expenses_add_new from "../images/expenses_add_new.png";
 import "./Expenses.css";
 
 export default function Expenses() {
-
   const handleMonthly = () => {
     console.log("monthly");
   }
@@ -92,5 +91,4 @@ export default function Expenses() {
     </div>
     
   );
-  
 }

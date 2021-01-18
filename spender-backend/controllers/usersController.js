@@ -48,4 +48,4 @@ const addNewExpenseById = async (req, res) => {
   else res.status(400).send("Could not add to user expenses")
 }
 
-module.exports = { getUsers, addNewUser, getUserById, updateUserById, getExpensesById, addNewExpenseById }; 
+module.exports = { getUsers, addNewUser, getUserById, updateUserById, getExpensesById, addNewExpenseById, user }; 
