@@ -9,7 +9,6 @@
   margin-top: 21px;
 }
 .saveButton {
-  margin-top: 82px;
   background-color: #3da9fc;
   padding: 1rem 3rem;
   font-size: 20px;
@@ -24,4 +23,8 @@
   border: 1px solid black;
   margin: 10px 10px;
   height: 40px;
+}
+.textarea {
+  border: 1px solid black;
+  margin: 10px 10px;
 }
