@@ -1,3 +1,6 @@
+// despite being in 'pages' folder, this is a component, reused multiple times.
+// each time it is used, it is at a different page location,
+// and has a different "category"(see variable below)
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -49,28 +52,36 @@ export default function NewExpense() {
         touched,
       }) => {
         return (
-          <>
-            <h1>{category}</h1>
-            <Form className={styles.body} onSubmit={handleSubmit}>
-              <input
-                className={styles.input}
-                type="text"
-                name={"title"}
-                value={values.title}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+          <div className={styles.body}>
+            <h1 className={`${styles.text} ${styles.h1}`}>{category}</h1>
+            <Form className={styles.form} onSubmit={handleSubmit}>
+              <Form.Group>
+                <h5 className={styles.text}>What did you buy?</h5>
+                <input
+                  className={styles.input}
+                  placeholder="Pizza? Ice-cream?"
+                  type="text"
+                  name={"title"}
+                  value={values.title}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </Form.Group>
               {errors.title && touched.title && (
                 <Alert variant="danger">{errors.title}</Alert>
               )}
-              <input
-                className={styles.input}
-                type="number"
-                name={"amount"}
-                value={values.amount}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+              <Form.Group>
+                <h5 className={styles.text}>How much did it cost?</h5>
+                <input
+                  className={styles.input}
+                  placeholder="$"
+                  type="number"
+                  name={"amount"}
+                  value={values.amount}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </Form.Group>
               {errors.amount && touched.amount && (
                 <Alert variant="danger">{errors.amount}</Alert>
               )}
@@ -78,7 +89,7 @@ export default function NewExpense() {
                 Save
               </Button>
             </Form>
-          </>
+          </div>
         );
       }}
     </Formik>
