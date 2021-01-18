@@ -1,0 +1,12 @@
+.text {
+  color: #094067;
+  font-weight: bold;
+}
+.h1 {
+  margin-top: 21px;
+  margin-bottom: 38px;
+}
+.buttons {
+  margin-bottom: 38px;
+  border-radius: 20px;
+}

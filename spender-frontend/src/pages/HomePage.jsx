@@ -5,15 +5,16 @@ import Navigation from "../components/Navigation";
 import $ from "../images/ExpensesIconWhite.png";
 import chartsIcon from "../images/ReportsIconWhite.png";
 import settingsIcon from "../images/SettingsIconWhite.png";
+import styles from "../styles/HomePage.module.css";
 
 export default function HomePage() {
   return (
     <div>
       <Navigation />
-      <h1>Hey User</h1>
+      <h1 className={`${styles.text} ${styles.h1}`}>Hey User</h1>
       <div className="mx-4 vh-100">
         <Link
-          className="btn btn-danger my-4 py-4 col bg-danger d-flex align-items-center justify-content-around"
+          className={`btn btn-danger my-4 py-4 col bg-danger d-flex align-items-center justify-content-around ${styles.buttons}`}
           to="/expenses"
         >
           <img src={$} alt={"$"} />
@@ -21,7 +22,7 @@ export default function HomePage() {
         </Link>
 
         <Link
-          className="btn btn-success my-4 py-4 col bg-success d-flex align-items-center justify-content-around"
+          className={`btn btn-danger my-4 py-4 col bg-success d-flex align-items-center justify-content-around ${styles.buttons}`}
           to="/charts"
         >
           <img src={chartsIcon} alt={"Charts"} />
@@ -29,7 +30,7 @@ export default function HomePage() {
         </Link>
 
         <Link
-          className="btn btn-primary my-4 py-4 col bg-primary d-flex align-items-center justify-content-start"
+          className={`btn btn-primary my-4 py-4 col bg-primary d-flex align-items-center justify-content-start ${styles.buttons}`}
           to="/settings"
         >
           <img className="mx-4" src={settingsIcon} alt={"Settings"} />
