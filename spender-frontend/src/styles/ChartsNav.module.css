@@ -1,18 +1,7 @@
-.On{
+.links{
     font-size: 30px;
     font-style: normal;
     font-weight: bold;
-    /* display: flex; */
-    /* align-items: center; */
-    /* text-align: center; */
-    color: #094067 !important;
-}
-.Off{
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    /* display: flex; */
-    /* align-items: center; */
-    /* text-align: center; */
+    text-decoration: none !important;
     color: white;
 }

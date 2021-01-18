@@ -8,7 +8,6 @@ export default function Charts() {
     <div>
       <Navigation />
       <ChartsNav/>
-      <h1>Charts Page</h1>
     </div>
   );
 }
