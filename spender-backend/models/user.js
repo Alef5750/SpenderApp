@@ -4,8 +4,9 @@ const { insertExpense, getExpensesByQuery } = require("../utils/helper")
 module.exports = class User {
   constructor() {
     const userSchema = new mongoose.Schema({
+      googleId: { type: Number, required: true },
       displayName: { type: String, required: true },
-      email: { type: String, trim: true, lowercase: true, required: true },
+      // email: { type: String, trim: true, lowercase: true, required: true },
       monthlyIncome: { type: Number, default: 0 },
       monthlyGoal: { type: Number, default: 0 },
       expenses: { type: Object, default: {} }
@@ -16,7 +17,7 @@ module.exports = class User {
 
   async findAll() {
     try {
-      const usersList = await this.UserModel.find()
+      const usersList = await this.UserModel.find().select('-expenses')
       return usersList;
     } catch (err) {
       console.log(err.stack);
@@ -34,9 +35,21 @@ module.exports = class User {
     }
   }
 
+  async findOrAdd(searchParam, userInfo) {
+    try {
+      let user = await this.UserModel.findOne(searchParam).exec();
+      if (!user)
+        user = await this.addNewUser(userInfo);
+      return user;
+    } catch (err) {
+      console.log(err.stack);
+      return err;
+    }
+  }
+
   async findById(id) {
     try {
-      const user = await this.UserModel.findById(id);
+      const user = await this.UserModel.findById(id).select('-expenses');
       return user;
     } catch (err) {
       console.log(err.stack);
