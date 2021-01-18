@@ -1,8 +1,18 @@
 .On{
-    color: white !important;
     font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    /* display: flex; */
+    /* align-items: center; */
+    /* text-align: center; */
+    color: #094067 !important;
 }
 .Off{
-    color: black !important;
+    font-style: normal;
+    font-weight: bold;
     font-size: 30px;
+    /* display: flex; */
+    /* align-items: center; */
+    /* text-align: center; */
+    color: white;
 }

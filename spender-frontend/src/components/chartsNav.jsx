@@ -17,12 +17,12 @@ export default function ChartsNav() {
     if (location.pathname === "/charts/year") Year = On;
     else Year = Off;
     return (
-        <Navbar bg="secondary" sticky="top" expand="sm" className="py-2 justify-content-around">
+        <Navbar bg="secondary" sticky="top" expand="sm" className="py-2 justify-content-between">
             <NavLink to="/charts/month" className="text-decoration-none">
                 <span className={Month}>Month</span>
             </NavLink>
             <NavLink to="/charts/3months" className="text-decoration-none">
-                <span className={Months}>3 Months</span>
+                <span className={Months}>3-Months</span>
             </NavLink>
             <NavLink to="/charts/year" className="text-decoration-none">
                 <span className={Year}>Year</span>
