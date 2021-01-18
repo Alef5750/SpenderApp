@@ -33,7 +33,7 @@ export default function Expenses() {
     <div>
       <Navigation />
 
-      <div className="d-flex flex-row mx-5 px-1 mt-5 justify-content-between">
+      <div className="d-flex flex-row mx-4 px-1 mt-5 justify-content-between">
         <div className=" d-flex flex-column expenses-first-features-div" onClick = {() => handleMonthly()}>
           <div className= "h-50 py-4 ">
           Monthly
@@ -54,7 +54,7 @@ export default function Expenses() {
         </div>
       </div>
 
-      <div className="d-flex flex-row mx-5 px-1 mt-3 justify-content-between">
+      <div className="d-flex flex-row mx-4 px-1 mt-3 justify-content-between">
         <div className=" d-flex flex-column expenses-first-features-div" onClick = {() => handleEntertainment()}>
         <div className= "h-50 py-4">
           Entertainment
@@ -75,7 +75,7 @@ export default function Expenses() {
         </div>
       </div>
 
-      <div className="d-flex flex-row mx-5 px-1 mt-3 justify-content-start" >
+      <div className="d-flex flex-row mx-4 px-1 mt-3 justify-content-start" >
         <div className=" d-flex flex-column expenses-first-features-div" onClick = {() => handleAddNew()}>
         <div className= "h-50 py-4 ">
           Add New...
