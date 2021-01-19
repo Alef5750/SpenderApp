@@ -17,7 +17,7 @@ export default function Navigation() {
         <img src={Expenses()} alt="Expenses" />
       </NavLink>
       <NavLink to="/charts">
-        <img src={Reports()} alt="Settings" />
+        <img src={Reports()} alt="Reports" />
       </NavLink>
       <NavLink to="/settings">
         <img src={Settings()} alt="Settings" />
