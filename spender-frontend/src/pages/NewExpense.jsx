@@ -6,8 +6,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 //componenets
 import Navigation from "../components/Navigation";
-
-import { useLocation } from "react-router-dom";
+import { NewExpenseCategory } from "../helpers/conditionals";
 //styles
 import styles from "../styles/NewExpense.module.css";
 import { Button, Form, Alert } from "react-bootstrap";
@@ -23,18 +22,6 @@ const formSchema = Yup.object().shape({
 });
 
 export default function NewExpense() {
-  const location = useLocation();
-  let category;
-  if (location.pathname === "/expenses/addnew") {
-    category = "Add a new Category!";
-  } else if (location.pathname === "/expenses/other") category = "Other";
-  else if (location.pathname === "/expenses/entertainment")
-    category = "Entertainment";
-  else if (location.pathname === "/expenses/food") category = "Food";
-  else if (location.pathname === "/expenses/entertainment")
-    category = "Entertainment";
-  else if (location.pathname === "/expenses/monthly")
-    category = "Monthly Expenses";
   function handleNewExpense(expense) {
     console.log(expense);
   }
@@ -60,7 +47,9 @@ export default function NewExpense() {
         return (
           <div className={styles.body}>
             <Navigation />
-            <h1 className={`${styles.text} ${styles.h1}`}>{category}</h1>
+            <h1 className={`${styles.text} ${styles.h1}`}>
+              {NewExpenseCategory()}
+            </h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
               <Form.Group>
                 <h5 className={styles.text}>What was it?</h5>
