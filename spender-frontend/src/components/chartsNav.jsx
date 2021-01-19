@@ -1,10 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Navbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-
-import styles from "../styles/ChartsNav.module.css";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import styles from "../styles/Charts.module.css";
 import ChartsGoals from "./chartsGoals";
 import ChartsHeader from "./chartsHeader";
 import ChartsGraphs from "./chartsGraphs";
@@ -17,28 +14,28 @@ export default function ChartsNav() {
         <div>
             <ChartsHeader/>
             <Router>
-                <Navbar expand="sm" className="fixed-bottom py-2 justify-content-between bg-warning">
-                    <NavLink to="/charts/goals" className="text-decoration-none">
-                        <span className={styles.link}>Goals</span>
+                <Navbar expand="sm" className={styles.nav}>
+                    <NavLink to="/charts/goals" className={styles.link} activeClassName={styles.activeLink}>
+                        Goals
                     </NavLink>
-                    <NavLink to="/charts/graphs" className="text-decoration-none">
-                        <span className={styles.link}>Graphs</span>
+                    <NavLink to="/charts/graphs" className={styles.link} activeClassName={styles.activeLink}>
+                        Graphs
                     </NavLink>
-                    <NavLink to="/charts/reports" className="text-decoration-none">
-                        <span className={styles.link}>Reports</span>
+                    <NavLink to="/charts/reports" className={styles.link} activeClassName={styles.activeLink}>
+                        Reports
                     </NavLink>
                 </Navbar>
                 <Switch>
-                    <Route path="/charts/goals">
+                    <Route exact path="/charts/goals">
                         <ChartsGoals />
                     </Route>
-                    <Route path="/charts/graphs">
+                    <Route exact path="/charts/graphs">
                         <ChartsGraphs />
                     </Route>
-                    <Route path="/charts/reports">
+                    <Route exact path="/charts/reports">
                         <ChartsReports />
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <ChartsDescription/>
                     </Route>
                 </Switch>

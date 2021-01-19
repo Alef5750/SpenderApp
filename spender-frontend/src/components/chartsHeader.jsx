@@ -1,15 +1,22 @@
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import styles from "../styles/Charts.module.css";
+
+
+const handleChange = (event) => {
+    console.log(event);
+} 
 
 export default function ChartsHeader() {
     return (
         <ToggleButtonGroup
             type="radio"
             name="timePeriods"
-            className="d-flex justify-content-between"
+            className="d-flex"
+            onChange={(event) => handleChange(event)}
         >
-            <ToggleButton className="rounded-0 bg-secondary border-secondary" value={"month"}>Month</ToggleButton>
-            <ToggleButton className="rounded-0 bg-secondary border-secondary" value={"3months"}>3-Months</ToggleButton>
-            <ToggleButton className="rounded-0 bg-secondary border-secondary" value={"year"}>Year</ToggleButton>
+            <ToggleButton className={styles.headerButtons} value={"month"}>Month</ToggleButton>
+            <ToggleButton className={styles.headerButtons} value={"3months"}>3-Months</ToggleButton>
+            <ToggleButton className={styles.headerButtons} value={"year"}>Year</ToggleButton>
         </ToggleButtonGroup>
     );
 }
