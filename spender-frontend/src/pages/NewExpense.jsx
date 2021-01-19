@@ -4,6 +4,8 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+//componenets
+import Navigation from "../components/Navigation";
 
 import { useLocation } from "react-router-dom";
 //styles
@@ -23,9 +25,9 @@ const formSchema = Yup.object().shape({
 export default function NewExpense() {
   const location = useLocation();
   let category;
-  if (location.pathname === "/expenses/addnew")
+  if (location.pathname === "/expenses/addnew") {
     category = "Add a new Category!";
-  else if (location.pathname === "/expenses/other") category = "Other";
+  } else if (location.pathname === "/expenses/other") category = "Other";
   else if (location.pathname === "/expenses/entertainment")
     category = "Entertainment";
   else if (location.pathname === "/expenses/food") category = "Food";
@@ -39,6 +41,7 @@ export default function NewExpense() {
   return (
     <Formik
       initialValues={{
+        category: "",
         title: "",
         amount: null,
         description: "",
@@ -56,6 +59,7 @@ export default function NewExpense() {
       }) => {
         return (
           <div className={styles.body}>
+            <Navigation />
             <h1 className={`${styles.text} ${styles.h1}`}>{category}</h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
               <Form.Group>
