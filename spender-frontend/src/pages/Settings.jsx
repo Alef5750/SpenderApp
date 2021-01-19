@@ -7,6 +7,7 @@ import * as Yup from "yup";
 //styles
 import { Form, Button, Alert } from "react-bootstrap";
 import styles from "../styles/Settings.module.css";
+import { UpdateSettings } from "../helpers/api";
 
 const formSchema = Yup.object().shape({
   monthlyIncome: Yup.number().required("Oops! You haven't entered your income"),
@@ -16,6 +17,7 @@ const formSchema = Yup.object().shape({
 export default function Settings() {
   function handleSettingsUpdate(settings) {
     console.log(settings);
+    UpdateSettings(settings);
   }
   return (
     <Formik
@@ -35,12 +37,6 @@ export default function Settings() {
         touched,
       }) => {
         return (
-          // type="email"
-          //     name={"email"}
-          //     value={values.email}
-          //     placeholder="Email"
-          //     onChange={handleChange}
-          //     onBlur={handleBlur}
           <div className={styles.body}>
             <Navigation />
             <h1 className={`${styles.text} ${styles.h1}`}>Settings</h1>
