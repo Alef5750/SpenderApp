@@ -16,11 +16,9 @@ import ExpensesIconBlue from "../images/ExpensesIconBlue.png";
 import SettingsIconWhite from "../images/SettingsIconWhite.png";
 import SettingsIconBlue from "../images/SettingsIconBlue.png";
 
-
 export default function Navigation() {
   let HomeIcon, ExpensesIcon, ReportsIcon, SettingsIcon;
   const location = useLocation();
-  console.log(location.pathname);
   if (location.pathname === "/home") HomeIcon = HomeIconBlue;
   else HomeIcon = HomeIconWhite;
   if (location.pathname === "/expenses") ExpensesIcon = ExpensesIconBlue;
