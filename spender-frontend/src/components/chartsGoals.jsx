@@ -1,10 +1,8 @@
 import React from "react";
-import Footer from "../components/footer"
 
 
-export default function MonthCharts() {
+export default function ChartsGoals() {
     return (
-        <div>
             <div className="mx-4">
                 <h3 className="text-primary">Monthly Savings</h3>
                 <div className="my-3 py-3 col bg-primary text-white d-flex h3 justify-content-center rounded">
@@ -22,7 +20,5 @@ export default function MonthCharts() {
                 {/* a message for the user, based on on the data fetched from the backend */}
                 
             </div>
-            <Footer />
-        </div>
     )
 }
