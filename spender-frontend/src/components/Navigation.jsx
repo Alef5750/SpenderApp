@@ -1,10 +1,9 @@
 import React from "react";
-// import { useState } from 'react';
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-
 //helpers
 import { Home, Expenses, Reports, Settings } from "../helpers/conditionals";
+//styles
 import styles from "../styles/Navbar.module.css";
 
 export default function Navigation() {
