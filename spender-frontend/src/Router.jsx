@@ -76,6 +76,6 @@ export default function Router() {
     //       {/* <SignIn /> */}
     //     </PrivateRoute>
     //   </Switch>
-    // </BrowserRouter>
+    // </BrowserRouter> 
   );
 }
