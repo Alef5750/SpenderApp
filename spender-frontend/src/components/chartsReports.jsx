@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function ChartsReports() {
+export default function ChartsReports({time}) {
+
+    if (time) console.log(time);
+
     return (
         <div className="mx-4">
             <h2>Reports</h2>

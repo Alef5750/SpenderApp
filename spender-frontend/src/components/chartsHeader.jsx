@@ -2,11 +2,40 @@ import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import styles from "../styles/Charts.module.css";
 
 
-const handleChange = (event) => {
-    console.log(event);
-} 
 
-export default function ChartsHeader() {
+export default function ChartsHeader({ timeRequest}) {
+
+    const handleChange = (event) => {
+        let date = new Date()
+        let time
+        let months
+        if (event === "month") time = `${date.getMonth() + 1} ${date.getFullYear()}`
+        if (event === "year") time = date.getFullYear()
+        if (event === "3months") {
+            months = date.getMonth()
+            if (months > 1) time = {
+                first: `${months - 1} ${date.getFullYear()}`,
+                second: `${months} ${date.getFullYear()}`,
+                third: `${months + 1} ${date.getFullYear()}`
+            }
+            else {
+                if (months === 0) time = {
+                    first: `11 ${date.getFullYear() - 1}`,
+                    second: `12 ${date.getFullYear() - 1}`,
+                    third: `${months + 1} ${date.getFullYear()}`
+                }
+
+                if (months === 1) time = {
+                    first: `12 ${date.getFullYear() - 1}`,
+                    second: `${months} ${date.getFullYear()}`,
+                    third: `${months + 1} ${date.getFullYear()}`
+                }
+            }
+        }
+        timeRequest(time)
+    }
+    // /api/users/:id/expenses?date=year/month-amount
+    
     return (
         <ToggleButtonGroup
             type="radio"
