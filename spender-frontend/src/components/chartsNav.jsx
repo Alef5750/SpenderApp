@@ -35,7 +35,7 @@ export default function ChartsNav() {
                     <Route exact path="/charts/reports">
                         <ChartsReports />
                     </Route>
-                    <Route exact path="/">
+                    <Route exact path="">
                         <ChartsDescription/>
                     </Route>
                 </Switch>
