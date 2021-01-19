@@ -7,6 +7,7 @@ import * as Yup from "yup";
 //componenets
 import Navigation from "../components/Navigation";
 import { NewExpenseCategory } from "../helpers/conditionals";
+import { SaveNewExpense } from "../helpers/api";
 //styles
 import styles from "../styles/NewExpense.module.css";
 import { Button, Form, Alert } from "react-bootstrap";
@@ -24,6 +25,7 @@ const formSchema = Yup.object().shape({
 export default function NewExpense() {
   function handleNewExpense(expense) {
     console.log(expense);
+    SaveNewExpense();
   }
   return (
     <Formik
