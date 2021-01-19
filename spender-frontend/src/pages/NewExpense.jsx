@@ -28,9 +28,9 @@ export default function NewExpense() {
   return (
     <Formik
       initialValues={{
-        category: "",
+        category: NewExpenseCategory(),
         title: "",
-        amount: null,
+        amount: "",
         description: "",
       }}
       validationSchema={formSchema}
