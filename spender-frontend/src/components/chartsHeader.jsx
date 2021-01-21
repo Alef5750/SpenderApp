@@ -1,4 +1,5 @@
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+// import { getExpensesByDate } from "../helpers/api";
 import styles from "../styles/Charts.module.css";
 
 
@@ -30,9 +31,10 @@ const handleChange = (event) => {
         }
     }
     console.log(time);
+    // /api/users/:id/expenses?date=year/month-amount
+    // getExpensesByDate(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
 
 } 
-    // /api/users/:id/expenses?date=year/month-amount
 
 export default function ChartsHeader() {
     
