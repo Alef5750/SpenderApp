@@ -4,26 +4,19 @@ import styles from "../styles/Charts.module.css";
 import moment from "moment";
 
 
-export default function ChartsHeader({ timeRequest }) {
+export default function ChartsHeader({ timeRequest, getData }) {
 
-    const handleChange = (event) => {
+    const handleChange = async (event) => {
         let date = new Date()
-        let time
-        let months
+        let time;
         if (event === "month") time = `${date.getFullYear()}/${moment(date).format('MM')}-1`
         if (event === "year") time = `${date.getFullYear()}/${moment(date).format('MM')}-12`
         if (event === "3months") time = `${date.getFullYear()}/${moment(date).format('MM')}-3`
         timeRequest(time);
-        getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
-           .then(response => console.log(response))
+        // await getData(time);
+        // getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
+        //    .then(response => console.log(response))
     }
-    // console.log(time);
-    // /api/users/:id/expenses?date=year/month-amount
-    // getExpensesByDate(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
-
-
-
-    // /api/users/:id/expenses?date=year/month-amount
 
     return (
         <ToggleButtonGroup

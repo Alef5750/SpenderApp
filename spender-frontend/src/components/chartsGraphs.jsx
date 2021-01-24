@@ -1,13 +1,21 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { getExpensesById } from "../helpers/api";
+import LineYear from "./LineYear"
+export default function ChartsGraphs({ time, labels, data }) {
+
+    // if (time) console.log(time);
+    // const [data, setData] = useState([]);
+    useEffect( () => {
+        console.log("1", time);
+        console.log("2", labels);
+        console.log("3", data);
+    }, [data]);
 
 
-export default function ChartsGraphs({ time }) {
-    
-    if(time)console.log(time);
 
     return (
         <div className="mx-4">
-            <h3>Graphs</h3>
+            {/* <LineYear data = {data} time = {time}/> */}
         </div>
     )
 }
