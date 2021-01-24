@@ -5,11 +5,13 @@ import moment from 'moment';
 
 function Charts({ data, time, labels }) {
     //initialise all the month with an expense by 0
-    const [expensesByMonth, setExpensesByMonth] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    const [expensesByMonth, setExpensesByMonth] = useState([0, 0, 0])
 
     // get all the expenses by month
 
     const getAmountByMonth = () => {
+        // "this variable" let we know if there was a expense for the month
+        let globalyMonth = 1;
         const myExpenseByMonth = [];
         let count = 0;
         for (const key in data) {
@@ -28,7 +30,7 @@ function Charts({ data, time, labels }) {
         if (data) {
             getAmountByMonth();
         } else {
-            setExpensesByMonth([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            setExpensesByMonth([]); 
         }
     }, [data])
 

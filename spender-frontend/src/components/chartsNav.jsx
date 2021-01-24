@@ -112,6 +112,7 @@ export default function ChartsNav({ timeRequest }) {
         labs.push(moment().subtract(2, 'months').format('MMM'))
         labs.push(moment().subtract(1, 'months').format('MMM'));
         labs.push(moment().format('MMM'));
+        setLabels(labs);
         //console.log(labs);
     }
 
