@@ -48,7 +48,7 @@ passport.use(new GoogleStrategy({
 },
   async function (accessToken, refreshToken, profile, done) {
     try {
-      console.log(UserModel)
+      // console.log(UserModel)
       const user = await UserModel.findOrAdd({ googleId: profile.id }, { googleId: profile.id, displayName: profile.name.givenName });
       if (user) return done(null, user);
     } catch (err) {
@@ -69,7 +69,7 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (user, done) {
-  console.log("de", user)
+  // console.log("de", user)
   done(null, user);
 });
 

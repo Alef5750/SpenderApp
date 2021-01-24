@@ -6,6 +6,11 @@ const isEmpty = (obj) => {
   return true;
 }
 
+const authRequest = (session, id) => {
+  if (session.id === id) return true;
+  return false;
+}
+
 const createDateByFormat = (day, month, year) => {
   if (month < 10) month = "0" + month;
   if (day < 10) day = "0" + day;
@@ -136,4 +141,4 @@ const getExpensesByQuery = (expenses, query) => {
     return [expensesByDateCurrent, expensesByDatePast];
   }
 }
-module.exports = { isEmpty, insertExpense, getExpensesByQuery }
+module.exports = { isEmpty, authRequest, insertExpense, getExpensesByQuery }
