@@ -5,6 +5,7 @@ export class PrivateRoute extends React.Component {
     state = {
         loading: true,
         isAuthenticated: false,
+        id: null,
     };
     componentDidMount() {
         const requestOptions = {
@@ -13,12 +14,13 @@ export class PrivateRoute extends React.Component {
         };
         fetch(`http://localhost:5000/auth`, requestOptions)
             .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                if (data) {
+            .then((id) => {
+                console.log(id);
+                if (id) {
                     this.setState({
                         loading: false,
                         isAuthenticated: true,
+                        id: id,
                     });
                 } else {
                     this.setState({
@@ -38,7 +40,7 @@ export class PrivateRoute extends React.Component {
                     render={(props) => (
                         <div>
                             {!this.state.isAuthenticated && <Redirect to="/" />}
-                            <Component {...this.props} />
+                            <Component {...this.props} id={this.state.id} />
                         </div>
                     )}
                 />

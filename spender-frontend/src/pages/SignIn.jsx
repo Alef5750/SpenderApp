@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 
 import styles from "../styles/Navbar.module.css";
 
-export default function SignIn() {
+export default function SignIn(props) {
     const initGoogle = () => {
         window.open(`http://localhost:5000/auth/google`, "_self");
     };
