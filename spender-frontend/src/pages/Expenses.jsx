@@ -12,23 +12,27 @@ import expenses_add_new from "../images/expenses_add_new.png";
 import { Button } from "react-bootstrap";
 import styles from "../styles/Expenses.module.css";
 
-<<<<<<< HEAD
-export default function Expenses() {
+export default function Expenses(prop) {
   const [redirect, setDirect] = useState(null);
 
   const handleMonthly = () => {
+    console.log("monthly");
     setDirect("/expenses/monthly");
   };
   const handleFood = () => {
+    console.log("food");
     setDirect("/expenses/food");
   };
   const handleEntertainment = () => {
+    console.log("entertainment");
     setDirect("/expenses/entertainment");
   };
   const handleOther = () => {
+    console.log("other");
     setDirect("/expenses/other");
   };
   const handleAddNew = () => {
+    console.log("addnew");
     setDirect("/expenses/addnew");
   };
   const handleEdit = () => {
@@ -38,6 +42,7 @@ export default function Expenses() {
   if (redirect) {
     return <Redirect to={redirect} />;
   }
+
   return (
     <div>
       <Navigation />
@@ -103,91 +108,4 @@ export default function Expenses() {
       </Button>
     </div>
   );
-=======
-export default function Expenses(prop) {
-    const handleMonthly = () => {
-        console.log("monthly");
-    };
-    const handleFood = () => {
-        console.log("food");
-    };
-    const handleEntertainment = () => {
-        console.log("entertainment");
-    };
-    const handleOther = () => {
-        console.log("other");
-    };
-    const handleAddNew = () => {
-        console.log("addnew");
-    };
-    const handleEdit = () => {
-        console.log("edit");
-    };
-
-    return (
-        <div>
-            <Navigation />
-
-            <div className="d-flex flex-row mx-4 px-1 mt-5 justify-content-between">
-                <div
-                    className=" d-flex flex-column expenses-first-features-div"
-                    onClick={() => handleMonthly()}
-                >
-                    <div className="h-50 py-4 ">Monthly</div>
-                    <div className="h-50">
-                        <img src={expenses_monthly} />
-                    </div>
-                </div>
-                <div
-                    className=" d-flex flex-column expenses-first-features-div"
-                    onClick={() => handleFood()}
-                >
-                    <div className="h-50 py-4">Food</div>
-                    <div className="h-50">
-                        <img src={expenses_food} />
-                    </div>
-                </div>
-            </div>
-
-            <div className="d-flex flex-row mx-4 px-1 mt-3 justify-content-between">
-                <div
-                    className=" d-flex flex-column expenses-first-features-div"
-                    onClick={() => handleEntertainment()}
-                >
-                    <div className="h-50 py-4">Entertainment</div>
-                    <div className="h-50">
-                        <img src={expenses_entertainement} />
-                    </div>
-                </div>
-                <div
-                    className=" d-flex flex-column expenses-first-features-div"
-                    onClick={() => handleOther()}
-                >
-                    <div className="h-50 py-4">Other</div>
-                    <div className="h-50">
-                        <img src={expenses_other} />
-                    </div>
-                </div>
-            </div>
-
-            <div className="d-flex flex-row mx-4 px-1 mt-3 justify-content-start">
-                <div
-                    className=" d-flex flex-column expenses-first-features-div"
-                    onClick={() => handleAddNew()}
-                >
-                    <div className="h-50 py-4 ">Add New...</div>
-                    <div className="h-50">
-                        <img src={expenses_add_new} />
-                    </div>
-                </div>
-            </div>
-            <Button
-                className="w-100 button-bottom"
-                onClick={() => handleEdit()}
-            >
-                Edit
-            </Button>
-        </div>
-    );
->>>>>>> 0a508b6cb8903da06b8916f698e67ced92ae7db2
 }
