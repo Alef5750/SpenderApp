@@ -6,10 +6,20 @@ const isEmpty = (obj) => {
   return true;
 }
 
+const createDateByFormat = (day, month, year) => {
+  if (month < 10) month = "0" + month;
+  if (day < 10) day = "0" + day;
+  return `${month}/${day}/${year}`
+}
+
 const insertExpense = (newExpense, userExpenses) => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentMonth = date.getMonth() + 1;
+  const currentDay = date.getDate();
+
+  const expenseDate = createDateByFormat(currentDay, currentMonth, currentYear);
+  newExpense.date = expenseDate;
 
   // if the year doesn't exist in the expenses report
   if (!userExpenses[currentYear]) {
