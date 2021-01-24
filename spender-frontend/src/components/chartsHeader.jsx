@@ -35,17 +35,13 @@ export default function ChartsHeader({ timeRequest}) {
         }
         timeRequest(time)
     }
-<<<<<<< HEAD
-    console.log(time);
+    // console.log(time);
     // /api/users/:id/expenses?date=year/month-amount
     // getExpensesByDate(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
 
-} 
 
-export default function ChartsHeader() {
-=======
+
     // /api/users/:id/expenses?date=year/month-amount
->>>>>>> 0a508b6cb8903da06b8916f698e67ced92ae7db2
     
     return (
         <ToggleButtonGroup
