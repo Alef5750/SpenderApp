@@ -3,50 +3,48 @@ import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 
 
-function Charts(props) {
-    const [labels, setLabels] = useState([]);
-
+function Charts({ data, time, labels }) {
     //initialise all the month with an expense by 0
     const [expensesByMonth, setExpensesByMonth] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
-    const expenseYear = props.mockData;
-
     // get all the expenses by month
-    const getAmountByMonth = () => {
 
+    const getAmountByMonth = () => {
         // "this variable" let we know if there was a expense for the month
         let globalyMonth = 1;
         const myExpenseByMonth = [];
-        for (const key in expenseYear) {
-            myExpenseByMonth[key - 1] = 0;
-            expenseYear[key].map(element => {
-                myExpenseByMonth[key - 1] += element.amount;
-            });
-
+        let count = 0;
+        for (const key in data) {
+            for (const monthKey in data[key]) {
+                myExpenseByMonth[count] = 0;
+                data[key][monthKey].map(element => {
+                    myExpenseByMonth[count] += element.amount;
+                });
+                count++;
+            }
         }
         setExpensesByMonth(myExpenseByMonth);
     }
 
     const defineTheLabels = () => {
-        console.log(props.time)
+        console.log(time)
     }
 
-    useEffect(() => {
-        defineTheLabels();
-        console.log(props.time)
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        setLabels(months);
-    }, [])
-
-    useEffect(() => {
-        console.log(props.mockData);
-    }, [])
+    // useEffect(() => {
+    //     defineTheLabels();
+    //     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    //     setLabels(months);
+    // }, [])
 
     useEffect(() => {
         getAmountByMonth();
-    }, [])
+    }, [data])
 
-    var data = {
+    // useEffect(() => {
+    //     getAmountByMonth();
+    // }, [])
+
+    var dataGraph = {
         labels: labels,
         datasets: [
             {
@@ -83,11 +81,10 @@ function Charts(props) {
     };
     return (
         <div className="ml-4 mr-3 mt-3">
-            {console.log(expensesByMonth)}
             <Line
-                data={data}
+                data={dataGraph}
                 options={options}
-                height={250}
+                height={215}
             />
         </div>
     )

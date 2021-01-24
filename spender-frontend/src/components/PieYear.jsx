@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Doughnut } from 'react-chartjs-2';
 
-function Charts(props) {
-    const expenseYear = props.mockData;
+function Charts({ data, time, labels }) {
     const [amountByCategorie, setAmountByCategorie] = useState([]);
     const [labelGraph, setLabelGraph] = useState([]);
     const [dataGraph, setDataGraph] = useState([]);
@@ -11,24 +10,30 @@ function Charts(props) {
 
     const getCategories = () => {
         const arrayOfCategory = [];
-        for (const key in expenseYear) {
-            for (let index = 0; index < expenseYear[key].length; index++) {
-                const found = arrayOfCategory.find(element => element.category == expenseYear[key][index].category);
-                if (!found) {
-                    const creationCategory = { category: expenseYear[key][index].category, amount: 0};
-                    arrayOfCategory.push(creationCategory);
+        for (const key in data) {
+            for (const monthKey in data[key]) {
+                for (let index = 0; index < data[key][monthKey].length; index++) {
+                    const found = arrayOfCategory.find(element => element.category == data[key][monthKey][index].category);
+                    if (!found) {
+                        const creationCategory = { category: data[key][monthKey][index].category, amount: 0 };
+                        arrayOfCategory.push(creationCategory);
+                    }
                 }
             }
+
         }
+        console.log(arrayOfCategory)
         getAmountByCategories(arrayOfCategory);
     }
 
     const getAmountByCategories = (arrayOfCategory) => {
-        for (const key in expenseYear) {
-            for (let index = 0; index < expenseYear[key].length; index++) {
-                for (let j = 0; j < arrayOfCategory.length; j++) {
-                    if (expenseYear[key][index].category == arrayOfCategory[j].category) {
-                        arrayOfCategory[j].amount += expenseYear[key][index].amount;
+        for (const key in data) {
+            for (const monthKey in data[key]) {
+                for (let index = 0; index < data[key][monthKey].length; index++) {
+                    for (let j = 0; j < arrayOfCategory.length; j++) {
+                        if (data[key][monthKey][index].category == arrayOfCategory[j].category) {
+                            arrayOfCategory[j].amount += data[key][monthKey][index].amount;
+                        }
                     }
                 }
             }
@@ -56,7 +61,7 @@ function Charts(props) {
 
     useEffect(() => {
         getCategories();
-    }, [])
+    }, [data])
 
     useEffect(() => {
         const categories = amountByCategorie.map(element => element.category);
@@ -67,7 +72,7 @@ function Charts(props) {
         const amounts = amountByCategorie.map(element => element.amount);
         setDataGraph(amounts);
     }, [amountByCategorie])
-    
+
     return (
 
         <div className="mx-4 mt-3">
@@ -90,7 +95,7 @@ function Charts(props) {
                         data: dataGraph
                     }]
                 }}
-                height={250}
+                height={225}
 
                 options={{
                     maintainAspectRatio: false,

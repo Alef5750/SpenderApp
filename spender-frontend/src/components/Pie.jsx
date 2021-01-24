@@ -1,39 +1,54 @@
 import React, { useState, useEffect } from "react"
 import { Doughnut } from 'react-chartjs-2';
-
+import moment from "moment";
 function Charts(props) {
-    const expenseMonth = props.mockData;
+    // const expenseMonth = props.mockData;
+    const { data, time, labels } = props;
     const [amountByCategorie, setAmountByCategorie] = useState([]);
     const [labelGraph, setLabelGraph] = useState([]);
     const [dataGraph, setDataGraph] = useState([]);
 
     const getCategories = () => {
+        const getTheYear = moment("02/02/2020").format('YYYY');
+        const getTheMonth = moment("02/02/2020").format('M');
+
         const arrayOfCategory = [];
-        for (let index = 0; index < expenseMonth.length; index++) {
-            const found = arrayOfCategory.find(element => element.category == expenseMonth[index].category);
+        for (let index = 0; index < data[getTheYear][getTheMonth].length; index++) {
+            const found = arrayOfCategory.find(element => element.category == data[getTheYear][getTheMonth][index].category);
             if (!found) {
-                const creationCategory = { category: expenseMonth[index].category, amount: 0 };
+                const creationCategory = { category: data[getTheYear][getTheMonth][index].category, amount: 0 };
                 arrayOfCategory.push(creationCategory);
             }
         }
-        
+
         getAmountByCategories(arrayOfCategory);
     }
 
     const getAmountByCategories = (arrayOfCategory) => {
-        for (let index = 0; index < expenseMonth.length; index++) {
+        const getTheYear = moment("02/02/2020").format('YYYY');
+        const getTheMonth = moment("02/02/2020").format('M');
+        for (let index = 0; index < data[getTheYear][getTheMonth].length; index++) {
             for (let j = 0; j < arrayOfCategory.length; j++) {
-                if (expenseMonth[index].category == arrayOfCategory[j].category) {
-                    arrayOfCategory[j].amount += expenseMonth[index].amount;
+                if (data[getTheYear][getTheMonth][index].category == arrayOfCategory[j].category) {
+                    arrayOfCategory[j].amount += data[getTheYear][getTheMonth][index].amount;
                 }
             }
         }
+        console.log(arrayOfCategory);
         setAmountByCategorie(arrayOfCategory);
     }
 
+
     useEffect(() => {
-        getCategories();
-    }, [])
+        const getTheYear = moment("02/02/2020").format('YYYY');
+        const getTheMonth = moment("02/02/2020").format('M');
+        if (data[getTheYear] && data[getTheYear][getTheMonth]) {
+            getCategories();
+            console.log(data);
+        }else{
+            setAmountByCategorie([]);
+        }
+    }, [props])
 
     useEffect(() => {
         const categories = amountByCategorie.map(element => element.category);
@@ -48,9 +63,6 @@ function Charts(props) {
     return (
 
         <div className="mx-4 mt-3">
-            {console.log(amountByCategorie)}
-            {console.log(labelGraph)}
-            {console.log(dataGraph)}
             <Doughnut
                 data={{
                     labels: labelGraph,
@@ -67,7 +79,7 @@ function Charts(props) {
                         data: dataGraph
                     }]
                 }}
-                height={250}
+                height={225}
 
                 options={{
                     maintainAspectRatio: false,

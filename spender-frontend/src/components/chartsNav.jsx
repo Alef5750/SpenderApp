@@ -18,15 +18,16 @@ export default function ChartsNav({ timeRequest }) {
 
     // ------------------ fetchData-------------------//
     const getData = async (time) => {
-        const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`);
+        const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=2020/02-1`);
+        // We have to replace "2020/03/1" By time ***********IMPORTANT********
         //console.log(getDataFromUser);
         setData(getDataFromUser);
     }
 
     useEffect(() => {
-        console.log("1", time);
-        console.log("2", labels);
-        console.log("3", data);
+        // console.log("1", time);
+        // console.log("2", labels);
+        // console.log("3", data);
     }, [time])
     // this function is receiving time from ChartsHeader and passes it up to Charts
     const handleTimeRequest = (time) => {
@@ -95,7 +96,11 @@ export default function ChartsNav({ timeRequest }) {
     // ------------------------YEAR--------------------------//
 
     const creationOfMonths = () => {
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const months = [];
+        for (let index = 11; index >= 0; index--) {
+            months.push(moment().subtract(index, 'months').format('MMM'));
+        }
+        console.log(months);
         setLabels(months);
     }
 
@@ -117,17 +122,21 @@ export default function ChartsNav({ timeRequest }) {
         if (time) {
             // console.log(time)
             const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`);
+            // We have to replace "2020/03/1" By time ***********IMPORTANT********
             console.log(getDataFromUser);
             setData(getDataFromUser);
             const amount = time.charAt(time.length - 1)
             switch (amount) {
                 case '1':
+                    console.log(amount);
                     creationOfDays();
                     break;
                 case '3':
+                    console.log(amount);
                     creationOfWeeks();
                     break;
                 case '2':
+                    console.log(amount);
                     creationOfMonths();
                     break;
             }
