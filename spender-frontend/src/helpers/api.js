@@ -6,7 +6,7 @@ export function SaveNewExpense() {
 }
 
 export function UpdateSettings(settings) {
-  axios.put(`${backendURL}/api/user/:id`, JSON.stringify(settings));
+  axios.put(`${backendURL}/api/users/6006bd6fc74a2f0cd474e40c`, settings);
   console.log(
     `We're sending ${JSON.stringify(
       settings
@@ -15,14 +15,14 @@ export function UpdateSettings(settings) {
 }
 
 export const getExpensesById = async (url) => {
-  const response = await axios.get(url)
-  const data = response.data
-  return data
-}
+  const response = await axios.get(url);
+  const data = response.data;
+  return data;
+};
 
 // export const getExpensesByDate = async (url) => {
-  // const response = await axios.get(url)
-  // console.log(response)
-  // const data = response.data
-  // return data
+// const response = await axios.get(url)
+// console.log(response)
+// const data = response.data
+// return data
 // }
