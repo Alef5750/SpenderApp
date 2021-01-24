@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, /* Route */ } from "react-router-dom";
+import { BrowserRouter, Switch /* Route */ } from "react-router-dom";
 import SignIn from "./pages/SignIn";
 import HomePage from "./pages/HomePage";
 import Expenses from "./pages/Expenses";
@@ -57,7 +57,7 @@ export default function Router() {
         <PrivateRoute path="/expenses/food" component={NewExpense}>
           {/* <NewExpense /> */}
         </PrivateRoute>
-        <PrivateRoute path="/expenses/monthly" component={Expenses}>
+        <PrivateRoute path="/expenses/monthly" component={NewExpense}>
           {/* <Expenses /> */}
         </PrivateRoute>
         <PrivateRoute path="/charts" component={Charts}>
@@ -76,6 +76,6 @@ export default function Router() {
           {/* <SignIn /> */}
         </PrivateRoute>
       </Switch>
-    </BrowserRouter> 
+    </BrowserRouter>
   );
 }

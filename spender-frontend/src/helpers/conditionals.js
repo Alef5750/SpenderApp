@@ -21,8 +21,7 @@ export function NewExpenseCategory() {
   else if (location.pathname === "/expenses/food") category = "Food";
   else if (location.pathname === "/expenses/entertainment")
     category = "Entertainment";
-  else if (location.pathname === "/expenses/monthly")
-    category = "Monthly Expenses";
+  else if (location.pathname === "/expenses/monthly") category = "Monthly";
   return category;
 }
 //Navigation.jsx icons
