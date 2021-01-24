@@ -2,7 +2,7 @@ import React from "react";
 // import { useState } from 'react';
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { getExpensesById } from "../helpers/api";
+// import { getExpensesById } from "../helpers/api";
 
 //helpers
 import { Home, Expenses, Reports, Settings } from "../helpers/conditionals";

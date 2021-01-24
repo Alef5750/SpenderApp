@@ -4,6 +4,8 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useLocation } from "react-router-dom";
+
 //componenets
 import Navigation from "../components/Navigation";
 import { NewExpenseCategory } from "../helpers/conditionals";
@@ -19,21 +21,25 @@ const formSchema = Yup.object().shape({
     .min(5)
     .max(15),
   amount: Yup.number().required("Oops! You haven't entered an amount"),
-  description: Yup.string(),
+  desc: Yup.string(),
 });
 
-export default function NewExpense() {
+export default function NewExpense(props) {
+  const path = useLocation().pathname;
   function handleNewExpense(expense) {
     console.log(expense);
-    SaveNewExpense();
+    SaveNewExpense(expense, props.id);
   }
   return (
     <Formik
       initialValues={{
-        category: NewExpenseCategory(),
+        category:
+          useLocation().pathname === "/expenses/addnew"
+            ? ""
+            : NewExpenseCategory(),
         title: "",
         amount: "",
-        description: "",
+        desc: "",
       }}
       validationSchema={formSchema}
       onSubmit={(expense) => handleNewExpense(expense)}
@@ -46,6 +52,22 @@ export default function NewExpense() {
         errors,
         touched,
       }) => {
+        let NewCategory;
+        if (path === "/expenses/addnew") {
+          NewCategory = (
+            <Form.Group>
+              <h5 className={styles.text}>Category:</h5>
+              <input
+                className={styles.input}
+                type="text"
+                name={"category"}
+                value={values.category}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </Form.Group>
+          );
+        }
         return (
           <div className={styles.body}>
             <Navigation />
@@ -53,6 +75,7 @@ export default function NewExpense() {
               {NewExpenseCategory()}
             </h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
+              {NewCategory}
               <Form.Group>
                 <h5 className={styles.text}>What was it?</h5>
                 <input
@@ -89,8 +112,8 @@ export default function NewExpense() {
                   cols="40"
                   rows="5"
                   type="text"
-                  name={"description"}
-                  value={values.description}
+                  name={"desc"}
+                  value={values.desc}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
