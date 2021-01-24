@@ -2,11 +2,14 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 export class PrivateRoute extends React.Component {
-    state = {
-        loading: true,
-        isAuthenticated: false,
-        id: null,
-    };
+    constructor() {
+        super();
+        this.state = {
+            loading: true,
+            isAuthenticated: false,
+            id: null,
+        };
+    }
     componentDidMount() {
         const requestOptions = {
             method: "GET",
