@@ -6,8 +6,9 @@ const isEmpty = (obj) => {
   return true;
 }
 
-const authRequest = (session, id) => {
-  if (session.id === id) return true;
+const authRequest = (user, id) => {
+  console.log(user)
+  if (user._id === id) return true;
   return false;
 }
 

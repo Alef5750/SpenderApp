@@ -19,7 +19,7 @@ const addNewUser = async (req, res) => {
 const getUserById = async (req, res) => {
   const { id } = req.params;
 
-  const authCheck = authRequest(req.session, id)
+  const authCheck = authRequest(req.user, id)
   if (!authCheck) res.status(401).send("Unauthorized")
   else {
     const foundUser = await user.findById(id);
@@ -31,7 +31,7 @@ const getUserById = async (req, res) => {
 const updateUserById = async (req, res) => {
   const { id } = req.params;
 
-  const authCheck = authRequest(req.session, id)
+  const authCheck = authRequest(req.user, id)
   if (!authCheck) res.status(401).send("Unauthorized")
   else {
     const newUserInfo = req.body;
@@ -44,7 +44,7 @@ const updateUserById = async (req, res) => {
 const getExpensesById = async (req, res) => {
   const { id } = req.params;
 
-  const authCheck = authRequest(req.session, id)
+  const authCheck = authRequest(req.user, id)
   if (!authCheck) res.status(401).send("Unauthorized")
   else {
     const queryParams = req.query;
@@ -56,7 +56,7 @@ const getExpensesById = async (req, res) => {
 
 const addNewExpenseById = async (req, res) => {
   const { id } = req.params;
-  const authCheck = authRequest(req.session, id)
+  const authCheck = authRequest(req.user, id)
   if (!authCheck) res.status(401).send("Unauthorized")
   else {
     const newExpense = req.body;
