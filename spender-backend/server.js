@@ -61,9 +61,9 @@ passport.serializeUser(function (user, done) {
   // console.log(user)
   const sessionUser = {
     _id: user._id,
-    displayName: user.displayName,
-    monthlyIncome: user.monthlyIncome,
-    monthlyGoal: user.monthlyGoal
+    // displayName: user.displayName,
+    // monthlyIncome: user.monthlyIncome,
+    // monthlyGoal: user.monthlyGoal
   }
   done(null, sessionUser);
 });
