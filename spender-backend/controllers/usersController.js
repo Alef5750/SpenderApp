@@ -1,4 +1,4 @@
-const { isEmpty } = require("../utils/helper")
+const { isEmpty, authRequest } = require("../utils/helper")
 const User = require('../models/user');
 const user = new User();
 
@@ -18,34 +18,52 @@ const addNewUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
-  const foundUser = await user.findById(id);
-  if (foundUser) res.status(200).send(foundUser)
-  else res.status(400).send("User could not be found")
 
+  const authCheck = authRequest(req.session, id)
+  if (!authCheck) res.status(401).send("Unauthorized")
+  else {
+    const foundUser = await user.findById(id);
+    if (foundUser) res.status(200).send(foundUser)
+    else res.status(400).send("User could not be found")
+  }
 }
 
 const updateUserById = async (req, res) => {
   const { id } = req.params;
-  const newUserInfo = req.body;
-  const updatedUser = await user.updateById(id, newUserInfo);
-  if (updatedUser) res.status(200).send(updatedUser)
-  else res.status(400).send("User could not be updated")
+
+  const authCheck = authRequest(req.session, id)
+  if (!authCheck) res.status(401).send("Unauthorized")
+  else {
+    const newUserInfo = req.body;
+    const updatedUser = await user.updateById(id, newUserInfo);
+    if (updatedUser) res.status(200).send(updatedUser)
+    else res.status(400).send("User could not be updated")
+  }
 }
 
 const getExpensesById = async (req, res) => {
   const { id } = req.params;
-  const queryParams = req.query;
-  const expenses = isEmpty(queryParams) ? await user.findAllExpenses(id) : await user.findExpensesByParams(id, queryParams)
-  if (expenses) res.status(200).send(expenses)
-  else res.status(400).send("Could not get user expenses")
+
+  const authCheck = authRequest(req.session, id)
+  if (!authCheck) res.status(401).send("Unauthorized")
+  else {
+    const queryParams = req.query;
+    const expenses = isEmpty(queryParams) ? await user.findAllExpenses(id) : await user.findExpensesByParams(id, queryParams)
+    if (expenses) res.status(200).send(expenses)
+    else res.status(400).send("Could not get user expenses")
+  }
 }
 
 const addNewExpenseById = async (req, res) => {
   const { id } = req.params;
-  const newExpense = req.body;
-  const expenses = await user.addNewExpenseById(id, newExpense)
-  if (expenses) res.status(200).send(expenses)
-  else res.status(400).send("Could not add to user expenses")
+  const authCheck = authRequest(req.session, id)
+  if (!authCheck) res.status(401).send("Unauthorized")
+  else {
+    const newExpense = req.body;
+    const expenses = await user.addNewExpenseById(id, newExpense)
+    if (expenses) res.status(200).send(expenses)
+    else res.status(400).send("Could not add to user expenses")
+  }
 }
 
 module.exports = { getUsers, addNewUser, getUserById, updateUserById, getExpensesById, addNewExpenseById, user }; 
