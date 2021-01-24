@@ -9,27 +9,27 @@ import PrivateRoute from "./components/PrivateRoute";
 import AddCategory from "./pages/AddCategory";
 
 export default function Router() {
-    return (
-      // <BrowserRouter>
-      //   <Switch>
-      //     <Route path="/expenses/*" />
-      //     <Route path="/charts" />
-      //     <Route path="/expenses" />
-      //     <Route path="/settings" />
-      //     <Route path="/home" />
-      //     <Route path="/" />
-      //   </Switch>
-      // </BrowserRouter>
-      <BrowserRouter>
-        <Switch>
-          <PrivateRoute path="/addcategory" component={AddCategory} />
-          <PrivateRoute path="/expenses/*" component={NewExpense} />
-          <PrivateRoute path="/charts" component={Charts} />
-          <PrivateRoute path="/expenses" component={Expenses} />
-          <PrivateRoute path="/settings" component={Settings} />
-          <PrivateRoute path="/home" component={HomePage} />
-          <PrivateRoute path="/" component={SignIn} />
-        </Switch>
-      </BrowserRouter>
-    );
+  return (
+    // <BrowserRouter>
+    //   <Switch>
+    //     <Route path="/expenses/*" />
+    //     <Route path="/charts" />
+    //     <Route path="/expenses" />
+    //     <Route path="/settings" />
+    //     <Route path="/home" />
+    //     <Route path="/" />
+    //   </Switch>
+    // </BrowserRouter>
+    <BrowserRouter>
+      <Switch>
+        <PrivateRoute path="/expenses/*" component={NewExpense} />
+        <PrivateRoute path="/charts" component={Charts} />
+        <PrivateRoute path="/addcategory" component={AddCategory} />
+        <PrivateRoute path="/expenses" component={Expenses} />
+        <PrivateRoute path="/settings" component={Settings} />
+        <PrivateRoute path="/home" component={HomePage} />
+        <PrivateRoute path="/" component={SignIn} />
+      </Switch>
+    </BrowserRouter>
+  );
 }

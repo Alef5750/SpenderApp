@@ -4,7 +4,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 //componenets
 import Navigation from "../components/Navigation";
@@ -26,7 +26,7 @@ const formSchema = Yup.object().shape({
 });
 
 export default function NewExpense(props) {
-  const path = useLocation().pathname;
+  // const path = useLocation().pathname;
   function handleNewExpense(expense) {
     console.log(expense);
     SaveNewExpense(expense, props.id);
@@ -34,10 +34,7 @@ export default function NewExpense(props) {
   return (
     <Formik
       initialValues={{
-        category:
-          useLocation().pathname === "/expenses/addnew"
-            ? ""
-            : NewExpenseCategory(),
+        category: NewExpenseCategory(),
         title: "",
         amount: "",
         desc: "",
@@ -53,22 +50,22 @@ export default function NewExpense(props) {
         errors,
         touched,
       }) => {
-        let NewCategory;
-        if (path === "/expenses/addnew") {
-          NewCategory = (
-            <Form.Group>
-              <h5 className={styles.text}>Category:</h5>
-              <input
-                className={styles.input}
-                type="text"
-                name={"category"}
-                value={values.category}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Group>
-          );
-        }
+        // let NewCategory;
+        // if (path === "/expenses/addnew") {
+        //   NewCategory = (
+        //     <Form.Group>
+        //       <h5 className={styles.text}>Category:</h5>
+        //       <input
+        //         className={styles.input}
+        //         type="text"
+        //         name={"category"}
+        //         value={values.category}
+        //         onChange={handleChange}
+        //         onBlur={handleBlur}
+        //       />
+        //     </Form.Group>
+        //   );
+        // }
         return (
           <div className={styles.body}>
             <Navigation />
@@ -76,7 +73,7 @@ export default function NewExpense(props) {
               {NewExpenseCategory()}
             </h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
-              {NewCategory}
+              {/* {NewCategory} */}
               {errors.category && touched.category && (
                 <Alert variant="danger">{errors.category}</Alert>
               )}
