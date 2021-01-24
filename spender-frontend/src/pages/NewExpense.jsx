@@ -19,13 +19,13 @@ const formSchema = Yup.object().shape({
     .min(5)
     .max(15),
   amount: Yup.number().required("Oops! You haven't entered an amount"),
-  description: Yup.string(),
+  desc: Yup.string(),
 });
 
-export default function NewExpense() {
+export default function NewExpense(props) {
   function handleNewExpense(expense) {
     console.log(expense);
-    SaveNewExpense();
+    SaveNewExpense(expense, props.id);
   }
   return (
     <Formik
@@ -33,7 +33,7 @@ export default function NewExpense() {
         category: NewExpenseCategory(),
         title: "",
         amount: "",
-        description: "",
+        desc: "",
       }}
       validationSchema={formSchema}
       onSubmit={(expense) => handleNewExpense(expense)}
@@ -89,8 +89,8 @@ export default function NewExpense() {
                   cols="40"
                   rows="5"
                   type="text"
-                  name={"description"}
-                  value={values.description}
+                  name={"desc"}
+                  value={values.desc}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
