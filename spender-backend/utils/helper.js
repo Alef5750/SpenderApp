@@ -8,7 +8,7 @@ const isEmpty = (obj) => {
 
 const authRequest = (user, id) => {
   console.log(user)
-  if (user._id === id) return true;
+  if (user && user._id === id) return true;
   return false;
 }
 
