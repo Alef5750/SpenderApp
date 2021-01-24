@@ -1,11 +1,15 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 
 export class PrivateRoute extends React.Component {
-    state = {
-        loading: true,
-        isAuthenticated: false,
-    };
+    constructor() {
+        super();
+        this.state = {
+            loading: true,
+            isAuthenticated: false,
+            id: null,
+        };
+    }
     componentDidMount() {
         const requestOptions = {
             method: "GET",
@@ -13,12 +17,13 @@ export class PrivateRoute extends React.Component {
         };
         fetch(`http://localhost:5000/auth`, requestOptions)
             .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                if (data) {
+            .then((id) => {
+                console.log(id);
+                if (id) {
                     this.setState({
                         loading: false,
                         isAuthenticated: true,
+                        id: id,
                     });
                 } else {
                     this.setState({
@@ -32,19 +37,24 @@ export class PrivateRoute extends React.Component {
         if (this.state.loading) {
             return <div>LOADING</div>;
         } else {
-            return (
-                <Route
-                    {...rest}
-                    render={(props) => (
-                        <div>
-                            {!this.state.isAuthenticated && <Redirect to="/" />}
-                            <Component {...this.props} />
-                        </div>
-                    )}
-                />
-            );
+            if (this.state.id && this.props.path === "/")
+                this.props.history.goBack();
+            else
+                return (
+                    <Route
+                        {...rest}
+                        render={(props) => (
+                            <div>
+                                {!this.state.isAuthenticated && (
+                                    <Redirect to="/" />
+                                )}
+                                <Component {...this.props} id={this.state.id} />
+                            </div>
+                        )}
+                    />
+                );
         }
     }
 }
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);

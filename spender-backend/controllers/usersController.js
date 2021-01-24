@@ -6,7 +6,6 @@ const getUsers = async (req, res) => {
   const users = await user.findAll();
   if (users) res.status(200).send(users)
   else res.status(400).send("Users not found")
-
 }
 
 const addNewUser = async (req, res) => {
