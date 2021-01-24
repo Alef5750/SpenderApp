@@ -16,10 +16,11 @@ import { Button, Form, Alert } from "react-bootstrap";
 
 //validation
 const formSchema = Yup.object().shape({
+  category: Yup.string().required("Please enter a category name").max(20),
   title: Yup.string()
     .required("Oops! You haven't entered a title")
     .min(5)
-    .max(15),
+    .max(20),
   amount: Yup.number().required("Oops! You haven't entered an amount"),
   desc: Yup.string(),
 });
@@ -76,6 +77,9 @@ export default function NewExpense(props) {
             </h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
               {NewCategory}
+              {errors.category && touched.category && (
+                <Alert variant="danger">{errors.category}</Alert>
+              )}
               <Form.Group>
                 <h5 className={styles.text}>What was it?</h5>
                 <input

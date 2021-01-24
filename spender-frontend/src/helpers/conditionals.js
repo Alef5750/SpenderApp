@@ -14,7 +14,7 @@ export function NewExpenseCategory() {
   const location = useLocation();
   let category;
   if (location.pathname === "/expenses/addnew") {
-    category = "Add New Category";
+    category = "Create a new category";
   } else if (location.pathname === "/expenses/other") category = "Other";
   else if (location.pathname === "/expenses/entertainment")
     category = "Entertainment";
