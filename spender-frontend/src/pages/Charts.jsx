@@ -5,7 +5,7 @@ import Navigation from "../components/Navigation";
 export default function Charts(props) {
     // this function is getting the data from the time buttons
     const handleTimeRequest = (time) => {
-        // console.log(time);
+        console.log(time);
     };
 
     return (
