@@ -13,7 +13,14 @@ const formSchema = Yup.object().shape({
   category: Yup.string().required("Please enter a category name").max(20),
 });
 
-export default function NewExpense(props) {
+export default function AddCategory(props) {
+  // let initialCategories = [
+  //   { title: "monthly", logo: "", id: Math.random() },
+  //   { title: "food", logo: "" },
+  //   { title: "entertainment", logo: "", id: Math.random() },
+  //   { title: "other", logo: "", id: Math.random() },
+  // ];
+  // const [currentCategories, setCategories] = useState(initialCategories);
   function handleNewCategory(newCategory) {
     console.log(newCategory);
     // AddNewCategory();
