@@ -17,7 +17,7 @@ const formSchema = Yup.object().shape({
 export default function Settings(props) {
   function handleSettingsUpdate(settings) {
     console.log(settings);
-    UpdateSettings(settings);
+    UpdateSettings(settings, props.id);
   }
   return (
     <Formik

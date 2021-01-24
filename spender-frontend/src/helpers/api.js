@@ -5,8 +5,8 @@ export function SaveNewExpense() {
   axios.put();
 }
 
-export function UpdateSettings(settings) {
-  axios.put(`${backendURL}/api/users/6006bd6fc74a2f0cd474e40c`, settings);
+export function UpdateSettings(settings, id) {
+  axios.put(`${backendURL}/api/users/${id}`, settings);
   console.log(
     `We're sending ${JSON.stringify(
       settings
