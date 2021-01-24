@@ -1,7 +1,10 @@
 import React from "react";
 
 
-export default function ChartsGoals() {
+export default function ChartsGoals({time}) {
+
+    if (time) console.log(time);
+
     return (
             <div className="mx-4">
                 <h3 className="text-primary">Monthly Savings</h3>

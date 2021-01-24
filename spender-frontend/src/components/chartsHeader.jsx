@@ -3,33 +3,39 @@ import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import styles from "../styles/Charts.module.css";
 
 
-const handleChange = (event) => {
-    let date = new Date()
-    let time
-    let months
-    if (event === "month") time = `${date.getMonth() + 1} ${date.getFullYear()}`
-    if (event === "year") time = date.getFullYear() 
-    if (event === "3months") {
-        months = date.getMonth()
-        if (months > 1) time = {
-            first: `${months - 1} ${date.getFullYear()}`,
-            second: `${months} ${date.getFullYear()}`,
-            third: `${months + 1} ${date.getFullYear()}`
-        }
-        else {
-            if (months === 0) time = {
-                first: `11 ${date.getFullYear() - 1}`,
-                second: `12 ${date.getFullYear() - 1}`,
-                third: `${months + 1} ${date.getFullYear()}`
-            }
-            
-            if (months === 1) time = {
-                first: `12 ${date.getFullYear() - 1}`,
+
+export default function ChartsHeader({ timeRequest}) {
+
+    const handleChange = (event) => {
+        let date = new Date()
+        let time
+        let months
+        if (event === "month") time = `${date.getMonth() + 1} ${date.getFullYear()}`
+        if (event === "year") time = date.getFullYear()
+        if (event === "3months") {
+            months = date.getMonth()
+            if (months > 1) time = {
+                first: `${months - 1} ${date.getFullYear()}`,
                 second: `${months} ${date.getFullYear()}`,
                 third: `${months + 1} ${date.getFullYear()}`
             }
+            else {
+                if (months === 0) time = {
+                    first: `11 ${date.getFullYear() - 1}`,
+                    second: `12 ${date.getFullYear() - 1}`,
+                    third: `${months + 1} ${date.getFullYear()}`
+                }
+
+                if (months === 1) time = {
+                    first: `12 ${date.getFullYear() - 1}`,
+                    second: `${months} ${date.getFullYear()}`,
+                    third: `${months + 1} ${date.getFullYear()}`
+                }
+            }
         }
+        timeRequest(time)
     }
+<<<<<<< HEAD
     console.log(time);
     // /api/users/:id/expenses?date=year/month-amount
     // getExpensesByDate(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
@@ -37,6 +43,9 @@ const handleChange = (event) => {
 } 
 
 export default function ChartsHeader() {
+=======
+    // /api/users/:id/expenses?date=year/month-amount
+>>>>>>> 0a508b6cb8903da06b8916f698e67ced92ae7db2
     
     return (
         <ToggleButtonGroup

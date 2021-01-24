@@ -6,10 +6,27 @@ const isEmpty = (obj) => {
   return true;
 }
 
+const authRequest = (user, id) => {
+  console.log(user)
+  return true //for testing
+  // if (user && user._id === id) return true;
+  // return false;
+}
+
+const createDateByFormat = (day, month, year) => {
+  if (month < 10) month = "0" + month;
+  if (day < 10) day = "0" + day;
+  return `${month}/${day}/${year}`
+}
+
 const insertExpense = (newExpense, userExpenses) => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentMonth = date.getMonth() + 1;
+  const currentDay = date.getDate();
+
+  const expenseDate = createDateByFormat(currentDay, currentMonth, currentYear);
+  newExpense.date = expenseDate;
 
   // if the year doesn't exist in the expenses report
   if (!userExpenses[currentYear]) {
@@ -70,9 +87,9 @@ const getExpensesByQuery = (expenses, query) => {
 
     let expensesByDate = {};
     for (let i = 0; i < numOfMonths; i++) {
-      if (queryMonth === 13) {
-        queryMonth = 1;
-        queryYear++;
+      if (queryMonth === 0) {
+        queryMonth = 12;
+        queryYear--;
       }
       if (!expensesByDate[queryYear]) expensesByDate = { ...expensesByDate, [queryYear]: {} };
       if (!expensesByDate[queryYear][queryMonth]) expensesByDate[queryYear] = { ...expensesByDate[queryYear], [queryMonth]: [] };
@@ -80,7 +97,7 @@ const getExpensesByQuery = (expenses, query) => {
       if (expenses[queryYear] && expenses[queryYear][queryMonth])
         expensesByDate[queryYear][queryMonth] = [...expenses[queryYear][queryMonth]]
 
-      queryMonth++;
+      queryMonth--;
     }
     return expensesByDate;
   } else {
@@ -91,9 +108,9 @@ const getExpensesByQuery = (expenses, query) => {
     let numOfMonths = dates[1] //3
     let expensesByDateCurrent = {};
     for (let i = 0; i < numOfMonths; i++) {
-      if (queryMonth === 13) {
-        queryMonth = 1;
-        queryYear++;
+      if (queryMonth === 0) {
+        queryMonth = 12;
+        queryYear--;
       }
       if (!expensesByDateCurrent[queryYear]) expensesByDateCurrent = { ...expensesByDateCurrent, [queryYear]: {} };
       if (!expensesByDateCurrent[queryYear][queryMonth]) expensesByDateCurrent[queryYear] = { ...expensesByDateCurrent[queryYear], [queryMonth]: [] };
@@ -101,7 +118,7 @@ const getExpensesByQuery = (expenses, query) => {
       if (expenses[queryYear] && expenses[queryYear][queryMonth])
         expensesByDateCurrent[queryYear][queryMonth] = [...expenses[queryYear][queryMonth]]
 
-      queryMonth++;
+      queryMonth--;
     }
 
     dates = query.date[1].split('-') //{date:[2020/10-3, 2020/7-3]}
@@ -110,9 +127,9 @@ const getExpensesByQuery = (expenses, query) => {
     numOfMonths = dates[1] //3
     let expensesByDatePast = {};
     for (let i = 0; i < numOfMonths; i++) {
-      if (queryMonth === 13) {
-        queryMonth = 1;
-        queryYear++;
+      if (queryMonth === 0) {
+        queryMonth = 12;
+        queryYear--;
       }
       if (!expensesByDatePast[queryYear]) expensesByDatePast = { ...expensesByDatePast, [queryYear]: {} };
       if (!expensesByDatePast[queryYear][queryMonth]) expensesByDatePast[queryYear] = { ...expensesByDatePast[queryYear], [queryMonth]: [] };
@@ -120,10 +137,10 @@ const getExpensesByQuery = (expenses, query) => {
       if (expenses[queryYear] && expenses[queryYear][queryMonth])
         expensesByDatePast[queryYear][queryMonth] = [...expenses[queryYear][queryMonth]]
 
-      queryMonth++;
+      queryMonth--;
     }
 
     return [expensesByDateCurrent, expensesByDatePast];
   }
 }
-module.exports = { isEmpty, insertExpense, getExpensesByQuery }
+module.exports = { isEmpty, authRequest, insertExpense, getExpensesByQuery }

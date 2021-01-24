@@ -48,7 +48,6 @@ passport.use(new GoogleStrategy({
 },
   async function (accessToken, refreshToken, profile, done) {
     try {
-      console.log(UserModel)
       const user = await UserModel.findOrAdd({ googleId: profile.id }, { googleId: profile.id, displayName: profile.name.givenName });
       if (user) return done(null, user);
     } catch (err) {
@@ -58,18 +57,16 @@ passport.use(new GoogleStrategy({
 ));
 
 passport.serializeUser(function (user, done) {
-  // console.log(user)
   const sessionUser = {
     _id: user._id,
-    displayName: user.displayName,
-    monthlyIncome: user.monthlyIncome,
-    monthlyGoal: user.monthlyGoal
+    // displayName: user.displayName,
+    // monthlyIncome: user.monthlyIncome,
+    // monthlyGoal: user.monthlyGoal
   }
   done(null, sessionUser);
 });
 
 passport.deserializeUser(function (user, done) {
-  console.log("de", user)
   done(null, user);
 });
 
@@ -80,17 +77,15 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function (req, res) {
-    // console.log(req.session)
-    console.log(req.user)
     res.redirect('http://localhost:3000/home');
   });
 
 // auth check
 app.get('/auth', (req, res) => {
   console.log(req.user)
-  console.log(req.sesssion)
-  if (req.user) res.status(200).send(true)
-  else res.status(200).send(false)
+  console.log(req.session)
+  if (req.user) res.status(200).json(req.user._id)
+  else res.status(200).json(null)
 })
 
 // api route
