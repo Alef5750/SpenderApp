@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 
 export class PrivateRoute extends React.Component {
     constructor() {
@@ -37,19 +37,24 @@ export class PrivateRoute extends React.Component {
         if (this.state.loading) {
             return <div>LOADING</div>;
         } else {
-            return (
-                <Route
-                    {...rest}
-                    render={(props) => (
-                        <div>
-                            {!this.state.isAuthenticated && <Redirect to="/" />}
-                            <Component {...this.props} id={this.state.id} />
-                        </div>
-                    )}
-                />
-            );
+            if (this.state.id && this.props.path === "/")
+                this.props.history.goBack();
+            else
+                return (
+                    <Route
+                        {...rest}
+                        render={(props) => (
+                            <div>
+                                {!this.state.isAuthenticated && (
+                                    <Redirect to="/" />
+                                )}
+                                <Component {...this.props} id={this.state.id} />
+                            </div>
+                        )}
+                    />
+                );
         }
     }
 }
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);
