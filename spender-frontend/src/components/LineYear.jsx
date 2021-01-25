@@ -3,10 +3,10 @@ import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 
 
-function Charts({ data, time, labels }) {
+function Charts({ data, time, labels, dataComparison }) {
     //initialise all the month with an expense by 0
     const [expensesByMonth, setExpensesByMonth] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-
+    const [expensesByMonthComparison, setExpensesByMonthComparison] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     // get all the expenses by month
 
     const getAmountByMonth = () => {
@@ -24,11 +24,27 @@ function Charts({ data, time, labels }) {
         setExpensesByMonth(myExpenseByMonth);
     }
 
+    const getAmountByMonthComparison = () => {
+        const myExpenseByMonthComparison = [];
+        let count = 0;
+        for (const key in dataComparison) {
+            for (const monthKey in dataComparison[key]) {
+                myExpenseByMonthComparison[count] = 0;
+                dataComparison[key][monthKey].map(element => {
+                    myExpenseByMonthComparison[count] += element.amount;
+                });
+                count++;
+            }
+        }
+        setExpensesByMonthComparison(myExpenseByMonthComparison);
+    }
     useEffect(() => {
         if (data) {
             getAmountByMonth();
+            getAmountByMonthComparison();
         } else {
-            setExpensesByMonth([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            setExpensesByMonth([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            setExpensesByMonthComparison([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         }
     }, [data])
 
@@ -36,13 +52,22 @@ function Charts({ data, time, labels }) {
         labels: labels,
         datasets: [
             {
-                label: moment().format('YYYY'),
+                label: moment().subtract(1, 'year').format('YYYY')+" - "+moment().format('YYYY'),
                 data: expensesByMonth,
                 backgroundColor: "blue",
                 borderColor: "lightblue",
                 fill: false,
                 lineTension: 0,
-                radius: 5
+                radius: 2
+            },
+            {
+                label: moment().subtract(2, 'year').format('YYYY')+" - "+moment().subtract(1, 'year').format('YYYY'),
+                data: expensesByMonthComparison,
+                backgroundColor: "red",
+                borderColor: "red",
+                fill: false,
+                lineTension: 0,
+                radius: 2
             }
         ]
     };

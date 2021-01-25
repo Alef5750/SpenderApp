@@ -12,10 +12,11 @@ import { getExpensesById } from "../helpers/api";
 
 export default function ChartsNav({ timeRequest }) {
 
-    const [time, setTime] = useState()
+    const [time, setTime] = useState();
+    const [lastTime, setLastTime] = useState();
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([])
-
+    const [dataComparison, setDataComparison] = useState([])
     
     // this function is receiving time from ChartsHeader and passes it up to Charts
     const handleTimeRequest = (time) => {
@@ -109,16 +110,21 @@ export default function ChartsNav({ timeRequest }) {
         //console.log(labs);
     }
 
-
+    const lastTimeRequest = (lastTime) => {
+        setLastTime(lastTime);
+    }
 
     // Here when we will get the time thanks to the component ChartsHeader, we will check the last character of the time
     // And in function of this character we will know if we need the labels for a month, 3 months or a year
-    // In the component ChartsGraph we will have algorithms that calculate the amount by categories, get all the categories etc
+    // In the component Pie% and Line% we will have algorithms that calculate the amount by categories, get all the categories etc
     useEffect(async () => {
         if (time) {
             // console.log(time)
             const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`);
+            const getDataFromUserComparison = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${lastTime}`);
+            setDataComparison(getDataFromUserComparison);
             // We have to replace "2020/03/1" By time ***********IMPORTANT********
+            console.log(getDataFromUserComparison);
             console.log(getDataFromUser);
             setData(getDataFromUser);
             const amount = time.charAt(time.length - 1)
@@ -143,7 +149,7 @@ export default function ChartsNav({ timeRequest }) {
 
     return (
         <div>
-            <ChartsHeader timeRequest={handleTimeRequest} />
+            <ChartsHeader timeRequest={handleTimeRequest} lastTimeRequest={(lastTime) => lastTimeRequest(lastTime)}/>
             <Router>
                 <Navbar expand="sm" className={styles.nav}>
                     <NavLink to="/charts/goals" className={styles.link} activeClassName={styles.activeLink}>
@@ -161,7 +167,7 @@ export default function ChartsNav({ timeRequest }) {
                         <ChartsGoals time={time} />
                     </Route>
                     <Route exact path="/charts/graphs">
-                        <ChartsGraphs time={time} labels={labels} data={data} />
+                        <ChartsGraphs time={time} labels={labels} data={data} dataComparison = {dataComparison}/>
                     </Route>
                     <Route exact path="/charts/reports">
                         <ChartsReports time={time} />
