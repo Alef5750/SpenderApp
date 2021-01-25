@@ -5,7 +5,7 @@ import Expenses from "./pages/Expenses";
 import NewExpense from "./pages/NewExpense";
 import Settings from "./pages/Settings";
 import Charts from "./pages/Charts";
-import PrivateRoute from "./components/PrivateRoute";
+import { PrivateRoute } from "./components/PrivateRoute";
 import AddCategory from "./pages/AddCategory";
 
 export default function Router() {

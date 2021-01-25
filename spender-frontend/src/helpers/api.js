@@ -2,6 +2,7 @@ import axios from "axios";
 const backendURL = "http://localhost:5000";
 
 export function SaveNewExpense(expense, id) {
+  // used id ////////////////////////
   axios.put(`${backendURL}/api/users/${id}/expenses`, expense);
   console.log(
     `We're sending ${JSON.stringify(
@@ -26,9 +27,8 @@ export const getExpensesById = async (url) => {
 };
 
 export const getExpensesByDate = async (url) => {
-  const response = await axios.get(url)
-  console.log(response)
-  const data = response.data
-  return data
-}
-
+  const response = await axios.get(url);
+  console.log(response);
+  const data = response.data;
+  return data;
+};

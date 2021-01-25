@@ -35,7 +35,7 @@ export default function NewExpense(props) {
 
   function handleNewExpense(expense) {
     console.log(expense);
-    SaveNewExpense(expense, props.id);
+    SaveNewExpense(expense, props.id); // used id /////////////////////////////////
   }
   return (
     <Formik

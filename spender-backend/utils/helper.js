@@ -56,27 +56,6 @@ const insertExpense = (newExpense, userExpenses) => {
   return userExpenses;
 }
 
-/*
-HOW A SHOULD QUERY LOOK LIKE?
-http://localhost:5000/api/users/:id/expenses?date=2020/10-3&date=2020/7-3
-[{
-  2020:
-    {
-      10: [],
-      11: []
-    },
-  2021:
-    {1: []}
-  },
-  {
-  2020:
-    {
-      7: [],
-      8: [],
-      9: []
-    }
-}]
-*/
 const getExpensesByQuery = (expenses, query) => {
   if (!Array.isArray(query.date)) {
     // only one date requested 
