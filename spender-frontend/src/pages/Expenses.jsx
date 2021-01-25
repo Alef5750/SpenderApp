@@ -4,19 +4,13 @@ import React from "react";
 //components
 import Navigation from "../components/Navigation";
 import CategoriesGrid from "../components/CategoriesGrid";
-
+//helpers
+import cards from "../helpers/categories";
 //styles
 import { Button } from "react-bootstrap";
 import styles from "../styles/Expenses.module.css";
 
 export default function Expenses(props) {
-  let cards = [
-    { title: "Monthly", id: Math.random() },
-    { title: "Food", id: Math.random() },
-    { title: "Entertainment", id: Math.random() },
-    { title: "Other", id: Math.random() },
-    { title: "Add New", id: Math.random() },
-  ];
   // const [redirect, setDirect] = useState(null);
 
   // const handleMonthly = () => {

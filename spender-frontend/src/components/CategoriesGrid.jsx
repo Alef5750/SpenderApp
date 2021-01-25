@@ -13,7 +13,7 @@ export default function CategoriesGrid(props) {
   return (
     <div className={styles.gridContainer}>
       {props.cards.map((card) => (
-        <CategoryCard title={card.title} key={card.id} />
+        <CategoryCard title={card.title} logo={card.logo} key={card.id} />
       ))}
     </div>
     /* // className="d-flex flex-row mx-4 px-1 mt-5 justify-content-between"> */
