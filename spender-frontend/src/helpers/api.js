@@ -2,7 +2,6 @@ import axios from "axios";
 const backendURL = "http://localhost:5000";
 
 export function SaveNewExpense(expense, id) {
-  // used id ////////////////////////
   axios.put(`${backendURL}/api/users/${id}/expenses`, expense);
   console.log(
     `We're sending ${JSON.stringify(

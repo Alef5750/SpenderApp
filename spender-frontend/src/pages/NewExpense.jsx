@@ -1,7 +1,8 @@
 // despite being in 'pages' folder, this is a component, reused multiple times.
 // each time it is used, it is at a different page location,
 // and has a different "category"(see variable below)
-import React from "react";
+import React, { useContext } from "react";
+import { IdContext } from "../components/PrivateRoute";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useLocation } from "react-router-dom";
@@ -28,6 +29,8 @@ const formSchema = Yup.object().shape({
 });
 
 export default function NewExpense(props) {
+  const userId = useContext(IdContext);
+
   const path = useLocation().pathname;
   console.log(path);
   const category = path.split("/")[2];
@@ -35,7 +38,7 @@ export default function NewExpense(props) {
 
   function handleNewExpense(expense) {
     console.log(expense);
-    SaveNewExpense(expense, props.id); // used id /////////////////////////////////
+    SaveNewExpense(expense, userId); // used id /////////////////////////////////
   }
   return (
     <Formik
