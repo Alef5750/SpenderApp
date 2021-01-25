@@ -13,8 +13,8 @@ export default function CategoryCard(props) {
   // 2. props.categoryLogo
   // 3. props.handleSelect() (which reroutes to NewExpense page, where the <h1> contains the title from the /:title in route)
   return (
-    <div className={`${styles.expensesFirstFeaturesDiv}`}>
-      <div className="h-50 py-4 ">Category</div>
+    <div className={`${styles.gridElement}`}>
+      <div className="h-50 py-4">Category</div>
       <div className="h-50">
         <img src={expenses_monthly} alt="monthly" />
       </div>

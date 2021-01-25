@@ -34,7 +34,7 @@ export default function NewExpense(props) {
   return (
     <Formik
       initialValues={{
-        category: NewExpenseCategory(),
+        category: NewExpenseCategory(), // needs to be changed...
         title: "",
         amount: "",
         desc: "",
