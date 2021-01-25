@@ -8,21 +8,15 @@ import ChartsGraphs from "./chartsGraphs";
 import ChartsReports from "./chartsReports";
 import ChartsDescription from "./chartsDescription";
 import moment from "moment";
-import { getExpensesById } from "../helpers/api";
+import { getExpensesById, getUserById } from "../helpers/api";
 
 export default function ChartsNav({ timeRequest }) {
 
     const [time, setTime] = useState()
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([])
-
-    // ------------------ fetchData-------------------//
-    const getData = async (time) => {
-        const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=2020/02-1`);
-        // We have to replace "2020/03/1" By time ***********IMPORTANT********
-        //console.log(getDataFromUser);
-        setData(getDataFromUser);
-    }
+    const [goal, setGoal] = useState()
+    const [income, setIncome] = useState()
 
     useEffect(() => {
         // console.log("1", time);
@@ -100,7 +94,7 @@ export default function ChartsNav({ timeRequest }) {
         for (let index = 11; index >= 0; index--) {
             months.push(moment().subtract(index, 'months').format('MMM'));
         }
-        console.log(months);
+        // console.log(months);
         setLabels(months);
     }
 
@@ -124,20 +118,20 @@ export default function ChartsNav({ timeRequest }) {
             // console.log(time)
             const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`);
             // We have to replace "2020/03/1" By time ***********IMPORTANT********
-            console.log(getDataFromUser);
+            // console.log(getDataFromUser);
             setData(getDataFromUser);
             const amount = time.charAt(time.length - 1)
             switch (amount) {
                 case '1':
-                    console.log(amount);
+                    // console.log(amount);
                     creationOfDays();
                     break;
                 case '3':
-                    console.log(amount);
+                    // console.log(amount);
                     creationOfWeeks();
                     break;
                 case '2':
-                    console.log(amount);
+                    // console.log(amount);
                     creationOfMonths();
                     break;
             }
@@ -145,10 +139,44 @@ export default function ChartsNav({ timeRequest }) {
 
     }, [time])
 
+    useEffect(() => {
+        getUserGoalAndIncome(time)
+        // return () => {
+        //     cleanup
+        // }
+    }, [time])
+    const getUserGoalAndIncome = async (time) => {
+        if(time){
+            const user = await getUserById("/api/users/600591c5a1e29824c0ef786a")
+            // console.log(user);
+            const period = time.charAt(time.length - 1)
+            let periodIncome = user.monthlyIncome
+            let periodGoal = user.monthlyGoal
+            switch (period) {
+                case '1':
+                    setIncome(periodIncome)
+                    setGoal(periodGoal)
+                    break;
+                case '3':
+                    periodIncome *= 3
+                    periodGoal *= 3
+                    setIncome(periodIncome)
+                    setGoal(periodGoal)
+                    break;
+                case '2':
+                    periodIncome *= 12
+                    periodGoal *= 12
+                    setIncome(periodIncome)
+                    setGoal(periodGoal)
+                    break;
+            }
+            // console.log("income", income, "goal", goal);
+        }
+    }
 
     return (
         <div>
-            <ChartsHeader timeRequest={handleTimeRequest} getData={(time) => getData(time)} />
+            <ChartsHeader timeRequest={handleTimeRequest} />
             <Router>
                 <Navbar expand="sm" className={styles.nav}>
                     <NavLink to="/charts/goals" className={styles.link} activeClassName={styles.activeLink}>
@@ -163,13 +191,13 @@ export default function ChartsNav({ timeRequest }) {
                 </Navbar>
                 <Switch>
                     <Route exact path="/charts/goals">
-                        <ChartsGoals time={time} />
+                        <ChartsGoals time={time} labels={labels} data={data} />
                     </Route>
                     <Route exact path="/charts/graphs">
                         <ChartsGraphs time={time} labels={labels} data={data} />
                     </Route>
                     <Route exact path="/charts/reports">
-                        <ChartsReports time={time} />
+                        <ChartsReports data={data} goal={goal} income={income} />
                     </Route>
                     <Route exact path="">
                         <ChartsDescription />

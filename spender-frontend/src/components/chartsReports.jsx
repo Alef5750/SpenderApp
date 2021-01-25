@@ -1,26 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default function ChartsReports({time}) {
+export default function ChartsReports({data, goal, income}) {
 
-    if (time) console.log(time);
+    const [amountByCategory, setAmountByCategory] = useState([]);
+    const [sum, setSum] = useState(0)
 
-    return (
-        <div className="mx-4">
-            <h2>Reports</h2>
-            <h3 className="text-primary">Expenses</h3>
-            <div className="my-3 py-3 col bg-danger text-white d-flex h3 justify-content-center rounded">
-                78$
+    useEffect(() => {
+        if (data) {
+            getCategories();
+        } else {
+            setAmountByCategory([])
+        }
+    }, [data])
+
+    const getCategories = () => {
+        const arrayOfCategory = [];
+        for (const key in data) {
+            for (const monthKey in data[key]) {
+                for (let index = 0; index < data[key][monthKey].length; index++) {
+                    const found = arrayOfCategory.find(element => element.category === data[key][monthKey][index].category);
+                    if (!found) {
+                        const creationCategory = { category: data[key][monthKey][index].category, amount: 0 };
+                        arrayOfCategory.push(creationCategory);
+                    }
+                }
+            }
+
+        }
+        // console.log(arrayOfCategory)
+        getAmountByCategory(arrayOfCategory);
+    }
+
+    const getAmountByCategory = (arrayOfCategory) => {
+        let amount = 0
+        for (const key in data) {
+            for (const monthKey in data[key]) {
+                for (let index = 0; index < data[key][monthKey].length; index++) {
+                    for (let j = 0; j < arrayOfCategory.length; j++) {
+                        if (data[key][monthKey][index].category === arrayOfCategory[j].category) {
+                            arrayOfCategory[j].amount += data[key][monthKey][index].amount;
+                            amount += arrayOfCategory[j].amount
+                        }
+                    }
+                }
+            }
+        }
+        setSum(amount)
+        setAmountByCategory(arrayOfCategory);
+    }
+
+    if (income) {
+        return (
+            <div className="mx-4">
+                <span>
+                    <h3 className="text-danger">Expenses</h3>
+                    {amountByCategory.map(expense => <h6 key={expense.category} className="text-danger mx-1 rounded">{expense.category}-{expense.amount}</h6>)}
+                    <h3 className="text-white bg-danger rounded">{sum}</h3>
+                </span>
+                <span>
+                    <h3 className="text-primary">Income</h3>
+                    <div className="my-3 py-3 col bg-primary text-white d-flex h3 justify-content-center rounded">
+                        {income}
+                    </div>
+                </span>
+                {income >= sum ?
+                    <span>
+                        <h3 className="text-success">Saved</h3>
+                        <div className="my-3 py-3 col bg-success text-white d-flex h3 justify-content-center rounded">
+                            {income - sum}
+                        </div>
+                    </span>
+                    :
+                    <span>
+                        <h3 className="text-warning">saved</h3>
+                        <div className="my-3 py-3 col bg-warning text-white d-flex h3 justify-content-center rounded">
+                            {income - sum}
+                        </div>
+                    </span>
+                }
             </div>
-
-            <h3 className="text-success">Saved</h3>
-            <div className="my-3 py-3 col bg-success text-white d-flex h3 justify-content-center rounded">
-                22$
+        )
+    }
+    else {
+        return (    
+            <div className="mx-4">
+                <h3 className="text-danger">Expenses</h3>
+                <h3 className="text-primary">Income</h3>
+                <h3 className="text-black">saved</h3>
             </div>
-
-            <h3 className="text-success">Income</h3>
-            <div className="my-3 py-3 col bg-primary text-white d-flex h3 justify-content-center rounded">
-                100$
-            </div>
-        </div>
-    )
+        )
+    }
 }
