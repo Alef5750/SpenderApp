@@ -16,25 +16,16 @@ export default function ChartsNav({ timeRequest }) {
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([])
 
-    // ------------------ fetchData-------------------//
-    const getData = async (time) => {
-        const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=2020/02-1`);
-        // We have to replace "2020/03/1" By time ***********IMPORTANT********
-        //console.log(getDataFromUser);
-        setData(getDataFromUser);
-    }
-
-    useEffect(() => {
-        // console.log("1", time);
-        // console.log("2", labels);
-        // console.log("3", data);
-    }, [time])
+    
     // this function is receiving time from ChartsHeader and passes it up to Charts
     const handleTimeRequest = (time) => {
         timeRequest(time)
         setTime(time)
     }
-    // ------------------------MONTHS--------------------------//
+    
+    // ------------------------ONE MONTH--------------------------//
+
+    // Calculate how many days we have by the current month for the graph's labels
     const numberDayByMonth = (month, year) => {
         month = moment().format('MM') - 1;
         //console.log(month);
@@ -79,6 +70,7 @@ export default function ChartsNav({ timeRequest }) {
         return numberDay;
     }
 
+    // We create an array with the number of the days like [01,02,03,..,28,29,..]
     const creationOfDays = () => {
         const numberDay = numberDayByMonth();
         const arrayOfDays = [];
@@ -95,18 +87,19 @@ export default function ChartsNav({ timeRequest }) {
 
     // ------------------------YEAR--------------------------//
 
+    // create an array with the month. For example if the current month is March we will have [April, May,...,December, ...,March]
     const creationOfMonths = () => {
         const months = [];
         for (let index = 11; index >= 0; index--) {
             months.push(moment().subtract(index, 'months').format('MMM'));
         }
-        console.log(months);
         setLabels(months);
     }
 
 
     // ------------------------3 MONTHS--------------------------//
 
+    // Create an array with the last 3 months
     const creationOfWeeks = () => {
         const labs = [];
         labs.push(moment().subtract(2, 'months').format('MMM'))
@@ -118,7 +111,9 @@ export default function ChartsNav({ timeRequest }) {
 
 
 
-
+    // Here when we will get the time thanks to the component ChartsHeader, we will check the last character of the time
+    // And in function of this character we will know if we need the labels for a month, 3 months or a year
+    // In the component ChartsGraph we will have algorithms that calculate the amount by categories, get all the categories etc
     useEffect(async () => {
         if (time) {
             // console.log(time)
@@ -148,7 +143,7 @@ export default function ChartsNav({ timeRequest }) {
 
     return (
         <div>
-            <ChartsHeader timeRequest={handleTimeRequest} getData={(time) => getData(time)} />
+            <ChartsHeader timeRequest={handleTimeRequest} />
             <Router>
                 <Navbar expand="sm" className={styles.nav}>
                     <NavLink to="/charts/goals" className={styles.link} activeClassName={styles.activeLink}>
