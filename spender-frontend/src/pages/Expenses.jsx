@@ -6,7 +6,7 @@ import Navigation from "../components/Navigation";
 import CategoriesGrid from "../components/CategoriesGrid";
 //helpers
 // import cards from "../helpers/categories";
-import {arrayOfCards} from "../pages/AddCategory";
+import { arrayOfCards } from "../pages/AddCategory";
 //styles
 import { Button } from "react-bootstrap";
 import styles from "../styles/Expenses.module.css";

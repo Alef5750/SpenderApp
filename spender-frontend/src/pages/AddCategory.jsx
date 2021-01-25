@@ -35,7 +35,11 @@ let arrayOfCards = [
 export default function AddCategory() {
   function handleNewCategory(newCategory) {
     console.log(newCategory);
-    arrayOfCards.push({ title: newCategory.category, id: Math.random() });
+    arrayOfCards.push({
+      title: newCategory.category,
+      logo: expenses_other,
+      id: Math.random(),
+    });
     console.log(arrayOfCards);
   }
   return (
