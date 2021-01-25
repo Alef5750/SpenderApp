@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import styles from "../styles/Charts.module.css";
@@ -9,25 +9,19 @@ import ChartsReports from "./chartsReports";
 import ChartsDescription from "./chartsDescription";
 import moment from "moment";
 import { getExpensesById, getUserById } from "../helpers/api";
+import { IdContext } from "./PrivateRoute";
 
-export default function ChartsNav({ timeRequest }) {
-
+export default function ChartsNav() {
+    
+    const userId = useContext(IdContext)
     const [time, setTime] = useState()
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([])
     const [goal, setGoal] = useState()
     const [income, setIncome] = useState()
 
-    useEffect(() => {
-        // console.log("1", time);
-        // console.log("2", labels);
-        // console.log("3", data);
-    }, [time])
     // this function is receiving time from ChartsHeader and passes it up to Charts
-    const handleTimeRequest = (time) => {
-        timeRequest(time)
-        setTime(time)
-    }
+    const handleTimeRequest = (time) => {setTime(time)}
     // ------------------------MONTHS--------------------------//
     const numberDayByMonth = (month, year) => {
         month = moment().format('MM') - 1;
@@ -59,7 +53,6 @@ export default function ChartsNav({ timeRequest }) {
                     else {
                         numberDay = 28;
                     }
-
                 }
                 else {
                     numberDay = 29;
@@ -68,7 +61,6 @@ export default function ChartsNav({ timeRequest }) {
             else {
                 numberDay = 28;
             }
-
         }
         return numberDay;
     }
@@ -86,7 +78,6 @@ export default function ChartsNav({ timeRequest }) {
         setLabels(arrayOfDays);
     }
 
-
     // ------------------------YEAR--------------------------//
 
     const creationOfMonths = () => {
@@ -98,7 +89,6 @@ export default function ChartsNav({ timeRequest }) {
         setLabels(months);
     }
 
-
     // ------------------------3 MONTHS--------------------------//
 
     const creationOfWeeks = () => {
@@ -109,9 +99,6 @@ export default function ChartsNav({ timeRequest }) {
         setLabels(labs);
         //console.log(labs);
     }
-
-
-
 
     useEffect(async () => {
         if (time) {
@@ -145,9 +132,10 @@ export default function ChartsNav({ timeRequest }) {
         //     cleanup
         // }
     }, [time])
+
     const getUserGoalAndIncome = async (time) => {
         if(time){
-            const user = await getUserById("/api/users/600591c5a1e29824c0ef786a")
+            const user = await getUserById(`/api/users/${userId}`)
             // console.log(user);
             const period = time.charAt(time.length - 1)
             let periodIncome = user.monthlyIncome

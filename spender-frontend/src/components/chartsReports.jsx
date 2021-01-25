@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-
-export default function ChartsReports({data, goal, income}) {
-
+import ExpensesTable from "./chartsExpensesTable";
+export default function ChartsReports({ data, income }) {
+    if (!income) {
+        income = 0
+    }
     const [amountByCategory, setAmountByCategory] = useState([]);
     const [sum, setSum] = useState(0)
-
     useEffect(() => {
         if (data) {
             getCategories();
@@ -12,7 +13,6 @@ export default function ChartsReports({data, goal, income}) {
             setAmountByCategory([])
         }
     }, [data])
-
     const getCategories = () => {
         const arrayOfCategory = [];
         for (const key in data) {
@@ -25,12 +25,9 @@ export default function ChartsReports({data, goal, income}) {
                     }
                 }
             }
-
         }
-        // console.log(arrayOfCategory)
         getAmountByCategory(arrayOfCategory);
     }
-
     const getAmountByCategory = (arrayOfCategory) => {
         let amount = 0
         for (const key in data) {
@@ -48,46 +45,35 @@ export default function ChartsReports({data, goal, income}) {
         setSum(amount)
         setAmountByCategory(arrayOfCategory);
     }
-
-    if (income) {
-        return (
-            <div className="mx-4">
+    return (
+        <div className="mx-4">
+            <span>
+                <h3 className="text-danger">Expenses</h3>
+                {/* {amountByCategory.map(expense => <h6 key={expense.category} className="text-danger mx-1 rounded">{expense.category}-{expense.amount}</h6>)} */}
+                <ExpensesTable amountByCategory={amountByCategory} />
+                <h3 className="text-white bg-danger rounded">{sum}</h3>
+            </span>
+            <span>
+                <h3 className="text-primary">Income</h3>
+                <div className="my-3 py-3 col bg-primary text-white d-flex h3 justify-content-center rounded">
+                    {income}
+                </div>
+            </span>
+            {income >= sum ?
                 <span>
-                    <h3 className="text-danger">Expenses</h3>
-                    {amountByCategory.map(expense => <h6 key={expense.category} className="text-danger mx-1 rounded">{expense.category}-{expense.amount}</h6>)}
-                    <h3 className="text-white bg-danger rounded">{sum}</h3>
-                </span>
-                <span>
-                    <h3 className="text-primary">Income</h3>
-                    <div className="my-3 py-3 col bg-primary text-white d-flex h3 justify-content-center rounded">
-                        {income}
+                    <h3 className="text-success">Saved</h3>
+                    <div className="my-3 py-3 col bg-success text-white d-flex h3 justify-content-center rounded">
+                        {income - sum}
                     </div>
                 </span>
-                {income >= sum ?
-                    <span>
-                        <h3 className="text-success">Saved</h3>
-                        <div className="my-3 py-3 col bg-success text-white d-flex h3 justify-content-center rounded">
-                            {income - sum}
-                        </div>
-                    </span>
-                    :
-                    <span>
-                        <h3 className="text-warning">saved</h3>
-                        <div className="my-3 py-3 col bg-warning text-white d-flex h3 justify-content-center rounded">
-                            {income - sum}
-                        </div>
-                    </span>
-                }
-            </div>
-        )
-    }
-    else {
-        return (    
-            <div className="mx-4">
-                <h3 className="text-danger">Expenses</h3>
-                <h3 className="text-primary">Income</h3>
-                <h3 className="text-black">saved</h3>
-            </div>
-        )
-    }
+                :
+                <span>
+                    <h3 className="text-warning">saved</h3>
+                    <div className="my-3 py-3 col bg-warning text-white d-flex h3 justify-content-center rounded">
+                        {income - sum}
+                    </div>
+                </span>
+            }
+        </div>
+    )
 }
