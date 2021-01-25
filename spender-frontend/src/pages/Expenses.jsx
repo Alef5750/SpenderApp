@@ -5,7 +5,8 @@ import React from "react";
 import Navigation from "../components/Navigation";
 import CategoriesGrid from "../components/CategoriesGrid";
 //helpers
-import cards from "../helpers/categories";
+// import cards from "../helpers/categories";
+import { arrayOfCards } from "../pages/AddCategory";
 //styles
 import { Button } from "react-bootstrap";
 import styles from "../styles/Expenses.module.css";
@@ -18,8 +19,7 @@ export default function Expenses(props) {
   return (
     <div>
       <Navigation />
-
-      <CategoriesGrid cards={cards} />
+      <CategoriesGrid cards={arrayOfCards} />
       <Button
         className={`w-100 ${styles.buttonBottom}`}
         onClick={() => handleEdit()}
