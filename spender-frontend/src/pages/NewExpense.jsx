@@ -1,14 +1,17 @@
 // despite being in 'pages' folder, this is a component, reused multiple times.
 // each time it is used, it is at a different page location,
 // and has a different "category"(see variable below)
-import React from "react";
+import React, { useContext } from "react";
+import { IdContext } from "../components/PrivateRoute";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useLocation } from "react-router-dom";
+//helpers
+// import cards from "../helpers/categories";
 
 //componenets
 import Navigation from "../components/Navigation";
-import { NewExpenseCategory } from "../helpers/conditionals";
+// import { NewExpenseCategory } from "../helpers/conditionals";
 import { SaveNewExpense } from "../helpers/api";
 //styles
 import styles from "../styles/NewExpense.module.css";
@@ -16,27 +19,31 @@ import { Button, Form, Alert } from "react-bootstrap";
 
 //validation
 const formSchema = Yup.object().shape({
+  category: Yup.string().required("Please enter a category name").max(20),
   title: Yup.string()
     .required("Oops! You haven't entered a title")
     .min(5)
-    .max(15),
+    .max(20),
   amount: Yup.number().required("Oops! You haven't entered an amount"),
   desc: Yup.string(),
 });
 
 export default function NewExpense(props) {
+  const userId = useContext(IdContext);
+
   const path = useLocation().pathname;
+  console.log(path);
+  const category = path.split("/")[2];
+  console.log(category);
+
   function handleNewExpense(expense) {
     console.log(expense);
-    SaveNewExpense(expense, props.id);
+    SaveNewExpense(expense, userId); // used id /////////////////////////////////
   }
   return (
     <Formik
       initialValues={{
-        category:
-          useLocation().pathname === "/expenses/addnew"
-            ? ""
-            : NewExpenseCategory(),
+        category: category,
         title: "",
         amount: "",
         desc: "",
@@ -52,30 +59,14 @@ export default function NewExpense(props) {
         errors,
         touched,
       }) => {
-        let NewCategory;
-        if (path === "/expenses/addnew") {
-          NewCategory = (
-            <Form.Group>
-              <h5 className={styles.text}>Category:</h5>
-              <input
-                className={styles.input}
-                type="text"
-                name={"category"}
-                value={values.category}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </Form.Group>
-          );
-        }
         return (
           <div className={styles.body}>
             <Navigation />
-            <h1 className={`${styles.text} ${styles.h1}`}>
-              {NewExpenseCategory()}
-            </h1>
+            <h1 className={`${styles.text} ${styles.h1}`}>{category}</h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
-              {NewCategory}
+              {errors.category && touched.category && (
+                <Alert variant="danger">{errors.category}</Alert>
+              )}
               <Form.Group>
                 <h5 className={styles.text}>What was it?</h5>
                 <input

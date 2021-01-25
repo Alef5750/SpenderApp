@@ -13,9 +13,7 @@ import SettingsIconBlue from "../images/SettingsIconBlue.png";
 export function NewExpenseCategory() {
   const location = useLocation();
   let category;
-  if (location.pathname === "/expenses/addnew") {
-    category = "Add New Category";
-  } else if (location.pathname === "/expenses/other") category = "Other";
+  if (location.pathname === "/expenses/other") category = "Other";
   else if (location.pathname === "/expenses/entertainment")
     category = "Entertainment";
   else if (location.pathname === "/expenses/food") category = "Food";

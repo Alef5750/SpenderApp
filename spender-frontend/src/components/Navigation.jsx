@@ -1,11 +1,11 @@
 import React from "react";
-// import { useState } from 'react';
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 // import { getExpensesById } from "../helpers/api";
 
 //helpers
 import { Home, Expenses, Reports, Settings } from "../helpers/conditionals";
+//styles
 import styles from "../styles/Navbar.module.css";
 
 
@@ -23,7 +23,7 @@ export default function Navigation() {
         <img src={Expenses()} alt="Expenses" />
       </NavLink>
       <NavLink to="/charts">
-        <img src={Reports()} alt="Settings" />
+        <img src={Reports()} alt="Reports" />
       </NavLink>
       <NavLink to="/settings">
         <img src={Settings()} alt="Settings" />
