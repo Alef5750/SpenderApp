@@ -4,11 +4,13 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+//helpers
+// import cards from "../helpers/categories";
 
 //componenets
 import Navigation from "../components/Navigation";
-import { NewExpenseCategory } from "../helpers/conditionals";
+// import { NewExpenseCategory } from "../helpers/conditionals";
 import { SaveNewExpense } from "../helpers/api";
 //styles
 import styles from "../styles/NewExpense.module.css";
@@ -26,7 +28,11 @@ const formSchema = Yup.object().shape({
 });
 
 export default function NewExpense(props) {
-  // const path = useLocation().pathname;
+  const path = useLocation().pathname;
+  console.log(path);
+  const category = path.split("/")[2];
+  console.log(category);
+
   function handleNewExpense(expense) {
     console.log(expense);
     SaveNewExpense(expense, props.id);
@@ -34,7 +40,7 @@ export default function NewExpense(props) {
   return (
     <Formik
       initialValues={{
-        category: NewExpenseCategory(), // needs to be changed...
+        category: category,
         title: "",
         amount: "",
         desc: "",
@@ -50,30 +56,11 @@ export default function NewExpense(props) {
         errors,
         touched,
       }) => {
-        // let NewCategory;
-        // if (path === "/expenses/addnew") {
-        //   NewCategory = (
-        //     <Form.Group>
-        //       <h5 className={styles.text}>Category:</h5>
-        //       <input
-        //         className={styles.input}
-        //         type="text"
-        //         name={"category"}
-        //         value={values.category}
-        //         onChange={handleChange}
-        //         onBlur={handleBlur}
-        //       />
-        //     </Form.Group>
-        //   );
-        // }
         return (
           <div className={styles.body}>
             <Navigation />
-            <h1 className={`${styles.text} ${styles.h1}`}>
-              {NewExpenseCategory()}
-            </h1>
+            <h1 className={`${styles.text} ${styles.h1}`}>{category}</h1>
             <Form className={styles.form} onSubmit={handleSubmit}>
-              {/* {NewCategory} */}
               {errors.category && touched.category && (
                 <Alert variant="danger">{errors.category}</Alert>
               )}

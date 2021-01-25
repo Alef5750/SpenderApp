@@ -10,16 +10,6 @@ import AddCategory from "./pages/AddCategory";
 
 export default function Router() {
   return (
-    // <BrowserRouter>
-    //   <Switch>
-    //     <Route path="/expenses/*" />
-    //     <Route path="/charts" />
-    //     <Route path="/expenses" />
-    //     <Route path="/settings" />
-    //     <Route path="/home" />
-    //     <Route path="/" />
-    //   </Switch>
-    // </BrowserRouter>
     <BrowserRouter>
       <Switch>
         <PrivateRoute path="/expenses/*" component={NewExpense} />
