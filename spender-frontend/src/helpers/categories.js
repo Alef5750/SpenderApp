@@ -6,7 +6,11 @@ import expenses_other from "../images/expenses_other.png";
 import expenses_add_new from "../images/expenses_add_new.png";
 
 let cards = [
-  { title: "Monthly", logo: expenses_monthly, id: Math.random() },
+  {
+    title: "Monthly",
+    logo: expenses_monthly,
+    id: Math.random(),
+  },
   { title: "Food", logo: expenses_food, id: Math.random() },
   {
     title: "Entertainment",
