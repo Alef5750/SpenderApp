@@ -1,0 +1,32 @@
+.link{
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none !important;
+    color: white !important;
+}
+
+.activeLink{
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: none !important;
+    color: #3DA9FC !important;
+}
+
+.nav{
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    background-color: #094067;
+    width: -webkit-fill-available;
+}
+
+.headerButtons{
+    background-color: #90B4CE;
+    border-color: #90B4CE;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: bold;
+    border-radius: 0%;
+}
