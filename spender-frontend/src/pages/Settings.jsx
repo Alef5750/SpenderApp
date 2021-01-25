@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { Form, Button, Alert } from "react-bootstrap";
 import styles from "../styles/Settings.module.css";
 import { UpdateSettings } from "../helpers/api";
-
+//
 const formSchema = Yup.object().shape({
   monthlyIncome: Yup.number().required("Oops! You haven't entered your income"),
   monthlyGoal: Yup.number().required("Oops! You haven't entered your goal"),

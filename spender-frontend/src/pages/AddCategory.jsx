@@ -1,29 +1,42 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
 //componenets
 import Navigation from "../components/Navigation";
 //styles
 import styles from "../styles/NewExpense.module.css";
 import { Button, Form, Alert } from "react-bootstrap";
-
+//images
+import expenses_monthly from "../images/expenses_monthly.png";
+import expenses_food from "../images/expenses_food.png";
+import expenses_entertainement from "../images/expenses_entertainement.png";
+import expenses_other from "../images/expenses_other.png";
+import expenses_add_new from "../images/expenses_add_new.png";
 //validation
 const formSchema = Yup.object().shape({
   category: Yup.string().required("Please enter a category name").max(20),
 });
 
-export default function AddCategory(props) {
-  // let initialCategories = [
-  //   { title: "monthly", logo: "", id: Math.random() },
-  //   { title: "food", logo: "" },
-  //   { title: "entertainment", logo: "", id: Math.random() },
-  //   { title: "other", logo: "", id: Math.random() },
-  // ];
-  // const [currentCategories, setCategories] = useState(initialCategories);
+let arrayOfCards = [
+  {
+    title: "Monthly",
+    logo: expenses_monthly,
+    id: Math.random(),
+  },
+  { title: "Food", logo: expenses_food, id: Math.random() },
+  {
+    title: "Entertainment",
+    logo: expenses_entertainement,
+    id: Math.random(),
+  },
+  { title: "Other", logo: expenses_other, id: Math.random() },
+  { title: "Add New", logo: expenses_add_new, id: Math.random() },
+];
+export default function AddCategory() {
   function handleNewCategory(newCategory) {
     console.log(newCategory);
-    // AddNewCategory();
+    arrayOfCards.push({ title: newCategory.category, id: Math.random() });
+    console.log(arrayOfCards);
   }
   return (
     <Formik
@@ -72,3 +85,5 @@ export default function AddCategory(props) {
     </Formik>
   );
 }
+
+export { arrayOfCards };
