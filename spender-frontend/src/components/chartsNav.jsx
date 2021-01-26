@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    NavLink,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
 } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import styles from "../styles/Charts.module.css";
@@ -86,7 +86,7 @@ export default function ChartsNav() {
         setLabels(arrayOfDays);
     };
 
-    // ------------------------YEAR--------------------------//
+  // ------------------------YEAR--------------------------//
 
     // create an array with the month. For example if the current month is March we will have [April, May,...,December, ...,March]
     const creationOfMonths = () => {
@@ -97,9 +97,9 @@ export default function ChartsNav() {
         setLabels(months);
     };
 
-    // ------------------------3 MONTHS--------------------------//
+  // ------------------------3 MONTHS--------------------------//
 
-    // Create an array with the last 3 months
+  // Create an array with the last 3 months
 
     const creationOfWeeks = () => {
         const labs = [];
