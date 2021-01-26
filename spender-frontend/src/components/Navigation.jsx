@@ -22,7 +22,7 @@ export default function Navigation() {
       <NavLink to="/expenses">
         <img src={Expenses()} alt="Expenses" />
       </NavLink>
-      <NavLink to="/charts/goals">
+      <NavLink to="/charts">
         <img src={Reports()} alt="Reports" />
       </NavLink>
       <NavLink to="/settings">

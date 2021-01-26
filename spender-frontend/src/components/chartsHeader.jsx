@@ -9,7 +9,7 @@ export default function ChartsHeader({ timeRequest, lastTimeRequest }) {
 
     const handleChange = async (event) => {
         let date = new Date()
-        let time;
+        let time = `${new Date().getFullYear()}/${moment(new Date()).format("M")}-1`
         let lastTime="";
         if (event === "month") time = `${date.getFullYear()}/${moment(date).format('M')}-1`
         if (event === "year") time = `${date.getFullYear()}/${moment(date).format('M')}-12`

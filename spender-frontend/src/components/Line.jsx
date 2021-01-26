@@ -75,7 +75,7 @@ function Charts(props) {
         if (dataComparison[getTheYear] && dataComparison[getTheYear][getTheMonth]) {
             creationDataGraphComparison();
         } else {
-            setDataGraph([]);
+            setDataGraphComparison([]);
         }
         console.log(dataComparison);
     }, [props]);
