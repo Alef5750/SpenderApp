@@ -45,7 +45,7 @@ export default function ChartsGoals({ data, goal, income }) {
                 </div>
                 <h2 className="bg-success text-white rounded my-4">Good Job!</h2>
                 <div className="progress">
-                    <div className="progress-bar" style={{ width: (income - sum) * 315 / goal }} role="progressbar" aria-valuenow={(income - sum) * 100 / goal} aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress-bar" style={{ width: 315 }} role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         )
@@ -62,9 +62,15 @@ export default function ChartsGoals({ data, goal, income }) {
                     {income - sum}
                 </div>
                 <h2 className="bg-warning text-white rounded my-4">You Can Do It!</h2>
-                <div className="progress">
-                    <div className="progress-bar" style={{ width: (income - sum) * 315 / goal }} role="progressbar" aria-valuenow={(income - sum) * 100 / goal} aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+                {isNaN((income - sum) * 315 / goal) || isFinite((income - sum) * 315 / goal) ?
+                    <div className="progress">
+                        <div className="progress-bar" style={{ width: (income - sum) * 315 / goal }} role="progressbar" aria-valuenow={(income - sum) * 315 / goal} aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                :
+                    <div className="progress">
+                        <div className="progress-bar" style={{ width: 0 }} role="progressbar" aria-valuenow={(income - sum) * 100 / goal} aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                }
             </div>
         )
     }
@@ -79,9 +85,9 @@ export default function ChartsGoals({ data, goal, income }) {
                 <div className="my-3 py-3 col bg-danger text-white d-flex h3 justify-content-center rounded">
                     {income - sum}
                 </div>
-                <h2 className="bg-danger text-white rounded my-4">You Are Doing It Wrong!</h2>
+                <h2 className="bg-danger text-white rounded my-4">You Are Doing It All Wrong...</h2>
                 <div className="progress">
-                    <div className="progress-bar" style={{ width: 0 }} role="progressbar" aria-valuenow={(income - sum) * 100 / goal} aria-valuemin="0" aria-valuemax="100"></div>
+                    <div className="progress-bar" style={{ width: 0 }} role="progressbar" aria-valuenow={0} aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         )
