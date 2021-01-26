@@ -3,10 +3,14 @@ import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 
 
-function Charts({ data, time, labels }) {
+function Charts(props) {
     //initialise all the month with an expense by 0
-    const [expensesByMonth, setExpensesByMonth] = useState([0, 0, 0])
+    const { data, time, labels, dataComparison } = props;
+    const [labelsMonths, setLabelsMonths] = useState([])
+    const [expensesByMonth, setExpensesByMonth] = useState([0, 0, 0]);
+    const [expensesByMonthComparison, setExpensesByMonthComparison] = useState([0, 0, 0]);
     const [titleLegend, setTitleLegend] = useState("");
+    const [titleLegendComparison, setTitleLegendComparison] = useState("");
     // get all the expenses by month
 
     const getAmountByMonth = () => {
@@ -24,35 +28,88 @@ function Charts({ data, time, labels }) {
         setExpensesByMonth(myExpenseByMonth);
     }
 
-    useEffect(() => {
-        if (data) {
-            getAmountByMonth();
-        } else {
-            setExpensesByMonth([]); 
+    const getAmountByMonthComparison = () => {
+        const myExpenseByMonthComparison = [];
+        let count = 0;
+        for (const key in dataComparison) {
+            for (const monthKey in dataComparison[key]) {
+                myExpenseByMonthComparison[count] = 0;
+                dataComparison[key][monthKey].map(element => {
+                    myExpenseByMonthComparison[count] += element.amount;
+                });
+                count++;
+            }
         }
-    }, [data])
+        setExpensesByMonthComparison(myExpenseByMonthComparison);
+    }
+
+    const handleTitleLegend = () => {
+        const endMonth = moment().format('MMM');
+        const startMonth = moment().subtract(2, 'months').format('MMM');
+        const year = moment().format('YYYY');
+        setTitleLegend(startMonth + " - " + endMonth + " " + year);
+    }
+
+    const handleTitleLegendComparison = () => {
+        const endMonth = moment().subtract(2, 'months').format('MMM');
+        const startMonth = moment().subtract(5, 'months').format('MMM');
+        const year = moment().subtract(2, 'months').format('YYYY');
+        setTitleLegendComparison(startMonth + " - " + endMonth + " " + year);
+    }
+
+    const datasetKeyProvider = () => {
+        return btoa(Math.random()).substring(0, 12)
+    }
 
     useEffect(() => {
-        let getTheYear = moment().format('YYYY');
-        const getTheMonth = moment().subtract(2, 'months').format('M');
-        if (getTheMonth == 11 || getTheMonth == 12) {
-            getTheYear = moment().subtract(1, 'year').format('YYYY');
-            setTitleLegend(getTheYear+" - ");
+        if (data) {
+            console.log(data);
+            console.log(dataComparison);
+            getAmountByMonth();
+            getAmountByMonthComparison();
+        } else {
+            console.log(data);
+            console.log(dataComparison);
+            setExpensesByMonth([]);
+            setExpensesByMonthComparison([]);
         }
-        
+    }, [props])
+
+    useEffect(() => {
+        handleTitleLegend();
+        handleTitleLegendComparison();
     }, [])
+
+    // useEffect(() => {
+    //     if (labels) {
+    //         const myLabels = labels.map(element =>{
+
+    //         })
+    //     }
+    // }, [labels])
 
     var dataGraph = {
         labels: labels,
         datasets: [
             {
-                label: titleLegend+moment().format('YYYY'),
+                label: titleLegend,
                 data: expensesByMonth,
                 backgroundColor: "blue",
                 borderColor: "lightblue",
                 fill: false,
                 lineTension: 0,
-                radius: 5
+                radius: 2,
+                key: 1
+            },
+            {
+                label: titleLegendComparison,
+                data: expensesByMonthComparison,
+                backgroundColor: "red",
+                borderColor: "lightcoral",
+                fill: false,
+                lineTension: 0,
+                radius: 2,
+                key: 2
             }
         ]
     };
@@ -63,8 +120,8 @@ function Charts({ data, time, labels }) {
         title: {
             display: true,
             position: "top",
-            text: "3 Last months expenses",
-            fontSize: 12,
+            text: "comparison between the last 3 months and the 3 before them",
+            fontSize: 10,
             fontColor: "#111"
         },
         legend: {
@@ -82,6 +139,7 @@ function Charts({ data, time, labels }) {
             <Line
                 data={dataGraph}
                 options={options}
+                datasetKeyProvider={datasetKeyProvider}
                 height={215}
             />
         </div>

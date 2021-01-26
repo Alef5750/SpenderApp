@@ -10,17 +10,25 @@ export default function ChartsHeader({ timeRequest, lastTimeRequest }) {
         let date = new Date()
         let time;
         let lastTime="";
-        if (event === "month") time = `${date.getFullYear()}/${moment(date).format('MM')}-1`
-        if (event === "year") time = `${date.getFullYear()}/${moment(date).format('MM')}-12`
-        if (event === "3months") time = `${date.getFullYear()}/${moment(date).format('MM')}-3`
+        if (event === "month") time = `${date.getFullYear()}/${moment(date).format('M')}-1`
+        if (event === "year") time = `${date.getFullYear()}/${moment(date).format('M')}-12`
+        if (event === "3months") time = `${date.getFullYear()}/${moment(date).format('M')}-3`
         if (event === "month") {
-            if(moment().subtract(1, 'months').format('MM')==12){
-                lastTime = `${moment().subtract(1, 'year').format('YYYY')}/${moment().subtract(1, 'months').format('MM')}-1`;
+            if(moment().subtract(1, 'months').format('M')==12){
+                lastTime = `${moment().subtract(1, 'year').format('YYYY')}/${moment().subtract(1, 'months').format('M')}-1`;
             }else{
-                lastTime = `${date.getFullYear()}/${moment().subtract(1, 'months').format('MM')}-1`;
+                lastTime = `${date.getFullYear()}/${moment().subtract(1, 'months').format('M')}-1`;
             }
         }
-        if (event === "year") lastTime = `${moment().subtract(1, 'year').format('YYYY')}/${moment(date).format('MM')}-12`;
+        if (event === "3months"){
+            const lastThreeMonth = moment().subtract(3, 'months').format('M');
+            if(lastThreeMonth==12 || lastThreeMonth==11 || lastThreeMonth==10) {
+                lastTime = `${moment().subtract(1, 'year').format('YYYY')}/${moment().subtract(3, 'months').format('M')}-3`; 
+            }else{
+                lastTime = `${date.getFullYear()}/${moment().subtract(3, 'months').format('M')}-3`;
+            }
+        } 
+        if (event === "year") lastTime = `${moment().subtract(1, 'year').format('YYYY')}/${moment(date).format('M')}-12`;
         timeRequest(time);
         lastTimeRequest(lastTime);
         // await getData(time);

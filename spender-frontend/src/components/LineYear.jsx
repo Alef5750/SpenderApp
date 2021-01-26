@@ -64,7 +64,7 @@ function Charts({ data, time, labels, dataComparison }) {
                 label: moment().subtract(2, 'year').format('YYYY')+" - "+moment().subtract(1, 'year').format('YYYY'),
                 data: expensesByMonthComparison,
                 backgroundColor: "red",
-                borderColor: "red",
+                borderColor: "lightcoral",
                 fill: false,
                 lineTension: 0,
                 radius: 2
@@ -78,8 +78,8 @@ function Charts({ data, time, labels, dataComparison }) {
         title: {
             display: true,
             position: "top",
-            text: "Month's expenses",
-            fontSize: 12,
+            text: "expenses for "+moment().format('YYYY')+" in comparison with " +moment().subtract(1, 'year').format('YYYY'),
+            fontSize: 10,
             fontColor: "#111"
         },
         legend: {

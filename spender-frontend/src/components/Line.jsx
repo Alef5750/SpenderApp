@@ -7,7 +7,7 @@ function Charts(props) {
     const { data, time, labels, dataComparison } = props;
     const [dataGraph, setDataGraph] = useState([]);
     const [dataGraphComparison, setDataGraphComparison] = useState([]);
-    const [titleLegend, setTitleLegend] = useState()
+    const [titleLegend, setTitleLegend] = useState();
 
     const creationDataGraph = () => {
         //expensesMonth
@@ -105,7 +105,7 @@ function Charts(props) {
                 label: moment().subtract(1, 'months').format('MMM')+" - "+titleLegend,
                 data: dataGraphComparison,
                 backgroundColor: "red",
-                borderColor: "red",
+                borderColor: "lightcoral",
                 fill: false,
                 lineTension: 0,
                 radius: 2
@@ -119,8 +119,8 @@ function Charts(props) {
         title: {
             display: true,
             position: "top",
-            text: "Days' expenses",
-            fontSize: 12,
+            text: "expenses for "+moment().format('MMM')+" in comparison with " +moment().subtract(1, 'months').format('MMM'),
+            fontSize: 10,
             fontColor: "#111"
         },
         legend: {

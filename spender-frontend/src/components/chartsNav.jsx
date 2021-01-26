@@ -101,11 +101,12 @@ export default function ChartsNav({ timeRequest }) {
     // ------------------------3 MONTHS--------------------------//
 
     // Create an array with the last 3 months
+
     const creationOfWeeks = () => {
         const labs = [];
-        labs.push(moment().subtract(2, 'months').format('MMM'))
-        labs.push(moment().subtract(1, 'months').format('MMM'));
-        labs.push(moment().format('MMM'));
+        labs.push(moment().subtract(5, 'months').format('MMM')+" / "+moment().subtract(2, 'months').format('MMM'))
+        labs.push(moment().subtract(4, 'months').format('MMM')+" / "+moment().subtract(1, 'months').format('MMM'));
+        labs.push(moment().subtract(3, 'months').format('MMM')+" / "+moment().format('MMM'));
         setLabels(labs);
         //console.log(labs);
     }

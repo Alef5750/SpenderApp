@@ -77,7 +77,13 @@ function Charts({ data, time, labels }) {
                             'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)',
                             'rgba(14, 153, 49, 1)',
-                            'rgba(155, 159, 64, 1)'
+                            'rgba(155, 159, 64, 1)',
+                            'rgba(92, 109, 22, 1)',
+                            'rgba(74, 102, 235, 1)',
+                            'rgba(205, 106, 36, 1)',
+                            'rgba(102, 82, 202, 1)',
+                            'rgba(140, 53, 109, 1)',
+                            'rgba(55, 269, 34, 1)',
                         ],
                         data: dataGraph
                     }]
@@ -86,6 +92,39 @@ function Charts({ data, time, labels }) {
 
                 options={{
                     maintainAspectRatio: false,
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var dataset = data.datasets[tooltipItem.datasetIndex];
+                                var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                                var total = meta.total;
+                                var currentValue = dataset.data[tooltipItem.index];
+                                var percentage = parseFloat((currentValue / total * 100).toFixed(0));
+                                return currentValue + ' (' + percentage + '%)';
+                            },
+                            title: function (tooltipItem, data) {
+                                return data.labels[tooltipItem[0].index];
+                            },
+                        },
+                        
+                        mode: 'nearest',
+                        
+                    },
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "expenses by category for the last 3 month",
+                        fontSize: 10,
+                        fontColor: "#111"
+                    },
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#333",
+                            fontSize: 8
+                        }
+                    },
                 }}
             />
         </div>
