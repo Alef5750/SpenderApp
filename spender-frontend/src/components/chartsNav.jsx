@@ -11,7 +11,6 @@ import ChartsGoals from "./chartsGoals";
 import ChartsHeader from "./chartsHeader";
 import ChartsGraphs from "./chartsGraphs";
 import ChartsReports from "./chartsReports";
-import ChartsDescription from "./chartsDescription";
 import moment from "moment";
 import { getExpensesById } from "../helpers/api";
 import { UserContext } from "../components/PrivateRoute";
