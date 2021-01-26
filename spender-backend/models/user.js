@@ -6,7 +6,6 @@ module.exports = class User {
     const userSchema = new mongoose.Schema({
       googleId: { type: Number, required: true },
       displayName: { type: String, required: true },
-      // email: { type: String, trim: true, lowercase: true, required: true },
       monthlyIncome: { type: Number, default: 0 },
       monthlyGoal: { type: Number, default: 0 },
       expenses: { type: Object, default: {} }

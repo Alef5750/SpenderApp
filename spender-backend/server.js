@@ -82,8 +82,6 @@ app.get('/auth/google/callback',
 
 // auth check
 app.get('/auth', (req, res) => {
-  console.log(req.user)
-  console.log(req.session)
   if (req.user) res.status(200).json(req.user)
   else res.status(200).json(null)
 })
