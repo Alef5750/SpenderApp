@@ -16,7 +16,6 @@ export const getExpensesById = async (url) => {
   return data;
 };
 
-<<<<<<< HEAD
 export const getExpensesByDate = async (url) => {
   const response = await axios.get(url);
   console.log(response);
@@ -34,17 +33,9 @@ export function UpdateSettings(settings, id) {
   );
 }
 
-// export const getDisplayName = async (id) => {
-//   const response = await axios.get(`${backendURL}/api/users/${id}`);
-//   const data = response.data;
-//   let displayName = JSON.stringify(data.displayName);
-//   console.log(`Data: ${displayName}`);
-//   return displayName;
-// };
-=======
-export const getUserById = async (url) => {
-  const response = await axios.get(url)
-  const data = response.data
-  return data
-}
->>>>>>> d25ca2fed22eff5a661c69f98e43813efe2e4008
+export const getUserById = async (id) => {
+  const response = await axios.get(`${backendURL}/api/users/${id}`);
+  const data = JSON.stringify(response.data);
+  console.log(data);
+  return data;
+};
