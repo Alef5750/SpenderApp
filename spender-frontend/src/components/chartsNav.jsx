@@ -11,15 +11,16 @@ import ChartsGoals from "./chartsGoals";
 import ChartsHeader from "./chartsHeader";
 import ChartsGraphs from "./chartsGraphs";
 import ChartsReports from "./chartsReports";
-import ChartsDescription from "./chartsDescription";
 import moment from "moment";
-import { getExpensesById, getUserById } from "../helpers/api";
-import { UserContext } from "./PrivateRoute";
+import { getExpensesById } from "../helpers/api";
+import { UserContext } from "../components/PrivateRoute";
 
 export default function ChartsNav() {
   const user = useContext(UserContext);
 
-  const [time, setTime] = useState();
+  const [time, setTime] = useState(
+    `${new Date().getFullYear()}/${moment(new Date()).format("M")}-1`
+  );
   const [lastTime, setLastTime] = useState();
   const [labels, setLabels] = useState([]);
   const [data, setData] = useState([]);
@@ -41,22 +42,22 @@ export default function ChartsNav() {
     year = moment().format("YYYY");
     var numberDay = 0;
     if (month <= 6) {
-      if (month % 2 == 0) {
+      if (month % 2 === 0) {
         numberDay = 31;
       } else {
         numberDay = 30;
       }
     } else {
-      if (month % 2 == 1) {
+      if (month % 2 === 1) {
         numberDay = 30;
       } else {
         numberDay = 31;
       }
     }
-    if (month == 1) {
-      if (year % 4 == 0) {
-        if (year % 100 == 0) {
-          if (year % 400 == 0) {
+    if (month === 1) {
+      if (year % 4 === 0) {
+        if (year % 100 === 0) {
+          if (year % 400 === 0) {
             numberDay = 29;
           } else {
             numberDay = 28;
@@ -132,10 +133,10 @@ export default function ChartsNav() {
     if (time) {
       // console.log(time)
       const getDataFromUser = await getExpensesById(
-        `/api/users/${user.uid}/expenses?date=${time}`
+        `/api/users/${user._id}/expenses?date=${time}`
       );
       const getDataFromUserComparison = await getExpensesById(
-        `/api/users/${user.uid}/expenses?date=${lastTime}`
+        `/api/users/${user._id}/expenses?date=${lastTime}`
       );
       setDataComparison(getDataFromUserComparison);
       // We have to replace "2020/03/1" By time ***********IMPORTANT********
@@ -156,6 +157,8 @@ export default function ChartsNav() {
           // console.log(amount);
           creationOfMonths();
           break;
+        default:
+          break;
       }
     }
   }, [time]);
@@ -169,11 +172,10 @@ export default function ChartsNav() {
 
   const getUserGoalAndIncome = async (time) => {
     if (time) {
-      const user = await getUserById(`/api/users/${user.uid}`);
-      // console.log(user);
       const period = time.charAt(time.length - 1);
       let periodIncome = user.monthlyIncome;
       let periodGoal = user.monthlyGoal;
+
       switch (period) {
         case "1":
           setIncome(periodIncome);
@@ -190,6 +192,8 @@ export default function ChartsNav() {
           periodGoal *= 12;
           setIncome(periodIncome);
           setGoal(periodGoal);
+          break;
+        default:
           break;
       }
       // console.log("income", income, "goal", goal);
@@ -240,9 +244,6 @@ export default function ChartsNav() {
           </Route>
           <Route exact path="/charts/reports">
             <ChartsReports data={data} income={income} />
-          </Route>
-          <Route exact path="">
-            <ChartsDescription />
           </Route>
         </Switch>
       </Router>
