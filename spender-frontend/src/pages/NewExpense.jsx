@@ -36,9 +36,10 @@ export default function NewExpense(props) {
   const category = path.split("/")[2];
   console.log(category);
 
+
   function handleNewExpense(expense) {
     console.log(expense);
-    SaveNewExpense(expense, user._uid); // used id /////////////////////////////////
+    SaveNewExpense(expense, user._id); // used id /////////////////////////////////
   }
   return (
     <Formik
