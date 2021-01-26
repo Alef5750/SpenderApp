@@ -4,17 +4,18 @@ import moment from 'moment';
 
 
 function Charts(props) {
-    const {data, time, labels} = props;
+    const { data, time, labels, dataComparison } = props;
     const [dataGraph, setDataGraph] = useState([]);
-    
+    const [dataGraphComparison, setDataGraphComparison] = useState([]);
+    const [titleLegend, setTitleLegend] = useState();
 
     const creationDataGraph = () => {
         //expensesMonth
         let count = 0;
         const daysByMonth = labels.length;
         const myAmoutByDay = [];
-        const getTheYear = moment("02/02/2020").format('YYYY');
-        const getTheMonth = moment("02/02/2020").format('M');
+        const getTheYear = moment().format('YYYY');
+        const getTheMonth = moment().format('M');
         for (let index = 1; index <= daysByMonth; index++) {
             let find = false;
             myAmoutByDay[count] = 0;
@@ -29,31 +30,85 @@ function Charts(props) {
         }
         setDataGraph(myAmoutByDay);
     }
-
+    const creationDataGraphComparison = () => {
+        //expensesMonth
+        let count = 0;
+        const daysByMonth = labels.length;
+        const myAmoutByDay = [];
+        let getTheYear = moment().format('YYYY');
+        const getTheMonth = moment().subtract(1, 'months').format('M');
+        if (getTheMonth == 12) {
+            getTheYear = moment().subtract(1, 'year').format('YYYY');
+        }
+        for (let index = 1; index <= daysByMonth; index++) {
+            let find = false;
+            myAmoutByDay[count] = 0;
+            for (let j = 0; j < dataComparison[getTheYear][getTheMonth].length; j++) {
+                const getDayFromData = moment(dataComparison[getTheYear][getTheMonth][j].date).format('D');
+                if (getDayFromData == index) {
+                    find = true;
+                    myAmoutByDay[count] += dataComparison[getTheYear][getTheMonth][j].amount;
+                }
+            }
+            count++;
+        }
+        setDataGraphComparison(myAmoutByDay);
+    }
 
     useEffect(() => {
-        const getTheYear = moment("02/02/2020").format('YYYY');
-        const getTheMonth = moment("02/02/2020").format('M');
-        setDataGraph([]);
+        const getTheYear = moment().format('YYYY');
+        const getTheMonth = moment().format('M');
         if (data[getTheYear] && data[getTheYear][getTheMonth]) {
             creationDataGraph();
-        }else{
-            setDataGraph([]); 
+        } else {
+            setDataGraph([]);
         }
         console.log(data);
     }, [props])
+
+    useEffect(() => {
+        let getTheYear = moment().format('YYYY');
+        const getTheMonth = moment().subtract(1, 'months').format('M');
+        if (getTheMonth == 12) {
+            getTheYear = moment().subtract(1, 'year').format('YYYY');
+        }
+        if (dataComparison[getTheYear] && dataComparison[getTheYear][getTheMonth]) {
+            creationDataGraphComparison();
+        } else {
+            setDataGraph([]);
+        }
+        console.log(dataComparison);
+    }, [props]);
+
+    useEffect(() => {
+        let getTheYear = moment().format('YYYY');
+        const getTheMonth = moment().subtract(1, 'months').format('M');
+        if (getTheMonth == 12) {
+            getTheYear = moment().subtract(1, 'year').format('YYYY');
+        }
+        setTitleLegend(getTheYear);
+    }, [])
 
     var dataG = {
         labels: labels,
         datasets: [
             {
-                label: moment().format('MMM'),
+                label: moment().format('MMM')+" - "+moment().format('YYYY'),
                 data: dataGraph,
                 backgroundColor: "blue",
                 borderColor: "lightblue",
                 fill: false,
                 lineTension: 0,
-                radius: 5
+                radius: 2
+            },
+            {
+                label: moment().subtract(1, 'months').format('MMM')+" - "+titleLegend,
+                data: dataGraphComparison,
+                backgroundColor: "red",
+                borderColor: "lightcoral",
+                fill: false,
+                lineTension: 0,
+                radius: 2
             }
         ]
     };
@@ -64,8 +119,8 @@ function Charts(props) {
         title: {
             display: true,
             position: "top",
-            text: "Month's expenses",
-            fontSize: 12,
+            text: "expenses for "+moment().format('MMM')+" in comparison with " +moment().subtract(1, 'months').format('MMM'),
+            fontSize: 10,
             fontColor: "#111"
         },
         legend: {

@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function ChartsGoals({time}) {
+export default function ChartsGoals({time, labels, data}) {
 
     if (time) console.log(time);
 

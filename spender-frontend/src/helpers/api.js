@@ -16,6 +16,7 @@ export const getExpensesById = async (url) => {
   return data;
 };
 
+<<<<<<< HEAD
 export const getExpensesByDate = async (url) => {
   const response = await axios.get(url);
   console.log(response);
@@ -40,3 +41,10 @@ export function UpdateSettings(settings, id) {
 //   console.log(`Data: ${displayName}`);
 //   return displayName;
 // };
+=======
+export const getUserById = async (url) => {
+  const response = await axios.get(url)
+  const data = response.data
+  return data
+}
+>>>>>>> d25ca2fed22eff5a661c69f98e43813efe2e4008
