@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -33,6 +33,7 @@ let arrayOfCards = [
     { title: "Other", logo: expenses_other, id: Math.random() },
 ];
 export default function AddCategory() {
+    const history = useHistory();
     const [redirect, setDirect] = useState(null);
 
     function handleNewCategory(newCategory) {
@@ -89,6 +90,14 @@ export default function AddCategory() {
                                 Save
                             </Button>
                         </Form>
+                        <Button
+                            className={`w-100 ${styles.buttonBottom}`}
+                            onClick={() => {
+                                history.push("/expenses");
+                            }}
+                        >
+                            Cancel
+                        </Button>
                     </div>
                 );
             }}

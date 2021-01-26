@@ -30,7 +30,7 @@ export default function NewExpense(props) {
 
     const path = useLocation().pathname;
     const category = path.split("/")[2];
-    let history = useHistory();
+    const history = useHistory();
 
     function handleNewExpense(expense) {
         SaveNewExpense(expense, user._id);
