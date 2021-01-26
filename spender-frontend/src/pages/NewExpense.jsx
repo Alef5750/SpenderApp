@@ -29,14 +29,13 @@ const formSchema = Yup.object().shape({
 });
 
 export default function NewExpense(props) {
-  let history = useHistory();
   const user = useContext(UserContext);
 
   const path = useLocation().pathname;
   console.log(path);
   const category = path.split("/")[2];
   console.log(category);
-
+  let history  = useHistory();
 
   function handleNewExpense(expense) {
     console.log(expense);
@@ -104,7 +103,7 @@ export default function NewExpense(props) {
                 <textarea
                   className={styles.textarea}
                   cols="40"
-                  rows="5"
+                  rows="4"
                   type="text"
                   name={"desc"}
                   value={values.desc}
@@ -112,13 +111,16 @@ export default function NewExpense(props) {
                   onBlur={handleBlur}
                 />
               </Form.Group>
-              <Button className={`mr-1 ${styles.saveButton}`} type="submit">
+              <Button className={styles.saveButton} type="submit">
                 Save
               </Button>
-              <Button className={`ml-1 ${styles.saveButton}`} type="button" onClick = {() => history.push("/expenses")}>
-                Cancel
-              </Button>
             </Form>
+            <Button
+              className={`w-100 ${styles.buttonBottom}`}
+              onClick={() => {history.push("/expenses")}}
+            >
+              Cancel
+            </Button>
           </div>
         );
       }}
