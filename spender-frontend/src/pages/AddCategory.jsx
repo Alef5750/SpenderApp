@@ -13,7 +13,7 @@ import expenses_monthly from "../images/expenses_monthly.png";
 import expenses_food from "../images/expenses_food.png";
 import expenses_entertainement from "../images/expenses_entertainement.png";
 import expenses_other from "../images/expenses_other.png";
-import expenses_add_new from "../images/expenses_add_new.png";
+// import expenses_add_new from "../images/expenses_add_new.png";
 //validation
 const formSchema = Yup.object().shape({
   category: Yup.string().required("Please enter a category name").max(20),
@@ -32,7 +32,7 @@ let arrayOfCards = [
     id: Math.random(),
   },
   { title: "Other", logo: expenses_other, id: Math.random() },
-  { title: "Add New", logo: expenses_add_new, id: Math.random() },
+  // { title: "Add New", logo: expenses_add_new, id: Math.random() },
 ];
 export default function AddCategory() {
   const [redirect, setDirect] = useState(null);
