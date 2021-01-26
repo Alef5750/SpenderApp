@@ -34,10 +34,10 @@ export default function ChartsReports({ data, income }) {
         for (const key in data) {
             for (const monthKey in data[key]) {
                 for (let index = 0; index < data[key][monthKey].length; index++) {
+                    amount += data[key][monthKey][index].amount
                     for (let j = 0; j < arrayOfCategory.length; j++) {
                         if (data[key][monthKey][index].category === arrayOfCategory[j].category) {
                             arrayOfCategory[j].amount += data[key][monthKey][index].amount;
-                            amount += arrayOfCategory[j].amount
                         }
                     }
                 }

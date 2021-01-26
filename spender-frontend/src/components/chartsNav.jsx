@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   NavLink,
+  Redirect
 } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import styles from "../styles/Charts.module.css";
@@ -12,16 +13,18 @@ import ChartsHeader from "./chartsHeader";
 import ChartsGraphs from "./chartsGraphs";
 import ChartsReports from "./chartsReports";
 import moment from "moment";
-import { getExpensesById } from "../helpers/api";
+import { getExpensesById, getUserById } from "../helpers/api";
 import { UserContext } from "../components/PrivateRoute";
 
 export default function ChartsNav() {
   const user = useContext(UserContext);
 
   const [time, setTime] = useState(
-    `${new Date().getFullYear()}/${moment(new Date()).format("M")}-1`
+    `${moment().format("YYYY")}/${moment().format("M")}-1`
   );
-  const [lastTime, setLastTime] = useState();
+  const [lastTime, setLastTime] = useState(
+    `${moment().subtract(1, 'months').format('YYYY')}/${moment().subtract(1, 'months').format('M')}-1`
+  );
   const [labels, setLabels] = useState([]);
   const [data, setData] = useState([]);
   const [goal, setGoal] = useState();
@@ -172,10 +175,11 @@ export default function ChartsNav() {
 
   const getUserGoalAndIncome = async (time) => {
     if (time) {
+      const userInfo = await getUserById(user._id)
+      const userData = JSON.parse(userInfo)
       const period = time.charAt(time.length - 1);
-      let periodIncome = user.monthlyIncome;
-      let periodGoal = user.monthlyGoal;
-
+      let periodIncome = userData.monthlyIncome;
+      let periodGoal = userData.monthlyGoal;
       switch (period) {
         case "1":
           setIncome(periodIncome);
@@ -196,7 +200,6 @@ export default function ChartsNav() {
         default:
           break;
       }
-      // console.log("income", income, "goal", goal);
     }
   };
 
@@ -245,6 +248,7 @@ export default function ChartsNav() {
           <Route exact path="/charts/reports">
             <ChartsReports data={data} income={income} />
           </Route>
+          <Redirect to="/charts/goals"/>
         </Switch>
       </Router>
     </div>
