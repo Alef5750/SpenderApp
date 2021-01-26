@@ -1,15 +1,15 @@
 .link{
-    font-size: 30px;
+    font-size: 27px;
+    font-weight: 600;
     font-style: normal;
-    font-weight: bold;
     text-decoration: none !important;
     color: white !important;
 }
 
 .activeLink{
-    font-size: 30px;
+    font-size: 27px;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none !important;
     color: #3DA9FC !important;
 }
@@ -20,6 +20,7 @@
     bottom: 0px;
     background-color: #094067;
     width: -webkit-fill-available;
+    padding-top: 6px;
 }
 
 .headerButtons{

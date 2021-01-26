@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { IdContext } from "../components/PrivateRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navigation from "../components/Navigation";
+import Footer from "../components/footer";
 //libraries
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -24,62 +25,65 @@ export default function Settings(props) {
     UpdateSettings(settings, userId);
   }
   return (
-    <Formik
-      initialValues={{
-        monthlyIncome: "",
-        monthlyGoal: "",
-      }}
-      validationSchema={formSchema}
-      onSubmit={(settings) => handleSettingsUpdate(settings)}
-    >
-      {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        errors,
-        touched,
-      }) => {
-        return (
-          <div className={styles.body}>
-            <Navigation />
-            <h1 className={`${styles.text} ${styles.h1}`}>Settings</h1>
-            <Form className={styles.form} onSubmit={handleSubmit}>
-              <Form.Group controlId="formMonthlyIncome">
-                <h5 className={styles.text}>Monthly Income</h5>
-                <input
-                  className={styles.input}
-                  type="number"
-                  name={"monthlyIncome"}
-                  value={values.monthlyIncome}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.monthlyIncome && touched.monthlyIncome && (
-                  <Alert variant="danger">{errors.monthlyIncome}</Alert>
-                )}
-              </Form.Group>
-              <Form.Group controlId="formMonthlySavingsGoal">
-                <h5 className={styles.text}>Monthly Savings Goal</h5>
-                <input
-                  className={styles.input}
-                  type="number"
-                  name={"monthlyGoal"}
-                  value={values.monthlyGoal}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.monthlyGoal && touched.monthlyGoal && (
-                  <Alert variant="danger">{errors.monthlyGoal}</Alert>
-                )}
-              </Form.Group>
-              <Button className={styles.saveButton} size="lg" type="submit">
-                Save
+    <>
+      <Formik
+        initialValues={{
+          monthlyIncome: "",
+          monthlyGoal: "",
+        }}
+        validationSchema={formSchema}
+        onSubmit={(settings) => handleSettingsUpdate(settings)}
+      >
+        {({
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+          errors,
+          touched,
+        }) => {
+          return (
+            <div className={styles.body}>
+              <Navigation />
+              <h1 className={`${styles.text} ${styles.h1}`}>Settings</h1>
+              <Form className={styles.form} onSubmit={handleSubmit}>
+                <Form.Group controlId="formMonthlyIncome">
+                  <h5 className={styles.text}>Monthly Income</h5>
+                  <input
+                    className={styles.input}
+                    type="number"
+                    name={"monthlyIncome"}
+                    value={values.monthlyIncome}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.monthlyIncome && touched.monthlyIncome && (
+                    <Alert variant="danger">{errors.monthlyIncome}</Alert>
+                  )}
+                </Form.Group>
+                <Form.Group controlId="formMonthlySavingsGoal">
+                  <h5 className={styles.text}>Monthly Savings Goal</h5>
+                  <input
+                    className={styles.input}
+                    type="number"
+                    name={"monthlyGoal"}
+                    value={values.monthlyGoal}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.monthlyGoal && touched.monthlyGoal && (
+                    <Alert variant="danger">{errors.monthlyGoal}</Alert>
+                  )}
+                </Form.Group>
+                <Button className={styles.saveButton} size="lg" type="submit">
+                  Save
               </Button>
-            </Form>
-          </div>
-        );
-      }}
-    </Formik>
+              </Form>
+            </div>
+          );
+        }}
+      </Formik>
+      <Footer />
+    </>
   );
 }
