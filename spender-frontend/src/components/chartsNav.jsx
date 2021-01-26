@@ -14,6 +14,7 @@ import { IdContext } from "./PrivateRoute";
 export default function ChartsNav() {
     
     const userId = useContext(IdContext)
+    
     const [time, setTime] = useState()
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([])
