@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+
 import { Formik } from "formik";
 import * as Yup from "yup";
 //componenets
@@ -33,6 +35,8 @@ let arrayOfCards = [
   { title: "Add New", logo: expenses_add_new, id: Math.random() },
 ];
 export default function AddCategory() {
+  const [redirect, setDirect] = useState(null);
+
   function handleNewCategory(newCategory) {
     console.log(newCategory);
     arrayOfCards.push({
@@ -41,6 +45,10 @@ export default function AddCategory() {
       id: Math.random(),
     });
     console.log(arrayOfCards);
+    setDirect("/expenses");
+  }
+  if (redirect) {
+    return <Redirect to={redirect} />;
   }
   return (
     <Formik
