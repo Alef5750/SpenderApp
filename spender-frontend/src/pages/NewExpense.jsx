@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../components/PrivateRoute";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 //helpers
 // import cards from "../helpers/categories";
 
@@ -29,6 +29,7 @@ const formSchema = Yup.object().shape({
 });
 
 export default function NewExpense(props) {
+  let history = useHistory();
   const user = useContext(UserContext);
 
   const path = useLocation().pathname;
@@ -40,6 +41,7 @@ export default function NewExpense(props) {
   function handleNewExpense(expense) {
     console.log(expense);
     SaveNewExpense(expense, user._id); // used id /////////////////////////////////
+    history.push("/expenses");
   }
   return (
     <Formik
@@ -110,8 +112,11 @@ export default function NewExpense(props) {
                   onBlur={handleBlur}
                 />
               </Form.Group>
-              <Button className={styles.saveButton} type="submit">
+              <Button className={`mr-1 ${styles.saveButton}`} type="submit">
                 Save
+              </Button>
+              <Button className={`ml-1 ${styles.saveButton}`} type="button" onClick = {() => history.push("/expenses")}>
+                Cancel
               </Button>
             </Form>
           </div>
