@@ -20,7 +20,7 @@ export default function ChartsNav() {
 
     const user = useContext(UserContext);
 
-    const [time, setTime] = useState()
+    const [time, setTime] = useState(`${new Date().getFullYear()}/${moment(new Date()).format('M')}-1`)
     const [lastTime, setLastTime] = useState();
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([]);
@@ -241,9 +241,6 @@ export default function ChartsNav() {
                     </Route>
                     <Route exact path="/charts/reports">
                         <ChartsReports data={data} income={income} />
-                    </Route>
-                    <Route exact path="">
-                        <ChartsDescription />
                     </Route>
                 </Switch>
             </Router>
