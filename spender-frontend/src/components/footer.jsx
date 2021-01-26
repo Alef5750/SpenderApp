@@ -1,7 +1,9 @@
 import React from "react";
+import styles from "../styles/footer.module.css";
+
 export default function Footer() {
     return (
-        <div className="position-fixed fixed-bottom py-3 bg-dark text-white">
+        <div className={`${styles.buttonBottom}`}>
             Spender
         </div>
     )
