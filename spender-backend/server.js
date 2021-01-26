@@ -59,9 +59,9 @@ passport.use(new GoogleStrategy({
 passport.serializeUser(function (user, done) {
   const sessionUser = {
     _id: user._id,
-    // displayName: user.displayName,
-    // monthlyIncome: user.monthlyIncome,
-    // monthlyGoal: user.monthlyGoal
+    displayName: user.displayName,
+    monthlyIncome: user.monthlyIncome,
+    monthlyGoal: user.monthlyGoal
   }
   done(null, sessionUser);
 });
@@ -84,7 +84,7 @@ app.get('/auth/google/callback',
 app.get('/auth', (req, res) => {
   console.log(req.user)
   console.log(req.session)
-  if (req.user) res.status(200).json(req.user._id)
+  if (req.user) res.status(200).json(req.user)
   else res.status(200).json(null)
 })
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Route, Redirect, useHistory } from "react-router-dom";
 
-export const IdContext = React.createContext(null);
+export const UserContext = React.createContext(null);
 
 export function PrivateRoute(props) {
     const history = useHistory();
 
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [id, setId] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const requestOptions = {
@@ -17,11 +17,11 @@ export function PrivateRoute(props) {
         };
         fetch(`http://localhost:5000/auth`, requestOptions)
             .then((res) => res.json())
-            .then((id) => {
-                console.log(id);
-                if (id) {
+            .then((user) => {
+                console.log(user);
+                if (user) {
                     setIsAuthenticated(true);
-                    setId(id);
+                    setUser(user);
                     setLoading(false);
                 } else {
                     setLoading(false);
@@ -33,10 +33,10 @@ export function PrivateRoute(props) {
     if (loading) {
         return <div>LOADING</div>;
     } else {
-        if (id && props.path === "/") history.goBack();
+        if (user && props.path === "/") history.goBack();
         else
             return (
-                <IdContext.Provider value={id}>
+                <UserContext.Provider value={user}>
                     <Route
                         {...rest}
                         render={(props) => (
@@ -46,7 +46,7 @@ export function PrivateRoute(props) {
                             </div>
                         )}
                     />
-                </IdContext.Provider>
+                </UserContext.Provider>
             );
     }
 }
@@ -93,7 +93,7 @@ export function PrivateRoute(props) {
 //                 this.props.history.goBack();
 //             else
 //                 return (
-//                     <IdContext.Provider value={this.state.id}>
+//                     <UserContext.Provider value={this.state.id}>
 //                         <Route
 //                             {...rest}
 //                             render={(props) => (
@@ -108,7 +108,7 @@ export function PrivateRoute(props) {
 //                                 </div>
 //                             )}
 //                         />
-//                     </IdContext.Provider>
+//                     </UserContext.Provider>
 //                 );
 //         }
 //     }

@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 // import axios from "axios";
 
 //components etc.
 import Footer from "../components/footer";
 import Navigation from "../components/Navigation";
-// import { IdContext } from "../components/PrivateRoute";
-//api
-// import { getDisplayName } from "../helpers/api";
+import { UserContext } from "../components/PrivateRoute";
 //images
 import $ from "../images/ExpensesIconWhite.png";
 import chartsIcon from "../images/ReportsIconWhite.png";
@@ -18,14 +16,14 @@ import styles from "../styles/HomePage.module.css";
 // const backendURL = "http://localhost:5000";
 
 export default function HomePage(props) {
-  // const userId = useContext(IdContext);
+  const user = useContext(UserContext);
   // const [displayName, setDisplayName] = useState("");
 
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const result = await axios.get(`${backendURL}/api/users/${userId}`);
   //     console.log(result.data);
-  //     setDisplayName(result.data);
+  //     setDisplayName(result.data.displayName);
   //   };
 
   //   fetchData();
@@ -34,7 +32,7 @@ export default function HomePage(props) {
   return (
     <div>
       <Navigation />
-      <h1 className={`${styles.text} ${styles.h1}`}>Hey User</h1>
+      <h1 className={`${styles.text} ${styles.h1}`}>Hey {user.displayName}</h1>
       <div className="mx-4 vh-100">
         <Link
           className={`btn btn-danger my-4 py-4 col bg-danger d-flex align-items-center justify-content-around ${styles.buttons}`}
