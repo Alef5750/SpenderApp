@@ -4,6 +4,7 @@ import styles from "../styles/Charts.module.css";
 import moment from "moment";
 
 
+
 export default function ChartsHeader({ timeRequest, lastTimeRequest }) {
 
     const handleChange = async (event) => {
@@ -31,9 +32,6 @@ export default function ChartsHeader({ timeRequest, lastTimeRequest }) {
         if (event === "year") lastTime = `${moment().subtract(1, 'year').format('YYYY')}/${moment(date).format('M')}-12`;
         timeRequest(time);
         lastTimeRequest(lastTime);
-        // await getData(time);
-        // getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`)
-        //    .then(response => console.log(response))
     }
 
     return (

@@ -31,3 +31,9 @@
     font-weight: bold;
     border-radius: 0%;
 }
+
+.expensesTable{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 1rem 0rem;
+}

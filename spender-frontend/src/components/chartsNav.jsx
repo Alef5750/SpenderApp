@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import styles from "../styles/Charts.module.css";
@@ -9,10 +9,13 @@ import ChartsReports from "./chartsReports";
 import ChartsDescription from "./chartsDescription";
 import moment from "moment";
 import { getExpensesById, getUserById } from "../helpers/api";
+import { IdContext } from "./PrivateRoute";
 
-export default function ChartsNav({ timeRequest }) {
-
-    const [time, setTime] = useState();
+export default function ChartsNav() {
+    
+    const userId = useContext(IdContext)
+    
+    const [time, setTime] = useState()
     const [lastTime, setLastTime] = useState();
     const [labels, setLabels] = useState([]);
     const [data, setData] = useState([])
@@ -22,7 +25,6 @@ export default function ChartsNav({ timeRequest }) {
     
     // this function is receiving time from ChartsHeader and passes it up to Charts
     const handleTimeRequest = (time) => {
-        timeRequest(time)
         setTime(time)
     }
     
@@ -59,7 +61,6 @@ export default function ChartsNav({ timeRequest }) {
                     else {
                         numberDay = 28;
                     }
-
                 }
                 else {
                     numberDay = 29;
@@ -68,7 +69,6 @@ export default function ChartsNav({ timeRequest }) {
             else {
                 numberDay = 28;
             }
-
         }
         return numberDay;
     }
@@ -87,7 +87,6 @@ export default function ChartsNav({ timeRequest }) {
         setLabels(arrayOfDays);
     }
 
-
     // ------------------------YEAR--------------------------//
 
     // create an array with the month. For example if the current month is March we will have [April, May,...,December, ...,March]
@@ -98,7 +97,6 @@ export default function ChartsNav({ timeRequest }) {
         }
         setLabels(months);
     }
-
 
     // ------------------------3 MONTHS--------------------------//
 
@@ -123,8 +121,8 @@ export default function ChartsNav({ timeRequest }) {
     useEffect(async () => {
         if (time) {
             // console.log(time)
-            const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`);
-            const getDataFromUserComparison = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${lastTime}`);
+            const getDataFromUser = await getExpensesById(`/api/users/${userId}/expenses?date=${time}`);
+            const getDataFromUserComparison = await getExpensesById(`/api/users/${userId}/expenses?date=${lastTime}`);
             setDataComparison(getDataFromUserComparison);
             // We have to replace "2020/03/1" By time ***********IMPORTANT********
             console.log(getDataFromUserComparison);
@@ -155,9 +153,10 @@ export default function ChartsNav({ timeRequest }) {
         //     cleanup
         // }
     }, [time])
+
     const getUserGoalAndIncome = async (time) => {
         if(time){
-            const user = await getUserById("/api/users/600591c5a1e29824c0ef786a")
+            const user = await getUserById(`/api/users/${userId}`)
             // console.log(user);
             const period = time.charAt(time.length - 1)
             let periodIncome = user.monthlyIncome
@@ -201,13 +200,13 @@ export default function ChartsNav({ timeRequest }) {
                 </Navbar>
                 <Switch>
                     <Route exact path="/charts/goals">
-                        <ChartsGoals time={time} labels={labels} data={data} />
+                        <ChartsGoals data={data} goal={goal} income={income}/>
                     </Route>
                     <Route exact path="/charts/graphs">
                         <ChartsGraphs time={time} labels={labels} data={data} dataComparison = {dataComparison}/>
                     </Route>
                     <Route exact path="/charts/reports">
-                        <ChartsReports data={data} goal={goal} income={income} />
+                        <ChartsReports data={data} income={income} />
                     </Route>
                     <Route exact path="">
                         <ChartsDescription />
