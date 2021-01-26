@@ -3,10 +3,10 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .form {
-  margin-top: 36px;
+  margin-top: 26px;
 }
 .h1 {
-  margin-top: 21px;
+  margin-top: 15px;
 }
 .saveButton {
   background-color: #3da9fc;
@@ -21,10 +21,21 @@
 }
 .input {
   border: 1px solid black;
-  margin: 10px 10px;
+  margin: 7px 7px;
   height: 40px;
 }
 .textarea {
   border: 1px solid black;
-  margin: 10px 10px 5px 10px;
+  margin: 5px 10px 5px 10px;
+}
+
+.buttonBottom{
+  left: 0;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+  background-color: #094067;
+  font-size: 27px;
+  font-weight: 600;
+  position: fixed;
 }
