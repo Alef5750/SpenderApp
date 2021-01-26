@@ -8,16 +8,3 @@
   font-weight: bold;
   height: 60px;
 }
-
-.buttonBottom {
-  left: 0;
-  right: 0;
-  position: fixed;
-  bottom: 0;
-  background-color: #094067;
-  font-size: 27px;
-  font-weight: 600;
-  padding: 6px 12px 8px 12px;
-  border: 1px;
-  color: white;
-}
