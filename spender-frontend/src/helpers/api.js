@@ -10,6 +10,20 @@ export function SaveNewExpense(expense, id) {
   );
 }
 
+export const getExpensesById = async (url) => {
+  const response = await axios.get(url);
+  const data = response.data;
+  return data;
+};
+
+export const getExpensesByDate = async (url) => {
+  const response = await axios.get(url);
+  console.log(response);
+  const data = response.data;
+  return data;
+};
+
+//users api
 export function UpdateSettings(settings, id) {
   axios.put(`${backendURL}/api/users/${id}`, settings);
   console.log(
@@ -19,14 +33,9 @@ export function UpdateSettings(settings, id) {
   );
 }
 
-export const getExpensesById = async (url) => {
-  const response = await axios.get(url);
-  const data = response.data;
+export const getUserById = async (id) => {
+  const response = await axios.get(`${backendURL}/api/users/${id}`);
+  const data = JSON.stringify(response.data);
+  console.log(data);
   return data;
 };
-
-export const getUserById = async (url) => {
-  const response = await axios.get(url)
-  const data = response.data
-  return data
-}
