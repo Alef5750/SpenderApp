@@ -54,26 +54,24 @@ export default function ChartsGoals({ data, goal, income }) {
                 <div className="my-3 py-3 col bg-primary text-white d-flex h3 justify-content-center rounded">
                     {goal}
                 </div>
-                {income >= sum ?
+                {savings >= goal ?
                     <span>
                         <h3 className="text-success">Saved</h3>
                         <div className="my-3 py-3 col bg-success text-white d-flex h3 justify-content-center rounded">
                             {savings}
                         </div>
+                        <h2 className="bg-success text-white rounded my-4">Good Job!</h2>
                     </span>
+                    
                     :
                     <span>
                         <h3 className="text-danger">Saved</h3>
                         <div className="my-3 py-3 col bg-danger text-white d-flex h3 justify-content-center rounded">
                             {savings}
                         </div>
+                        <h2 className="bg-warning text-white rounded my-4">You Can Do It!</h2>
                     </span>
-                }
-                {savings >= goal ?
-                    <h2 className="bg-success text-white rounded my-4">Good Job!</h2>               
-                :
-                    <h2 className="bg-warning text-white rounded my-4">You Can Do It!</h2>
-                }            
+                }           
                 {/* <div className="progress">
                     <div className="progress-bar" style={{ width: progress }} role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                 </div> */}
