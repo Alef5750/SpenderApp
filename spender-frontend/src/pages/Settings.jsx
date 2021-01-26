@@ -18,9 +18,8 @@ const formSchema = Yup.object().shape({
     monthlyGoal: Yup.number().required("Oops! You haven't entered your goal"),
 });
 
-export default function Settings(props) {
+export default function Settings() {
     const user = useContext(UserContext);
-    console.log(user);
 
     function handleSettingsUpdate(settings) {
         console.log(settings);
