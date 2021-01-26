@@ -9,11 +9,11 @@ import ChartsReports from "./chartsReports";
 import ChartsDescription from "./chartsDescription";
 import moment from "moment";
 import { getExpensesById, getUserById } from "../helpers/api";
-import { IdContext } from "./PrivateRoute";
+import { UserContext } from "../components/PrivateRoute";
 
 export default function ChartsNav() {
     
-    const userId = useContext(IdContext)
+    const user = useContext(UserContext);
     
     const [time, setTime] = useState()
     const [lastTime, setLastTime] = useState();
@@ -121,8 +121,8 @@ export default function ChartsNav() {
     useEffect(async () => {
         if (time) {
             // console.log(time)
-            const getDataFromUser = await getExpensesById(`/api/users/${userId}/expenses?date=${time}`);
-            const getDataFromUserComparison = await getExpensesById(`/api/users/${userId}/expenses?date=${lastTime}`);
+            const getDataFromUser = await getExpensesById(`/api/users/${user._id}/expenses?date=${time}`);
+            const getDataFromUserComparison = await getExpensesById(`/api/users/${user._id}/expenses?date=${lastTime}`);
             setDataComparison(getDataFromUserComparison);
             // We have to replace "2020/03/1" By time ***********IMPORTANT********
             console.log(getDataFromUserComparison);
@@ -156,8 +156,6 @@ export default function ChartsNav() {
 
     const getUserGoalAndIncome = async (time) => {
         if(time){
-            const user = await getUserById(`/api/users/${userId}`)
-            // console.log(user);
             const period = time.charAt(time.length - 1)
             let periodIncome = user.monthlyIncome
             let periodGoal = user.monthlyGoal
