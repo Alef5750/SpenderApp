@@ -10,7 +10,7 @@
 }
 .saveButton {
   background-color: #3da9fc;
-  padding: 1rem 3rem;
+  padding: 0.75rem 3rem;
   font-size: 20px;
   font-weight: 700;
   border-radius: 20px;
@@ -26,5 +26,5 @@
 }
 .textarea {
   border: 1px solid black;
-  margin: 10px 10px;
+  margin: 10px 10px 5px 10px;
 }
