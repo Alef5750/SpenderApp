@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ExpensesTable from "./chartsExpensesTable";
+import styles from "../styles/Charts.module.css";
+
+
 export default function ChartsReports({ data, income }) {
-    if (!income) {
-        income = 0
-    }
+    if (!income) {income = 0}
     const [amountByCategory, setAmountByCategory] = useState([]);
     const [sum, setSum] = useState(0)
     useEffect(() => {
@@ -68,7 +69,7 @@ export default function ChartsReports({ data, income }) {
                 </span>
                 :
                 <span>
-                    <h3 className="text-warning">saved</h3>
+                    <h3 className="text-warning">Saved</h3>
                     <div className="my-3 py-3 col bg-warning text-white d-flex h3 justify-content-center rounded">
                         {income - sum}
                     </div>

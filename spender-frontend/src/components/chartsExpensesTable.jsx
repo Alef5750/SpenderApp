@@ -1,27 +1,22 @@
-import { Table } from "react-bootstrap"
+import styles from "../styles/Charts.module.css";
+
 export default function ExpensesTable({ amountByCategory }) {
     if (amountByCategory) {
         return (
-            <Table striped bordered hover size="sm" className="text-danger small">
-                <thead>
-                    <tr>
-                        {amountByCategory.map(expense => {
-                            return (
-                                <th key={expense.category}>{expense.category}</th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {amountByCategory.map(expense => {
-                            return (
-                                <td key={expense.amount} className="font-weight-bold">{expense.amount}</td>
-                            )
-                        })}
-                    </tr>
-                </tbody>
-            </Table>
+            <div size="sm" className={styles.expensesTable}>
+                {amountByCategory.map(expense => {
+                    return (
+                        <div
+                            className="border border-danger text-danger small font-weight-bold rounded"
+                            key={expense.category}
+                        >
+                            {expense.category}
+                            <br />
+                            {expense.amount}
+                        </div>
+                    )
+                })}
+            </div>
         );
     }
     else {

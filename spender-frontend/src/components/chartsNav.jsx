@@ -103,9 +103,9 @@ export default function ChartsNav() {
     useEffect(async () => {
         if (time) {
             // console.log(time)
-            const getDataFromUser = await getExpensesById(`/api/users/600591c5a1e29824c0ef786a/expenses?date=${time}`);
+            const getDataFromUser = await getExpensesById(`/api/users/${userId}/expenses?date=${time}`);
             // We have to replace "2020/03/1" By time ***********IMPORTANT********
-            // console.log(getDataFromUser);
+            console.log(getDataFromUser);
             setData(getDataFromUser);
             const amount = time.charAt(time.length - 1)
             switch (amount) {
@@ -179,13 +179,13 @@ export default function ChartsNav() {
                 </Navbar>
                 <Switch>
                     <Route exact path="/charts/goals">
-                        <ChartsGoals time={time} labels={labels} data={data} />
+                        <ChartsGoals data={data} goal={goal} income={income}/>
                     </Route>
                     <Route exact path="/charts/graphs">
                         <ChartsGraphs time={time} labels={labels} data={data} />
                     </Route>
                     <Route exact path="/charts/reports">
-                        <ChartsReports data={data} goal={goal} income={income} />
+                        <ChartsReports data={data} income={income} />
                     </Route>
                     <Route exact path="">
                         <ChartsDescription />
