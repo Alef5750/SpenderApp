@@ -52,8 +52,8 @@ export default function AddCategory() {
     //   }, [user._id]);
     function handleNewCategory(newCategory) {
         //PUT newCategory in backend
-        const updatedCategories = [...user.categories, newCategory.category];
-        UpdateCategories(updatedCategories, user._id);
+        // const updatedCategories = [...user.categories, newCategory.category];
+        // UpdateCategories(updatedCategories, user._id);
         //retrieve user's categories array from backend
 
         //push this array/it's data to local array
