@@ -99,6 +99,10 @@ app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 // handle termination on ctrl+c to close mongo connection
 process.on('SIGINT', () => {
   console.info('SIGTERM signal received.');
