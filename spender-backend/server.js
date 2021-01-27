@@ -57,6 +57,7 @@ passport.use(new GoogleStrategy({
 ));
 
 passport.serializeUser(function (user, done) {
+  console.log(user)
   const sessionUser = {
     _id: user._id,
     displayName: user.displayName,

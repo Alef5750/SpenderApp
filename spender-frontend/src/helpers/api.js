@@ -35,8 +35,8 @@ export const getUserById = async (id) => {
 };
 
 //categories
-export const UpdateCategories = (updatedCategories, id) => {
-  axios.put(
+export const UpdateCategories = async (updatedCategories, id) => {
+  await axios.put(
     `${backendURL}/api/users/${id}`,
     { categories: updatedCategories },
     {
