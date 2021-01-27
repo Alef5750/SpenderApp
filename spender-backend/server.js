@@ -61,7 +61,8 @@ passport.serializeUser(function (user, done) {
     _id: user._id,
     displayName: user.displayName,
     monthlyIncome: user.monthlyIncome,
-    monthlyGoal: user.monthlyGoal
+    monthlyGoal: user.monthlyGoal,
+    categories: user.categories
   }
   done(null, sessionUser);
 });
