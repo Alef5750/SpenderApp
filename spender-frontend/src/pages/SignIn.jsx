@@ -7,7 +7,10 @@ import styles from "../styles/Navbar.module.css";
 
 export default function SignIn() {
     const initGoogle = () => {
-        window.open(`http://localhost:5000/auth/google`, "_self");
+        window.open(
+            `https://spender-app-itc.herokuapp.com/auth/google`,
+            "_self"
+        );
     };
 
     return (

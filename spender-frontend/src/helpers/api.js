@@ -1,5 +1,5 @@
 import axios from "axios";
-const backendURL = "http://localhost:5000";
+const backendURL = "https://spender-app-itc.herokuapp.com";
 
 export function SaveNewExpense(expense, id) {
   axios.put(`${backendURL}/api/users/${id}/expenses`, expense, { withCredentials: true });
