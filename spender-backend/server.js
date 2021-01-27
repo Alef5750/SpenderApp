@@ -1,10 +1,14 @@
+const path = require('path');
 require('dotenv').config({ path: './.env' });
 const express = require('express');
 const initClient = require('./database')
 const mongoose = require('mongoose');
 const { user: UserModel } = require('./controllers/usersController')
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+
+app.use(express.static(path.join(__dirname, 'build')));
+
 
 // cookie parser
 // const cookieParser = require('cookie-parser')
