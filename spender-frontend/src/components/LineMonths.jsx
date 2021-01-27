@@ -111,7 +111,7 @@ function Charts(props) {
             display: true,
             position: "top",
             text: "comparison between the last 3 months and the 3 before them",
-            fontSize: 10,
+            fontSize: 12,
             fontColor: "#111",
         },
         legend: {
@@ -119,7 +119,7 @@ function Charts(props) {
             position: "bottom",
             labels: {
                 fontColor: "#333",
-                fontSize: 8,
+                fontSize: 10,
             },
         },
         maintainAspectRatio: false,

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect, useHistory } from "react-router-dom";
+import { UserContext } from "../components/PrivateRoute";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
 //componenets
 import Navigation from "../components/Navigation";
+//api
+import { UpdateCategories } from "../helpers/api";
 //styles
 import styles from "../styles/NewExpense.module.css";
 import { Button, Form, Alert } from "react-bootstrap";
@@ -33,10 +36,17 @@ let arrayOfCards = [
     { title: "Other", logo: expenses_other, id: Math.random() },
 ];
 export default function AddCategory() {
+    const user = useContext(UserContext);
     const history = useHistory();
     const [redirect, setDirect] = useState(null);
 
     function handleNewCategory(newCategory) {
+        //PUT newCategory in backend
+        const updatedCategories = [...user.categories, newCategory.category];
+        UpdateCategories(updatedCategories, user._id);
+        //retrieve user's categories array from backend
+
+        //push this array/it's data to local array
         arrayOfCards.push({
             title: newCategory.category,
             logo: expenses_other,

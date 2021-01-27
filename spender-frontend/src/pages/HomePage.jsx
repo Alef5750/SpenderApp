@@ -23,7 +23,7 @@ export default function HomePage() {
             </h1>
             <div className="mx-4 vh-100">
                 <Link
-                    className={`btn btn-danger my-4 py-4 col bg-danger d-flex align-items-center justify-content-around ${styles.buttons}`}
+                    className={`btn my-4 py-4 col bg-danger d-flex align-items-center justify-content-around ${styles.buttons}`}
                     to="/expenses"
                 >
                     <img src={$} alt={"$"} />
@@ -31,7 +31,7 @@ export default function HomePage() {
                 </Link>
 
                 <Link
-                    className={`btn btn-danger my-4 py-4 col bg-success d-flex align-items-center justify-content-around ${styles.buttons}`}
+                    className={`btn my-4 py-4 col bg-success d-flex align-items-center justify-content-around ${styles.buttons}`}
                     to="/charts"
                 >
                     <img src={chartsIcon} alt={"Charts"} />
@@ -39,7 +39,7 @@ export default function HomePage() {
                 </Link>
 
                 <Link
-                    className={`btn btn-danger my-4 py-4 col bg-primary d-flex align-items-center ${styles.buttons}`}
+                    className={`btn my-4 py-4 col bg-primary d-flex align-items-center ${styles.buttons}`}
                     to="/settings"
                 >
                     <img

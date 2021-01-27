@@ -8,7 +8,7 @@ import PieMonths from "./PieMonths";
 
 export default function ChartsGraphs({ time, labels, data, dataComparison }) {
     return (
-        <div className="mx-4">
+        <div className="mx-1">
             {time && time.charAt(time.length - 1) == 3 && (
                 <LineMonths
                     data={data}

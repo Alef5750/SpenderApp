@@ -8,6 +8,7 @@ module.exports = class User {
       displayName: { type: String, required: true },
       monthlyIncome: { type: Number, default: 0 },
       monthlyGoal: { type: Number, default: 0 },
+      categories: { type: Array, default: [] },
       expenses: { type: Object, default: {} }
     })
 

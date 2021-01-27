@@ -2,7 +2,9 @@ import axios from "axios";
 const backendURL = "https://spender-app-itc.herokuapp.com";
 
 export function SaveNewExpense(expense, id) {
-  axios.put(`${backendURL}/api/users/${id}/expenses`, expense, { withCredentials: true });
+  axios.put(`${backendURL}/api/users/${id}/expenses`, expense, {
+    withCredentials: true,
+  });
 }
 
 export const getExpensesById = async (url) => {
@@ -19,11 +21,26 @@ export const getExpensesByDate = async (url) => {
 
 //users api
 export function UpdateSettings(settings, id) {
-  axios.put(`${backendURL}/api/users/${id}`, settings, { withCredentials: true });
+  axios.put(`${backendURL}/api/users/${id}`, settings, {
+    withCredentials: true,
+  });
 }
 
 export const getUserById = async (id) => {
-  const response = await axios.get(`${backendURL}/api/users/${id}`, { withCredentials: true });
+  const response = await axios.get(`${backendURL}/api/users/${id}`, {
+    withCredentials: true,
+  });
   const data = JSON.stringify(response.data);
   return data;
+};
+
+//categories
+export const UpdateCategories = async (updatedCategories, id) => {
+  await axios.put(
+    `${backendURL}/api/users/${id}`,
+    { categories: updatedCategories },
+    {
+      withCredentials: true,
+    }
+  );
 };

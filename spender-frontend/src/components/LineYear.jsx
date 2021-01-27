@@ -79,7 +79,7 @@ function Charts({ data, time, labels, dataComparison }) {
             display: true,
             position: "top",
             text: "expenses for "+moment().format('YYYY')+" in comparison with " +moment().subtract(1, 'year').format('YYYY'),
-            fontSize: 10,
+            fontSize: 12,
             fontColor: "#111"
         },
         legend: {
@@ -87,7 +87,7 @@ function Charts({ data, time, labels, dataComparison }) {
             position: "bottom",
             labels: {
                 fontColor: "#333",
-                fontSize: 8
+                fontSize: 10
             }
         },
         maintainAspectRatio: false,
