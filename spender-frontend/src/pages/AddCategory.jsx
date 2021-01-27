@@ -52,7 +52,7 @@ export default function AddCategory() {
             logo: expenses_other,
             id: Math.random(),
         });
-        setDirect("/expenses");
+        history.push("/expenses");
     }
     if (redirect) {
         return <Redirect to={redirect} />;
