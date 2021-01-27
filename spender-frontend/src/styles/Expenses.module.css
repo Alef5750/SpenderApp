@@ -7,7 +7,7 @@
   font-size: 27px;
   font-weight: 600;
   position: fixed;
-  border:0px !important;
+  border-radius: 0px !important;
 }
 
 /* CategoriesGrid */
