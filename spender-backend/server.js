@@ -12,13 +12,13 @@ const port = 5000;
 
 
 // set cors
-const cors = require('cors')
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+// const cors = require('cors')
+// app.use(
+//   cors({
+//     origin: true,
+//     credentials: true,
+//   })
+// );
 
 // body parser
 const bodyParser = require("body-parser");
