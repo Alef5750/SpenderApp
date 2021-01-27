@@ -81,7 +81,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function (req, res) {
-    res.redirect('http://localhost:3000/home');
+    res.redirect('https://spender-app-itc.herokuapp.com/home');
   });
 
 // auth check
