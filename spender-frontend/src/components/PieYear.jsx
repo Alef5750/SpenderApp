@@ -30,7 +30,6 @@ function Charts({ data, time, labels }) {
                 }
             }
         }
-        console.log(arrayOfCategory);
         getAmountByCategories(arrayOfCategory);
     };
 
@@ -77,9 +76,6 @@ function Charts({ data, time, labels }) {
 
     return (
         <div className="mx-4 mt-3">
-            {console.log(amountByCategory)}
-            {console.log(labelGraph)}
-            {console.log(dataGraph)}
             <Doughnut
                 data={{
                     labels: labelGraph,
