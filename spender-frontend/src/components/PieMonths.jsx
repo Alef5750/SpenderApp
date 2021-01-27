@@ -131,7 +131,7 @@ function Charts({ data, time, labels }) {
                         display: true,
                         position: "top",
                         text: "expenses by category for the last 3 month",
-                        fontSize: 10,
+                        fontSize: 12,
                         fontColor: "#111",
                     },
                     legend: {
@@ -139,7 +139,7 @@ function Charts({ data, time, labels }) {
                         position: "bottom",
                         labels: {
                             fontColor: "#333",
-                            fontSize: 8,
+                            fontSize: 12,
                         },
                     },
                 }}
