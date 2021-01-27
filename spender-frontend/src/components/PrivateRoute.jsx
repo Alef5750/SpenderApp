@@ -34,7 +34,7 @@ export function PrivateRoute(props) {
             method: "GET",
             credentials: "include",
         };
-        fetch(`http://localhost:5000/auth`, requestOptions)
+        fetch(`https://spender-app-itc.herokuapp.com/auth`, requestOptions)
             .then((res) => res.json())
             .then((user) => {
                 if (user) {
