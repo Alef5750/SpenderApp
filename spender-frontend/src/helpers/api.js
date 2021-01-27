@@ -1,5 +1,5 @@
 import axios from "axios";
-const backendURL = "https://spender-app-itc.herokuapp.com";
+const backendURL = "http://localhost:5000";
 
 export function SaveNewExpense(expense, id) {
   axios.put(`${backendURL}/api/users/${id}/expenses`, expense, {
@@ -35,8 +35,8 @@ export const getUserById = async (id) => {
 };
 
 //categories
-export const UpdateCategories = async (updatedCategories, id) => {
-  await axios.put(
+export const UpdateCategories = (updatedCategories, id) => {
+  axios.put(
     `${backendURL}/api/users/${id}`,
     { categories: updatedCategories },
     {
