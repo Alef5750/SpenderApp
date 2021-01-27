@@ -133,7 +133,7 @@ function Charts(props) {
                 moment().format("MMM") +
                 " in comparison with " +
                 moment().subtract(1, "months").format("MMM"),
-            fontSize: 10,
+            fontSize: 12,
             fontColor: "#111",
         },
         legend: {
@@ -141,7 +141,7 @@ function Charts(props) {
             position: "bottom",
             labels: {
                 fontColor: "#333",
-                fontSize: 8,
+                fontSize: 10,
             },
         },
         maintainAspectRatio: false,
