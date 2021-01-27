@@ -39,7 +39,17 @@ export default function AddCategory() {
     const user = useContext(UserContext);
     const history = useHistory();
     const [redirect, setDirect] = useState(null);
+    //   useEffect(() => {
+    //     const fetchData = async () => {
+    //       const result = await axios.get(`${backendURL}/api/users/${user._id}`, {
+    //         withCredentials: true,
+    //       });
+    //       const data = JSON.stringify(result.data);
+    //       setData(data);
+    //     };
 
+    //     fetchData();
+    //   }, [user._id]);
     function handleNewCategory(newCategory) {
         //PUT newCategory in backend
         const updatedCategories = [...user.categories, newCategory.category];
@@ -52,7 +62,7 @@ export default function AddCategory() {
             logo: expenses_other,
             id: Math.random(),
         });
-        history.push("/expenses");
+        setDirect("/expenses");
     }
     if (redirect) {
         return <Redirect to={redirect} />;
