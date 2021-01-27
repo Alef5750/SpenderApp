@@ -89,7 +89,10 @@ export default function AddCategory() {
                         <h1 className={`${styles.text} ${styles.h1}`}>
                             Add a new category of your choice!
                         </h1>
-                        <Form className={styles.form} onSubmit={handleSubmit}>
+                        <Form
+                            className={styles.form}
+                            onSubmit={() => handleSubmit()}
+                        >
                             <Form.Group>
                                 <input
                                     className={styles.input}
