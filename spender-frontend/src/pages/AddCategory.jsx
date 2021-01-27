@@ -6,6 +6,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 //componenets
 import Navigation from "../components/Navigation";
+//api
+import { UpdateCategories } from "../helpers/api";
 //styles
 import styles from "../styles/NewExpense.module.css";
 import { Button, Form, Alert } from "react-bootstrap";
@@ -37,15 +39,35 @@ export default function AddCategory() {
   const user = useContext(UserContext);
   const history = useHistory();
   const [redirect, setDirect] = useState(null);
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       const result = await axios.get(`${backendURL}/api/users/${user._id}`, {
+  //         withCredentials: true,
+  //       });
+  //       const data = JSON.stringify(result.data);
+  //       setData(data);
+  //     };
 
+  //     fetchData();
+  //   }, [user._id]);
   function handleNewCategory(newCategory) {
+    //PUT newCategory in backend
+    console.log(user.categories);
+    const updatedCategories = [...user.categories, newCategory.category];
+    console.log(updatedCategories);
+    UpdateCategories(updatedCategories, user._id);
+    //retrieve user's categories array from backend
+    console.log(user.categories);
+
+    //push this array/it's data to local array
     arrayOfCards.push({
       title: newCategory.category,
       logo: expenses_other,
       id: Math.random(),
     });
     setDirect("/expenses");
-    console.log(user.categories);
+    window.location.reload();
+    console.log(user);
   }
   if (redirect) {
     return <Redirect to={redirect} />;
